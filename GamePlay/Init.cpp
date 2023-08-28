@@ -1,16 +1,20 @@
 ﻿#include "Init.h"
-#include "Object.h"
-#include "Fly.h"
+
 
 Object Butter, Bee;  Fly fly1;
-Window::Window(){}
-Window::~Window(){}
+HandelEvent handelEvent;
+
+Window::Window() {}
+Window::~Window() {}
 void Window::handleEvent()
 {
 	// Nhận sự kiện từ của sổ
 	SDL_PollEvent(&event);
 	// Nếu của sổ bị đóng thì trả giá trị của isRunning false để dừng chương trình
 	if (event.type == SDL_QUIT) isRunning = false;
+
+	// Nhận sự kiện
+	handelEvent.Handel(event);
 }
 
 void Window::init(const char* title, int xpos, int ypos, int width, int height, bool fullscreen)
@@ -38,16 +42,26 @@ void Window::init(const char* title, int xpos, int ypos, int width, int height, 
 }
 
 void Window::update()
-{	
+{
 	Butter.animation();
-	Butter.update(Vector {2,2});
+	Vector v = Vector{ 1, 1 };
+	if (handelEvent.BUTTON_LEFT)
+	{
+		float vx = (float)(handelEvent.MOUSE_X - Butter.getPosition().x);
+		float vy = (float)(handelEvent.MOUSE_Y - Butter.getPosition().y);
+
+		float r = sqrt(vx * vx + vy * vy);
+
+		v = Vector{ (vx / r) * 6, (vy / r) * 6 };
+	}
+	Butter.update(v);
 
 	fly1.animation();
 	fly1.update(Vector{ 1,0 });
 
 	Bee.animation();
 	Bee.update(Vector{ 10,10 });
-	
+
 	SDL_Delay(50);
 
 }
@@ -61,7 +75,7 @@ void Window::render()
 	Bee.Render(renderer);
 
 	SDL_RenderPresent(renderer);
-	
+
 }
 void Window::destroy()
 {

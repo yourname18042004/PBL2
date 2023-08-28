@@ -3,8 +3,8 @@
 
 
 struct Vector{
-	int x;
-	int y;
+	float x;
+	float y;
 };
 
 

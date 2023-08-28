@@ -6,6 +6,10 @@
 #include <iostream>
 #include "Vector.h"
 #include "LoadTexture.h"
+#include "Object.h"
+#include "Fly.h"
+#include "HandelEvent.h"
+
 
 // đối tượng nhận và xử lý tất cả các đối tượng sự kiện khác
 

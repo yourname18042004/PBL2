@@ -4,7 +4,7 @@
 #include <SDL.h>
 #include <SDL_image.h>
 #include <iostream>
-
+#include "Vector.h"
 #include "LoadTexture.h"
 
 // đối tượng nhận và xử lý tất cả các đối tượng sự kiện khác
@@ -34,12 +34,7 @@ private:
 	SDL_Event event;
 	// giá trị xet xem cửa sổ đã tắt hay chưa
 	bool isRunning;
-	
-	SDL_Texture* ruoi;
-	SDL_Texture* ruoi1;
-	SDL_Texture* ruoi2;
 
-	int t = 0;
 };
 
 #endif // INIT_WINDOW_H

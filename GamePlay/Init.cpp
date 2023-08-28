@@ -1,11 +1,10 @@
 ﻿#include "Init.h"
+#include "Object.h"
+#include "Fly.h"
 
-SDL_Texture* ruoi;
-SDL_Rect srcR, destR;
-
+Object Butter, Bee;  Fly fly1;
 Window::Window(){}
 Window::~Window(){}
-
 void Window::handleEvent()
 {
 	// Nhận sự kiện từ của sổ
@@ -33,30 +32,36 @@ void Window::init(const char* title, int xpos, int ypos, int width, int height, 
 	{
 		isRunning = false;
 	}
-	ruoi = LoadImage::Load("D:/C++/PBL2/Data/ruoi1.png", renderer);
+	fly1.Init(40, 80, 100, 100, renderer, "Data//fly_200_100.png");
+	Butter.Init(40, 80, 100, 100, renderer, "Data//butterfly1_700_100.png");
+	Bee.Init(100, 200, 100, 100, renderer, "Data//bee_200_100.png");
 }
 
 void Window::update()
-{
-	srcR.x = (t % 3) * 300;
-	srcR.y = 300;
-	srcR.w = 300;
-	srcR.h = 900;
+{	
+	Butter.animation();
+	Butter.update(Vector {2,2});
+
+	fly1.animation();
+	fly1.update(Vector{ 1,0 });
+
+	Bee.animation();
+	Bee.update(Vector{ 10,10 });
 	
-	destR.x = 200;
-	destR.y = 100;
-	destR.w = 500;
-	destR.h = 500;
-	t++;
+	SDL_Delay(50);
+
 }
 
 void Window::render()
 {
 	SDL_RenderClear(renderer);
 
-	SDL_RenderCopy(renderer, ruoi, &srcR, &destR);
+	Butter.Render(renderer);
+	fly1.Render(renderer);
+	Bee.Render(renderer);
 
 	SDL_RenderPresent(renderer);
+	
 }
 void Window::destroy()
 {

@@ -35,6 +35,15 @@
     <ClInclude Include="GamePlay\LoadTexture.h">
       <Filter>Header Files\GamePlay</Filter>
     </ClInclude>
+    <ClInclude Include="GamePlay\Fly.h">
+      <Filter>Header Files\GamePlay</Filter>
+    </ClInclude>
+    <ClInclude Include="GamePlay\Object.h">
+      <Filter>Header Files\GamePlay</Filter>
+    </ClInclude>
+    <ClInclude Include="GamePlay\Vector.h">
+      <Filter>Header Files\GamePlay</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="Data\ruoi.png">

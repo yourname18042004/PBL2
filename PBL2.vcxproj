@@ -145,8 +145,11 @@
     <ClCompile Include="Main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="GamePlay\Fly.h" />
     <ClInclude Include="GamePlay\Init.h" />
     <ClInclude Include="GamePlay\LoadTexture.h" />
+    <ClInclude Include="GamePlay\Object.h" />
+    <ClInclude Include="GamePlay\Vector.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Data\ruoi.png" />

@@ -1,7 +1,10 @@
 ﻿#include "Init.h"
+#include "CollisionHandling.h"
+
 
 
 Object Butter, Bee;  Fly fly1;
+Racket RacKet1;
 HandelEvent handelEvent;
 
 Window::Window() {}
@@ -39,13 +42,14 @@ void Window::init(const char* title, int xpos, int ypos, int width, int height, 
 	fly1.Init(40, 80, 100, 100, renderer, "Data//fly_200_100.png");
 	Butter.Init(40, 80, 100, 100, renderer, "Data//butterfly1_700_100.png");
 	Bee.Init(100, 200, 100, 100, renderer, "Data//bee_200_100.png");
+	RacKet1.Init(100, 200, 100, 100, renderer, "Data//Racket_200_100.png");
 }
 
 void Window::update()
 {
 	Butter.animation();
-	Vector v = Vector{ 1, 1 };
-	if (handelEvent.BUTTON_LEFT)
+	Vector v = Vector{ 0.02, 0 };
+	/*if (handelEvent.BUTTON_LEFT)
 	{
 		float vx = (float)(handelEvent.MOUSE_X - Butter.getPosition().x);
 		float vy = (float)(handelEvent.MOUSE_Y - Butter.getPosition().y);
@@ -53,17 +57,23 @@ void Window::update()
 		float r = sqrt(vx * vx + vy * vy);
 
 		v = Vector{ (vx / r) * 6, (vy / r) * 6 };
+	}*/
+	Butter.update(v);
+	if (fly1.status) {
+		fly1.animation();
 	}
 	
-	Butter.update(v);
-
-	fly1.animation();
-	fly1.update(Vector{ 1,0 });
+	fly1.update(Vector{ 0.005,0.005 });
 
 	Bee.animation();
-	Bee.update(Vector{ 10,10 });
+	Bee.update(Vector{ 0.005,0.005 });
 
-	SDL_Delay(50);
+	RacKet1.AnimationRacket(handelEvent);
+	RacKet1.update();
+
+	if (Collision(fly1.GetRect(), RacKet1.GetRect()) && handelEvent.BUTTON_LEFT) {
+		fly1.status = false;
+	}
 
 }
 
@@ -72,8 +82,12 @@ void Window::render()
 	SDL_RenderClear(renderer);
 
 	Butter.Render(renderer);
-	fly1.Render(renderer);
+	if (fly1.status) {
+		fly1.Render(renderer);
+	}
+
 	Bee.Render(renderer);
+	RacKet1.Render(renderer);
 
 	SDL_RenderPresent(renderer);
 

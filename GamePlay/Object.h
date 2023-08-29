@@ -8,7 +8,7 @@
 #include "LoadTexture.h"
 #include "Vector.h"
 class Object {
-private:
+protected:
 	float pos_x; // Vị trí ban đầu 
 	float pos_y;
 	SDL_Texture* Texture;
@@ -62,6 +62,15 @@ public:
 	}
 	// Trả về vị trí đối tượng;
 	Vector getPosition() { return Vector{ pos_x, pos_y }; }
+	void setPosition( Vector v){
+		pos_x = v.x;
+		pos_y = v.y;
+		dest.x = v.x;
+		dest.y = v.y;
+	}
+	SDL_FRect GetRect() {
+		return dest;
+	}
 };
 
 #endif

@@ -47,10 +47,11 @@
     <ClInclude Include="GamePlay\HandelEvent.h">
       <Filter>Header Files\GamePlay</Filter>
     </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <Image Include="Data\ruoi.png">
-      <Filter>Resource Files\Data</Filter>
-    </Image>
+    <ClInclude Include="GamePlay\Racket.h">
+      <Filter>Header Files\GamePlay</Filter>
+    </ClInclude>
+    <ClInclude Include="GamePlay\CollisionHandling.h">
+      <Filter>Header Files\GamePlay</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

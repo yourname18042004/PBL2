@@ -9,6 +9,7 @@
 #include "Object.h"
 #include "Fly.h"
 #include "HandelEvent.h"
+#include  "Racket.h"
 
 
 // đối tượng nhận và xử lý tất cả các đối tượng sự kiện khác

@@ -1,4 +1,7 @@
 ﻿  Init.cpp
-  Main.cpp
-  Generating Code...
-  PBL2.vcxproj -> D:\Ngôn Ngữ Lập Trình\C++\PBL2\x64\Debug\PBL2.exe
+D:\PBL2\GamePlay\Init.cpp(51,21): warning C4305: 'initializing': truncation from 'double' to 'float'
+D:\PBL2\GamePlay\Init.cpp(66,22): warning C4305: 'initializing': truncation from 'double' to 'float'
+D:\PBL2\GamePlay\Init.cpp(66,28): warning C4305: 'initializing': truncation from 'double' to 'float'
+D:\PBL2\GamePlay\Init.cpp(69,21): warning C4305: 'initializing': truncation from 'double' to 'float'
+D:\PBL2\GamePlay\Init.cpp(69,27): warning C4305: 'initializing': truncation from 'double' to 'float'
+  PBL2.vcxproj -> D:\PBL2\x64\Debug\PBL2.exe

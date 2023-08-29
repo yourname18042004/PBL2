@@ -30,6 +30,11 @@ public:
 			MOUSE_Y = event.motion.y;
 			BUTTON_LEFT = true;
 		}
+
+		if (event.type == SDL_MOUSEBUTTONUP)
+		{
+			BUTTON_LEFT = false;
+		}
 	}
 };
 

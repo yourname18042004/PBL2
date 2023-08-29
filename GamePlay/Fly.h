@@ -5,8 +5,9 @@
 #include "Vector.h"
 
 class Fly :public Object {
+public:
 	int score;
-	bool status;
+	bool status = true;
 	Vector direction;
 };
 

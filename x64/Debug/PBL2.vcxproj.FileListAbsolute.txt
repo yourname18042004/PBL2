@@ -1,2 +1,3 @@
 D:\C++\PBL2\x64\Debug\PBL2.exe
 D:\PBL2\x64\Debug\PBL2.exe
+D:\Ngôn Ngữ Lập Trình\C++\PBL2\x64\Debug\PBL2.exe

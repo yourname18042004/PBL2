@@ -54,6 +54,7 @@ void Window::update()
 
 		v = Vector{ (vx / r) * 6, (vy / r) * 6 };
 	}
+	
 	Butter.update(v);
 
 	fly1.animation();

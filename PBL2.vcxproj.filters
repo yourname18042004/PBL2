@@ -27,6 +27,12 @@
     <ClCompile Include="GamePlay\Init.cpp">
       <Filter>Header Files\GamePlay</Filter>
     </ClCompile>
+    <ClCompile Include="GamePlay\ManagerObject.cpp">
+      <Filter>Header Files\GamePlay</Filter>
+    </ClCompile>
+    <ClCompile Include="GamePlay\Object.cpp">
+      <Filter>Header Files\GamePlay</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GamePlay\Init.h">
@@ -51,6 +57,15 @@
       <Filter>Header Files\GamePlay</Filter>
     </ClInclude>
     <ClInclude Include="GamePlay\CollisionHandling.h">
+      <Filter>Header Files\GamePlay</Filter>
+    </ClInclude>
+    <ClInclude Include="GamePlay\ManagerObject.h">
+      <Filter>Header Files\GamePlay</Filter>
+    </ClInclude>
+    <ClInclude Include="GamePlay\LoadDocument.h">
+      <Filter>Header Files\GamePlay</Filter>
+    </ClInclude>
+    <ClInclude Include="GamePlay\ObjectText.h">
       <Filter>Header Files\GamePlay</Filter>
     </ClInclude>
   </ItemGroup>

@@ -7,11 +7,14 @@
 #include<string.h>
 #include "LoadTexture.h"
 #include "Vector.h"
+
+
 class Object {
 protected:
 	float pos_x; // Vị trí ban đầu 
 	float pos_y;
 	SDL_Texture* Texture;
+	SDL_Renderer* renderer;
 	SDL_Rect scr; //Khung hình cắt ảnh, độ to của đối tượng và vị trí trên cửa sổ
 	SDL_FRect dest;
 	int WidthAni, HeightAni; // Thông số ảnh đưa vào
@@ -20,57 +23,19 @@ protected:
 
 public:
 	// Khởi tạo đối tượng
-	void Init(float pos_x, float pos_y, float width, float height, SDL_Renderer* Render, const char* file_path) {
-		this->pos_x = pos_x;
-		this->pos_y = pos_y;
-		Texture = LoadImage::Load(file_path, Render);
-		this->file_path = file_path;
-		dest.x = pos_x;
-		dest.y = pos_y;
-		dest.w = width;
-		dest.h = height;
-		// đọc và tách thông số từ địa chỉ ảnh
-		char tmp[100];
-		for (int i = 0; i < strlen(file_path); i++) {
-			tmp[i] = file_path[i];
-		}
-		char* tmpoftmp = strtok(tmp, "_");
-		char* Width = strtok(NULL, "_");
-		char* Height = strtok(NULL, ".");
-		WidthAni = atoi(Width);
-		HeightAni = atoi(Height);
-		scr.w = HeightAni;
-		scr.h = HeightAni;
-
-	}
+	Object(float pos_x, float pos_y, float width, float height, SDL_Renderer* Render, const char* file_path); 
 	// vẽ đối tượng
-	void Render(SDL_Renderer* render) {
-		SDL_RenderCopyF(render, Texture, &scr, &dest);
-	}
+	void Render(SDL_Renderer* render); 
 	// chuyển động của đối tượng
-	void animation() {
-
-		scr.x = (count % (WidthAni / HeightAni)) * HeightAni;
-		count++;
-	}
+	void Animation();
 	//cập nhật tốc độ và hướng di chuyển 
-	void update(Vector v) {
-		dest.x += v.x;
-		dest.y += v.y;
-		pos_x += v.x;
-		pos_y += v.y;
-	}
+	void UpdateObject(Vector v);
 	// Trả về vị trí đối tượng;
+	void setPosition(Vector v); 
+
 	Vector getPosition() { return Vector{ pos_x, pos_y }; }
-	void setPosition( Vector v){
-		pos_x = v.x;
-		pos_y = v.y;
-		dest.x = v.x;
-		dest.y = v.y;
-	}
-	SDL_FRect GetRect() {
-		return dest;
-	}
+	
+	SDL_FRect GetRect();
 };
 
 #endif

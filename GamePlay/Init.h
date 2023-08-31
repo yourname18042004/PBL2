@@ -9,8 +9,9 @@
 #include "Object.h"
 #include "Fly.h"
 #include "HandelEvent.h"
-#include  "Racket.h"
-
+#include "Racket.h"
+#include "CollisionHandling.h"
+#include <cstdlib>
 
 // đối tượng nhận và xử lý tất cả các đối tượng sự kiện khác
 
@@ -31,7 +32,6 @@ public:
 	void destroy();
 	// Hàm trả về giá trị để xét xem chương trình có tiếp tục chạy nữa hay không
 	bool Running() { return isRunning; }
-
 private:
 	SDL_Window* window;
 	SDL_Renderer* renderer;

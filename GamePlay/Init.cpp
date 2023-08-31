@@ -1,13 +1,20 @@
 ﻿#include "Init.h"
-#include "CollisionHandling.h"
+#include "ManagerObject.h"
+#include "LoadCharacter.h"
+#include "LoadDocument.h"
+#include "ObjectText.h"
+#include < cstring>
+#include <sstream>
+#include <string.h>
 
-
-
-Object Butter, Bee;  Fly fly1;
-Racket RacKet1;
+Manager ManagerObject;
+Racket* RacKet1 = nullptr;
 HandelEvent handelEvent;
 
+Text Textwindow;Text Noti;// thông báo win game
 Window::Window() {}
+
+char text[100] = "FLY KILLER SCORE:";// thanh ghi điểm số, ban đầu sẽ không in điểm
 Window::~Window() {}
 void Window::handleEvent()
 {
@@ -33,64 +40,62 @@ void Window::init(const char* title, int xpos, int ypos, int width, int height, 
 
 		renderer = SDL_CreateRenderer(window, -1, 0);
 		SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
+		SDL_ShowCursor(false);//Ẩn trỏ chuột mặc định
+
+		TTF_Init();
 		isRunning = true;
 	}
 	else
 	{
 		isRunning = false;
 	}
-	fly1.Init(40, 80, 100, 100, renderer, "Data//fly_200_100.png");
-	Butter.Init(40, 80, 100, 100, renderer, "Data//butterfly1_700_100.png");
-	Bee.Init(100, 200, 100, 100, renderer, "Data//bee_200_100.png");
-	RacKet1.Init(100, 200, 100, 100, renderer, "Data//Racket_200_100.png");
+	//Them doi tuong vao vector Object
+	for (int i = 0; i <10; i++) {
+		//random độ lớn của Object
+		int size = rand() % 50 + 50;
+
+		Fly* Fly1 = (Fly*)new Fly::Object(100 * (rand() % 5), 100 * (rand() % 5), size, size, 
+			renderer,
+			"Data//fly_200_100.png");
+
+		ManagerObject.Add(*Fly1);
+	}
+	//Tao con tro va quan ly
+	RacKet1 = (Racket*)new Racket::Object(100, 200, 75, 75, renderer, "Data//Racket_200_100.png");
+	RacKet1->SetTheAnimation();
+	ManagerObject.Add(RacKet1);
+	ManagerObject.Add(&handelEvent);
+	// khởi tạo các thông báo in trên cửa sổ
+	Textwindow.init(10,0,200, 50, "Data//arial.ttf", 25, { 255,0,0, 255}, "FLY KILLER SCORE:0", renderer);
+	Noti.init(720, 360, 200, 50, "Data//arial.ttf", 50, { 255,0,0, 255 }, "YOU WIN", renderer);
 }
 
 void Window::update()
-{
-	Butter.animation();
-	Vector v = Vector{ 0.02, 0 };
-	/*if (handelEvent.BUTTON_LEFT)
-	{
-		float vx = (float)(handelEvent.MOUSE_X - Butter.getPosition().x);
-		float vy = (float)(handelEvent.MOUSE_Y - Butter.getPosition().y);
+{	
+	RacKet1->AnimationRacket(handelEvent);
+	RacKet1->UpdatePositionOfMouse();
+	ManagerObject.UpdatePositionAndVector();
+	char text1[100]; // dòng text null tạm thời được copy từ text khai báo bên trên
+	strcpy(text1, text);
 
-		float r = sqrt(vx * vx + vy * vy);
-
-		v = Vector{ (vx / r) * 6, (vy / r) * 6 };
-	}*/
-	Butter.update(v);
-	if (fly1.status) {
-		fly1.animation();
-	}
-	
-	fly1.update(Vector{ 0.005,0.005 });
-
-	Bee.animation();
-	Bee.update(Vector{ 0.005,0.005 });
-
-	RacKet1.AnimationRacket(handelEvent);
-	RacKet1.update();
-
-	if (Collision(fly1.GetRect(), RacKet1.GetRect()) && handelEvent.BUTTON_LEFT) {
-		fly1.status = false;
-	}
-
+	//chuyển biến scorer thành chuỗi rồi nối vào chuỗi đã được copy rồi cập nhật lên màn hình 
+	strcat(text1, std::to_string(ManagerObject.scored).c_str());
+	Textwindow.update(10, 0, 200, 50, "Data//arial.ttf", 25, { 255 ,0 ,0 , 255 }, text1, renderer); 
 }
 
 void Window::render()
 {
 	SDL_RenderClear(renderer);
-
-	Butter.Render(renderer);
-	if (fly1.status) {
-		fly1.Render(renderer);
-	}
-
-	Bee.Render(renderer);
-	RacKet1.Render(renderer);
-
+	ManagerObject.render(renderer);
+	RacKet1->Render(renderer);
+	Textwindow.render(renderer);
+	//Hết đối tượng trên màn hình -> in ra thông báo chiến thắng
+	
+	if (ManagerObject.getSize() == 0)
+		Noti.render(renderer);
+	
+	
 	SDL_RenderPresent(renderer);
-
 }
 void Window::destroy()
 {

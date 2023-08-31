@@ -5,11 +5,9 @@
 
 // khởi tạo đối tượng
 Window* window = nullptr;
-
 // chiều rộng chiểu cao của của sổ
 const int WIDTH_SCREEN = 1440;
 const int HEIGHT_SCREEN = 720;
-
 int main(int argc, char* argv[])
 {
 	// cấp phát bộ nhớ
@@ -28,6 +26,7 @@ int main(int argc, char* argv[])
 
 		// hiển thị đối tượng
 		window->render();
+		
 
 	}
 

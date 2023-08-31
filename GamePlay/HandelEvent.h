@@ -7,6 +7,7 @@ class HandelEvent
 {
 public:
 	bool BUTTON_LEFT = false;
+	bool set = true;
 	int MOUSE_X = 0;
 	int MOUSE_Y = 0;
 	bool Key[26] = {0};
@@ -22,18 +23,18 @@ public:
 				Key[key - SDLK_a] = true;
 			}
 		}
-		
+		if (BUTTON_LEFT) BUTTON_LEFT = false;
 
-		if (event.button.button == SDL_BUTTON_LEFT)
+		if (event.type == SDL_MOUSEBUTTONUP) set = true;
+
+		else if (event.button.button == SDL_BUTTON_LEFT)
 		{
 			MOUSE_X = event.motion.x;
 			MOUSE_Y = event.motion.y;
-			BUTTON_LEFT = true;
-		}
-
-		if (event.type == SDL_MOUSEBUTTONUP)
-		{
-			BUTTON_LEFT = false;
+			if (set) {
+				BUTTON_LEFT = true;
+				set = false;
+			}
 		}
 	}
 };

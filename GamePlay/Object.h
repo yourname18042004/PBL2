@@ -27,7 +27,7 @@ public:
 	// vẽ đối tượng
 	void Render(SDL_Renderer* render); 
 	// chuyển động của đối tượng
-	void Animation();
+	void Animation(bool a);
 	//cập nhật tốc độ và hướng di chuyển 
 	void UpdateObject(Vector v);
 	// Trả về vị trí đối tượng;

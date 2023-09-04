@@ -1,4 +1,5 @@
-D:\Ngôn Ngữ Lập Trình\C++\PBL2\GamePlay\Init.cpp;D:\Ngôn Ngữ Lập Trình\C++\PBL2\x64\Debug\Init.obj
-D:\Ngôn Ngữ Lập Trình\C++\PBL2\GamePlay\ManagerObject.cpp;D:\Ngôn Ngữ Lập Trình\C++\PBL2\x64\Debug\ManagerObject.obj
-D:\Ngôn Ngữ Lập Trình\C++\PBL2\GamePlay\Object.cpp;D:\Ngôn Ngữ Lập Trình\C++\PBL2\x64\Debug\Object.obj
-D:\Ngôn Ngữ Lập Trình\C++\PBL2\Main.cpp;D:\Ngôn Ngữ Lập Trình\C++\PBL2\x64\Debug\Main.obj
+D:\PBL2\GamePlay\Init.cpp;D:\PBL2\x64\Debug\Init.obj
+D:\PBL2\GamePlay\LoadMusic.cpp;D:\PBL2\x64\Debug\LoadMusic.obj
+D:\PBL2\GamePlay\ManagerObject.cpp;D:\PBL2\x64\Debug\ManagerObject.obj
+D:\PBL2\GamePlay\Object.cpp;D:\PBL2\x64\Debug\Object.obj
+D:\PBL2\Main.cpp;D:\PBL2\x64\Debug\Main.obj

@@ -12,6 +12,7 @@
 #include "Racket.h"
 #include "CollisionHandling.h"
 #include <cstdlib>
+#include "MenuAndBackground.h"
 
 // đối tượng nhận và xử lý tất cả các đối tượng sự kiện khác
 

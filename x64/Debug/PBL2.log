@@ -1,18 +1,5 @@
-﻿  Init.cpp
-D:\Ngôn Ngữ Lập Trình\C++\PBL2\GamePlay\ObjectText.h(19,12): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-D:\Ngôn Ngữ Lập Trình\C++\PBL2\GamePlay\ObjectText.h(20,12): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-D:\Ngôn Ngữ Lập Trình\C++\PBL2\GamePlay\ObjectText.h(21,12): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-D:\Ngôn Ngữ Lập Trình\C++\PBL2\GamePlay\ObjectText.h(22,12): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-D:\Ngôn Ngữ Lập Trình\C++\PBL2\GamePlay\ObjectText.h(30,12): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-D:\Ngôn Ngữ Lập Trình\C++\PBL2\GamePlay\ObjectText.h(31,12): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-D:\Ngôn Ngữ Lập Trình\C++\PBL2\GamePlay\ObjectText.h(32,12): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-D:\Ngôn Ngữ Lập Trình\C++\PBL2\GamePlay\ObjectText.h(33,12): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-D:\Ngôn Ngữ Lập Trình\C++\PBL2\GamePlay\Init.cpp(57,83): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-D:\Ngôn Ngữ Lập Trình\C++\PBL2\GamePlay\Init.cpp(57,77): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-D:\Ngôn Ngữ Lập Trình\C++\PBL2\GamePlay\Init.cpp(57,61): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-D:\Ngôn Ngữ Lập Trình\C++\PBL2\GamePlay\Init.cpp(57,41): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-  ManagerObject.cpp
-D:\Ngôn Ngữ Lập Trình\C++\PBL2\GamePlay\ManagerObject.cpp(25,20): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
-  Main.cpp
-  Generating Code...
-  PBL2.vcxproj -> D:\Ngôn Ngữ Lập Trình\C++\PBL2\x64\Debug\PBL2.exe
+﻿  ManagerObject.cpp
+D:\PBL2\GamePlay\Fly.h(40,16): warning C4244: '+=': conversion from 'double' to 'float', possible loss of data
+D:\PBL2\GamePlay\Fly.h(41,16): warning C4244: '+=': conversion from 'double' to 'float', possible loss of data
+D:\PBL2\GamePlay\ManagerObject.cpp(24,20): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
+  PBL2.vcxproj -> D:\PBL2\x64\Debug\PBL2.exe

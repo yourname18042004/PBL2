@@ -27,11 +27,17 @@ Object::Object(float pos_x, float pos_y, float width, float height, SDL_Renderer
 void Object:: Render(SDL_Renderer* render) {
 	SDL_RenderCopyF(render, Texture, &scr, &dest);
 }
-void Object::Animation() {
-	scr.x = (count % (WidthAni / HeightAni)) * HeightAni;
-	count++;
+void Object::Animation(bool a) {
+	if (a == true) {
+		scr.x = (count % (WidthAni / HeightAni)) * HeightAni;
+		count++;
+	}
+	if (a == false) {
+		scr.x = (count % ((WidthAni / 2) / HeightAni)) * HeightAni;
+		count++;
+	}
 }
-void Object:: UpdateObject(Vector v) {
+void Object::UpdateObject(Vector v){
 	dest.x += v.x;
 	dest.y += v.y;
 	pos_x += v.x;

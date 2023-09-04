@@ -112,13 +112,13 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)\Libraries\SDL_library\SDL2_image\include;$(SolutionDir)\Libraries\SDL_library\SDL2\include;$(SolutionDir)\Libraries\SDL_library\SDL2_ttf-2.0.14\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)\Libraries\SDL_library\SDL2_mixer-2.0.2\include;$(SolutionDir)\Libraries\SDL_library\SDL2_image\include;$(SolutionDir)\Libraries\SDL_library\SDL2\include;$(SolutionDir)\Libraries\SDL_library\SDL2_ttf-2.0.14\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_image.lib;SDL2_ttf.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(SolutionDir)\Libraries\SDL_library\SDL2_ttf-2.0.14\lib\x64;$(SolutionDir)\Libraries\SDL_library\SDL2_image\lib\x64;$(SolutionDir)\Libraries\SDL_library\SDL2\lib\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_image.lib;SDL2_ttf.lib;SDL2_mixer.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)\Libraries\SDL_library\SDL2_ttf-2.0.14\lib\x64;$(SolutionDir)\Libraries\SDL_library\SDL2_image\lib\x64;$(SolutionDir)\Libraries\SDL_library\SDL2\lib\x64;$(SolutionDir)\Libraries\SDL_library\SDL2_mixer-2.0.2\lib\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -142,6 +142,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="GamePlay\Init.cpp" />
+    <ClCompile Include="GamePlay\LoadMusic.cpp" />
     <ClCompile Include="GamePlay\ManagerObject.cpp" />
     <ClCompile Include="GamePlay\Object.cpp" />
     <ClCompile Include="Main.cpp" />
@@ -152,8 +153,10 @@
     <ClInclude Include="GamePlay\HandelEvent.h" />
     <ClInclude Include="GamePlay\Init.h" />
     <ClInclude Include="GamePlay\LoadDocument.h" />
+    <ClInclude Include="GamePlay\LoadMusic.h" />
     <ClInclude Include="GamePlay\LoadTexture.h" />
     <ClInclude Include="GamePlay\ManagerObject.h" />
+    <ClInclude Include="GamePlay\MenuAndBackground.h" />
     <ClInclude Include="GamePlay\Object.h" />
     <ClInclude Include="GamePlay\ObjectText.h" />
     <ClInclude Include="GamePlay\Racket.h" />

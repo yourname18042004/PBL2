@@ -25,11 +25,10 @@ public:
 	
 	void AnimationRacket(HandelEvent handel) {
 		if (setanimation) {
-			Animation();
+			Animation(true);
 			}
 		if (handel.BUTTON_LEFT) {
 			setanimation = true;
-
 		}
 		if(count == WidthAni / HeightAni + 1) {// nếu count vượt quá giá trị khung hình thì trả về vị trí ban đầu
 			SDL_Delay(50);

@@ -1,7 +1,8 @@
 ﻿#include <SDL.h>
 #include <SDL_image.h>
-#include "GamePlay/Init.h"
-#include "GamePlay/MenuAndBackground.h"
+#include <Init/Init.h>
+
+
 #undef main
 
 // khởi tạo đối tượng

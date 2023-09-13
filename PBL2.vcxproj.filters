@@ -13,69 +13,105 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="Header Files\GamePlay">
-      <UniqueIdentifier>{05ef85fc-0302-4aa3-8f9d-900e3d71aea4}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Resource Files\Data">
       <UniqueIdentifier>{b61cc790-2f90-4c4f-be25-510cfe7466e1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\GamePlay">
+      <UniqueIdentifier>{59fbc76f-654e-43cb-96c8-ab99d43a3893}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\GamePlay\Object">
+      <UniqueIdentifier>{9e13632c-e73f-4c43-9b80-7be03e23c1d0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\GamePlay\Init">
+      <UniqueIdentifier>{f2a739aa-db31-4e48-91fd-46e07619761f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\GamePlay\Time_vector">
+      <UniqueIdentifier>{6adf4ac4-0309-4912-8816-a4064e93b7f8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\GamePlay\Load">
+      <UniqueIdentifier>{63bcf501-c6be-4d09-b4ea-e06fc2a90c15}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\GamePlay\Vacham">
+      <UniqueIdentifier>{0c87e2ad-f55e-4107-a787-aa99b1dde1b9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\GamePlay\Manager">
+      <UniqueIdentifier>{187ff05a-e6e9-4bd4-b030-36865184d307}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\GamePlay\Animation">
+      <UniqueIdentifier>{7df3e64d-6bf6-43ca-a812-42ae4ff5a7ac}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="GamePlay\Init.cpp">
-      <Filter>Header Files\GamePlay</Filter>
+    <ClCompile Include="Libraries\GamePlay\Object\Object.cpp">
+      <Filter>Header Files\GamePlay\Object</Filter>
     </ClCompile>
-    <ClCompile Include="GamePlay\ManagerObject.cpp">
-      <Filter>Header Files\GamePlay</Filter>
+    <ClCompile Include="Libraries\GamePlay\Init\Init.cpp">
+      <Filter>Header Files\GamePlay\Init</Filter>
     </ClCompile>
-    <ClCompile Include="GamePlay\Object.cpp">
-      <Filter>Header Files\GamePlay</Filter>
+    <ClCompile Include="Libraries\GamePlay\Time_vector\Timer.cpp">
+      <Filter>Header Files\GamePlay\Time_vector</Filter>
     </ClCompile>
-    <ClCompile Include="GamePlay\LoadMusic.cpp">
-      <Filter>Header Files\GamePlay</Filter>
+    <ClCompile Include="Libraries\GamePlay\Manager\ManagerObject.cpp">
+      <Filter>Header Files\GamePlay\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="Libraries\GamePlay\Animation\FramesObject.cpp">
+      <Filter>Header Files\GamePlay\Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="Libraries\GamePlay\Animation\Animation.cpp">
+      <Filter>Header Files\GamePlay\Animation</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="GamePlay\Init.h">
-      <Filter>Header Files\GamePlay</Filter>
+    <ClInclude Include="Libraries\GamePlay\Object\Fly.h">
+      <Filter>Header Files\GamePlay\Object</Filter>
     </ClInclude>
-    <ClInclude Include="GamePlay\LoadTexture.h">
-      <Filter>Header Files\GamePlay</Filter>
+    <ClInclude Include="Libraries\GamePlay\Object\Object.h">
+      <Filter>Header Files\GamePlay\Object</Filter>
     </ClInclude>
-    <ClInclude Include="GamePlay\Fly.h">
-      <Filter>Header Files\GamePlay</Filter>
+    <ClInclude Include="Libraries\GamePlay\Object\ObjectText.h">
+      <Filter>Header Files\GamePlay\Object</Filter>
     </ClInclude>
-    <ClInclude Include="GamePlay\Object.h">
-      <Filter>Header Files\GamePlay</Filter>
+    <ClInclude Include="Libraries\GamePlay\Object\Racket.h">
+      <Filter>Header Files\GamePlay\Object</Filter>
     </ClInclude>
-    <ClInclude Include="GamePlay\Vector.h">
-      <Filter>Header Files\GamePlay</Filter>
+    <ClInclude Include="Libraries\GamePlay\Init\Init.h">
+      <Filter>Header Files\GamePlay\Init</Filter>
     </ClInclude>
-    <ClInclude Include="GamePlay\HandelEvent.h">
-      <Filter>Header Files\GamePlay</Filter>
+    <ClInclude Include="Libraries\GamePlay\Init\MenuAndBackground.h">
+      <Filter>Header Files\GamePlay\Init</Filter>
     </ClInclude>
-    <ClInclude Include="GamePlay\Racket.h">
-      <Filter>Header Files\GamePlay</Filter>
+    <ClInclude Include="Libraries\GamePlay\Time_vector\Timer.h">
+      <Filter>Header Files\GamePlay\Time_vector</Filter>
     </ClInclude>
-    <ClInclude Include="GamePlay\CollisionHandling.h">
-      <Filter>Header Files\GamePlay</Filter>
+    <ClInclude Include="Libraries\GamePlay\Time_vector\Vector.h">
+      <Filter>Header Files\GamePlay\Time_vector</Filter>
     </ClInclude>
-    <ClInclude Include="GamePlay\ManagerObject.h">
-      <Filter>Header Files\GamePlay</Filter>
+    <ClInclude Include="Libraries\GamePlay\Load\LoadDocument.h">
+      <Filter>Header Files\GamePlay\Load</Filter>
     </ClInclude>
-    <ClInclude Include="GamePlay\LoadDocument.h">
-      <Filter>Header Files\GamePlay</Filter>
+    <ClInclude Include="Libraries\GamePlay\Load\LoadMusic.h">
+      <Filter>Header Files\GamePlay\Load</Filter>
     </ClInclude>
-    <ClInclude Include="GamePlay\ObjectText.h">
-      <Filter>Header Files\GamePlay</Filter>
+    <ClInclude Include="Libraries\GamePlay\Load\LoadTexture.h">
+      <Filter>Header Files\GamePlay\Load</Filter>
     </ClInclude>
-    <ClInclude Include="GamePlay\LoadMusic.h">
-      <Filter>Header Files\GamePlay</Filter>
+    <ClInclude Include="Libraries\GamePlay\Vacham\CollisionHandling.h">
+      <Filter>Header Files\GamePlay\Vacham</Filter>
     </ClInclude>
-    <ClInclude Include="GamePlay\MenuAndBackground.h">
-      <Filter>Header Files\GamePlay</Filter>
+    <ClInclude Include="Libraries\GamePlay\Manager\HandelEvent.h">
+      <Filter>Header Files\GamePlay\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="Libraries\GamePlay\Manager\ManagerObject.h">
+      <Filter>Header Files\GamePlay\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="Libraries\GamePlay\Animation\Animation.h">
+      <Filter>Header Files\GamePlay\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="Libraries\GamePlay\Animation\FramesObject.h">
+      <Filter>Header Files\GamePlay\Animation</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

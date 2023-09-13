@@ -112,7 +112,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)\Libraries\SDL_library\SDL2_mixer-2.0.2\include;$(SolutionDir)\Libraries\SDL_library\SDL2_image\include;$(SolutionDir)\Libraries\SDL_library\SDL2\include;$(SolutionDir)\Libraries\SDL_library\SDL2_ttf-2.0.14\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)\Libraries\GamePlay;$(SolutionDir)\Libraries\SDL_library\SDL2_mixer-2.0.2\include;$(SolutionDir)\Libraries\SDL_library\SDL2_image\include;$(SolutionDir)\Libraries\SDL_library\SDL2\include;$(SolutionDir)\Libraries\SDL_library\SDL2_ttf-2.0.14\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -141,26 +141,31 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="GamePlay\Init.cpp" />
-    <ClCompile Include="GamePlay\LoadMusic.cpp" />
-    <ClCompile Include="GamePlay\ManagerObject.cpp" />
-    <ClCompile Include="GamePlay\Object.cpp" />
+    <ClCompile Include="Libraries\GamePlay\Animation\Animation.cpp" />
+    <ClCompile Include="Libraries\GamePlay\Animation\FramesObject.cpp" />
+    <ClCompile Include="Libraries\GamePlay\Init\Init.cpp" />
+    <ClCompile Include="Libraries\GamePlay\Manager\ManagerObject.cpp" />
+    <ClCompile Include="Libraries\GamePlay\Object\Object.cpp" />
+    <ClCompile Include="Libraries\GamePlay\Time_vector\Timer.cpp" />
     <ClCompile Include="Main.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="GamePlay\CollisionHandling.h" />
-    <ClInclude Include="GamePlay\Fly.h" />
-    <ClInclude Include="GamePlay\HandelEvent.h" />
-    <ClInclude Include="GamePlay\Init.h" />
-    <ClInclude Include="GamePlay\LoadDocument.h" />
-    <ClInclude Include="GamePlay\LoadMusic.h" />
-    <ClInclude Include="GamePlay\LoadTexture.h" />
-    <ClInclude Include="GamePlay\ManagerObject.h" />
-    <ClInclude Include="GamePlay\MenuAndBackground.h" />
-    <ClInclude Include="GamePlay\Object.h" />
-    <ClInclude Include="GamePlay\ObjectText.h" />
-    <ClInclude Include="GamePlay\Racket.h" />
-    <ClInclude Include="GamePlay\Vector.h" />
+    <ClInclude Include="Libraries\GamePlay\Animation\Animation.h" />
+    <ClInclude Include="Libraries\GamePlay\Animation\FramesObject.h" />
+    <ClInclude Include="Libraries\GamePlay\Init\Init.h" />
+    <ClInclude Include="Libraries\GamePlay\Init\MenuAndBackground.h" />
+    <ClInclude Include="Libraries\GamePlay\Load\LoadDocument.h" />
+    <ClInclude Include="Libraries\GamePlay\Load\LoadMusic.h" />
+    <ClInclude Include="Libraries\GamePlay\Load\LoadTexture.h" />
+    <ClInclude Include="Libraries\GamePlay\Manager\HandelEvent.h" />
+    <ClInclude Include="Libraries\GamePlay\Manager\ManagerObject.h" />
+    <ClInclude Include="Libraries\GamePlay\Object\Fly.h" />
+    <ClInclude Include="Libraries\GamePlay\Object\Object.h" />
+    <ClInclude Include="Libraries\GamePlay\Object\ObjectText.h" />
+    <ClInclude Include="Libraries\GamePlay\Object\Racket.h" />
+    <ClInclude Include="Libraries\GamePlay\Time_vector\Timer.h" />
+    <ClInclude Include="Libraries\GamePlay\Time_vector\Vector.h" />
+    <ClInclude Include="Libraries\GamePlay\Vacham\CollisionHandling.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

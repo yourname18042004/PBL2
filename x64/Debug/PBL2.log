@@ -1,5 +1,6 @@
-﻿  ManagerObject.cpp
-D:\PBL2\GamePlay\Fly.h(40,16): warning C4244: '+=': conversion from 'double' to 'float', possible loss of data
-D:\PBL2\GamePlay\Fly.h(41,16): warning C4244: '+=': conversion from 'double' to 'float', possible loss of data
-D:\PBL2\GamePlay\ManagerObject.cpp(24,20): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
+﻿  FramesObject.cpp
+D:\PBL2\Libraries\GamePlay\Animation\FramesObject.cpp(23,11): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+D:\PBL2\Libraries\GamePlay\Animation\FramesObject.cpp(24,11): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+  Timer.cpp
+  Generating Code...
   PBL2.vcxproj -> D:\PBL2\x64\Debug\PBL2.exe

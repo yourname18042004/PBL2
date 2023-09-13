@@ -1,5 +1,7 @@
-D:\PBL2\GamePlay\Init.cpp;D:\PBL2\x64\Debug\Init.obj
-D:\PBL2\GamePlay\LoadMusic.cpp;D:\PBL2\x64\Debug\LoadMusic.obj
-D:\PBL2\GamePlay\ManagerObject.cpp;D:\PBL2\x64\Debug\ManagerObject.obj
-D:\PBL2\GamePlay\Object.cpp;D:\PBL2\x64\Debug\Object.obj
+D:\PBL2\Libraries\GamePlay\Animation\Animation.cpp;D:\PBL2\x64\Debug\Animation.obj
+D:\PBL2\Libraries\GamePlay\Animation\FramesObject.cpp;D:\PBL2\x64\Debug\FramesObject.obj
+D:\PBL2\Libraries\GamePlay\Init\Init.cpp;D:\PBL2\x64\Debug\Init.obj
+D:\PBL2\Libraries\GamePlay\Manager\ManagerObject.cpp;D:\PBL2\x64\Debug\ManagerObject.obj
+D:\PBL2\Libraries\GamePlay\Object\Object.cpp;D:\PBL2\x64\Debug\Object.obj
+D:\PBL2\Libraries\GamePlay\Time_vector\Timer.cpp;D:\PBL2\x64\Debug\Timer.obj
 D:\PBL2\Main.cpp;D:\PBL2\x64\Debug\Main.obj

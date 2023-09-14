@@ -40,6 +40,9 @@
     <Filter Include="Header Files\GamePlay\Animation">
       <UniqueIdentifier>{7df3e64d-6bf6-43ca-a812-42ae4ff5a7ac}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\GamePlay\Linklist">
+      <UniqueIdentifier>{db5c5920-9226-4eb1-aa1c-77e4a4b04dcb}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -112,6 +115,9 @@
     </ClInclude>
     <ClInclude Include="Libraries\GamePlay\Animation\FramesObject.h">
       <Filter>Header Files\GamePlay\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="Libraries\GamePlay\Linklist\Linklist.h">
+      <Filter>Header Files\GamePlay\Linklist</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -19,6 +19,7 @@
 #include <Load/LoadDocument.h>
 #include <Object/ObjectText.h>
 #include "MenuAndBackground.h"
+#include <Linklist/Linklist.h>
 #include <cstring>
 #include <sstream>
 #include <string.h>

@@ -1,11 +1,11 @@
 ﻿#include "Init.h"
 
 
-Manager ManagerObject;
+//Manager ManagerObject;
 //Racket* RacKet1 = nullptr;
 Fly* Fly1 = nullptr;
 HandelEvent handelEvent;
-
+ObjectLinkList<Fly>*  FlyLinkList = nullptr;
 
 const int FPS_rate = 120;
 
@@ -38,14 +38,27 @@ void Window::init(const char* title, int xpos, int ypos, int width, int height, 
 
 		renderer = SDL_CreateRenderer(window, -1, 0);
 		SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
-		SDL_ShowCursor(false);//Ẩn trỏ chuột mặc định
+		//SDL_ShowCursor(false);//Ẩn trỏ chuột mặc định
 
 		TTF_Init();
 		isRunning = true;
 		mtimer = Timer::Init();
 
-		Fly1 = (Fly*)new Object(100, 100, 100, 100, renderer);
-		Fly1->Init();
+		//Fly1 = (Fly*)new Object(100, 100, 100, 100, renderer);
+		//Fly1->Init();
+		FlyLinkList = new ObjectLinkList<Fly>();
+		FlyLinkList->push((Fly*)new Object(100, 100, 100, 100, renderer));
+		FlyLinkList->push((Fly*)new Object(400, 100, 100, 100, renderer));
+		FlyLinkList->push((Fly*)new Object(100, 400, 100, 100, renderer));
+		FlyLinkList->push((Fly*)new Object(400, 400, 100, 100, renderer));
+		while (!FlyLinkList->setIndex())
+		{
+			FlyLinkList->getIndex()->getData()->Init();
+		}
+		FlyLinkList->resetIndex();
+		//FlyLinkList.push((Fly*)new Object(400, 400, 100, 100, renderer));
+		//FlyLinkList.push((Fly*)new Object(600, 400, 100, 100, renderer));
+		//FlyLinkList.push((Fly*)new Object(400, 700, 100, 100, renderer));
 	}
 	else
 	{
@@ -57,8 +70,14 @@ void Window::init(const char* title, int xpos, int ypos, int width, int height, 
 void Window::update()
 {	
 	mtimer->Update();
-	Fly1->UpdateFly();
-
+	//Fly1->UpdateFly();
+	
+	while (!FlyLinkList->setIndex())
+	{
+		FlyLinkList->getIndex()->getData()->UpdateFly();
+	}
+	FlyLinkList->resetIndex();
+	//FlyLinkList.resetIndex();
 }
 
 void Window::render()
@@ -66,7 +85,11 @@ void Window::render()
 	if (mtimer->DeltaTime() >= 1.0f / FPS_rate) {
 		SDL_RenderClear(renderer);
 		
-		Fly1->Render();
+		while (!FlyLinkList->setIndex())
+		{
+			FlyLinkList->getIndex()->getData()->Render();
+		}
+		FlyLinkList->resetIndex();
 		SDL_RenderPresent(renderer);
 		mtimer->reset();
 	}

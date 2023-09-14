@@ -1,6 +1,10 @@
-﻿  FramesObject.cpp
-D:\PBL2\Libraries\GamePlay\Animation\FramesObject.cpp(23,11): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-D:\PBL2\Libraries\GamePlay\Animation\FramesObject.cpp(24,11): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-  Timer.cpp
-  Generating Code...
-  PBL2.vcxproj -> D:\PBL2\x64\Debug\PBL2.exe
+﻿  Init.cpp
+D:\C++\PBL2\Libraries\GamePlay\Object\ObjectText.h(19,12): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+D:\C++\PBL2\Libraries\GamePlay\Object\ObjectText.h(20,12): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+D:\C++\PBL2\Libraries\GamePlay\Object\ObjectText.h(21,12): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+D:\C++\PBL2\Libraries\GamePlay\Object\ObjectText.h(22,12): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+D:\C++\PBL2\Libraries\GamePlay\Object\ObjectText.h(33,12): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+D:\C++\PBL2\Libraries\GamePlay\Object\ObjectText.h(34,12): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+D:\C++\PBL2\Libraries\GamePlay\Object\ObjectText.h(35,12): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+D:\C++\PBL2\Libraries\GamePlay\Object\ObjectText.h(36,12): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+  PBL2.vcxproj -> D:\C++\PBL2\x64\Debug\PBL2.exe

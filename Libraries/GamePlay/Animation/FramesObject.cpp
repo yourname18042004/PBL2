@@ -24,7 +24,7 @@ FramesObject::FramesObject(float pos_x, float pos_y, int width, int height, cons
 	dest.h = height;
 	animation = new Animation(WidthAni/HeightAni, true, 1000);
 	this->renderer = renderer;
-
+	Index = 0;
 }
 void FramesObject::UpdateFrames() {
 	animation->AnimationManager(Index);

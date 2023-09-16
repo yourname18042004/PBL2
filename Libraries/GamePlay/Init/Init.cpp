@@ -1,11 +1,8 @@
 ﻿#include "Init.h"
 
 
-//Manager ManagerObject;
-//Racket* RacKet1 = nullptr;
-Fly* Fly1 = nullptr;
+Manager ManagerObject;
 HandelEvent handelEvent;
-ObjectLinkList<Fly>*  FlyLinkList = nullptr;
 
 const int FPS_rate = 120;
 
@@ -38,7 +35,7 @@ void Window::init(const char* title, int xpos, int ypos, int width, int height, 
 
 		renderer = SDL_CreateRenderer(window, -1, 0);
 		SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
-		//SDL_ShowCursor(false);//Ẩn trỏ chuột mặc định
+		SDL_ShowCursor(false);//Ẩn trỏ chuột mặc định
 
 		TTF_Init();
 		isRunning = true;
@@ -46,19 +43,13 @@ void Window::init(const char* title, int xpos, int ypos, int width, int height, 
 
 		//Fly1 = (Fly*)new Object(100, 100, 100, 100, renderer);
 		//Fly1->Init();
-		FlyLinkList = new ObjectLinkList<Fly>();
-		FlyLinkList->push((Fly*)new Object(100, 100, 100, 100, renderer));
-		FlyLinkList->push((Fly*)new Object(400, 100, 100, 100, renderer));
-		FlyLinkList->push((Fly*)new Object(100, 400, 100, 100, renderer));
-		FlyLinkList->push((Fly*)new Object(400, 400, 100, 100, renderer));
-		while (!FlyLinkList->setIndex())
-		{
-			FlyLinkList->getIndex()->getData()->Init();
+		for (int i = 0; i < 100; i++) {
+			int ranx = rand() % 1400;
+			int rany = rand() % 720;
+			ManagerObject.Add(new Fly(ranx, rany, 100, 100, Vector{1,3}, renderer));
 		}
-		FlyLinkList->resetIndex();
-		//FlyLinkList.push((Fly*)new Object(400, 400, 100, 100, renderer));
-		//FlyLinkList.push((Fly*)new Object(600, 400, 100, 100, renderer));
-		//FlyLinkList.push((Fly*)new Object(400, 700, 100, 100, renderer));
+		ManagerObject.Add(new Racket(100, 100, 75, 75, renderer, &handelEvent));
+	
 	}
 	else
 	{
@@ -70,30 +61,18 @@ void Window::init(const char* title, int xpos, int ypos, int width, int height, 
 void Window::update()
 {	
 	mtimer->Update();
-	//Fly1->UpdateFly();
-	
-	while (!FlyLinkList->setIndex())
-	{
-		FlyLinkList->getIndex()->getData()->UpdateFly();
-	}
-	FlyLinkList->resetIndex();
-	//FlyLinkList.resetIndex();
+	ManagerObject.Update();
 }
 
 void Window::render()
 {	
 	if (mtimer->DeltaTime() >= 1.0f / FPS_rate) {
 		SDL_RenderClear(renderer);
-		
-		while (!FlyLinkList->setIndex())
-		{
-			FlyLinkList->getIndex()->getData()->Render();
-		}
-		FlyLinkList->resetIndex();
+		ManagerObject.render(renderer);
 		SDL_RenderPresent(renderer);
+		std::cout << mtimer->DeltaTime() << std::endl;
 		mtimer->reset();
 	}
-	
 }
 void Window::destroy()
 {

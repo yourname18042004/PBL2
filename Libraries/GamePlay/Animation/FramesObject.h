@@ -14,14 +14,14 @@ private:
 	SDL_Texture* Texture;
 	SDL_Renderer* renderer;
 	SDL_Rect scr; //Khung hình cắt ảnh, độ to của đối tượng và vị trí trên cửa sổ
-	SDL_FRect dest;
+	SDL_FRect* dest;
 	int WidthAni, HeightAni;
 	int Index;
 	int WidthImage, HeightImage;
 	Animation* animation;
 
 public:
-	FramesObject(float pos_x, float pos_y, int width, int height, const char* path, SDL_Renderer* renderer);
+	FramesObject(SDL_FRect* dest, const char* path, SDL_Renderer* renderer, bool loop);
 	void Get_Texture();
 	void UpdateFrames();
 	int getWidthAni() {
@@ -33,7 +33,14 @@ public:
 	int getMax_frame() {
 		return (int)(WidthAni / HeightAni);
 	}
+	void setPositionDest(int x, int y) {
+		(*dest).x = x;
+		(*dest).y = y;
+	}
 
+	void setRunanimation() {
+		animation->SetRunAnimation();
+	}
 };
 
 

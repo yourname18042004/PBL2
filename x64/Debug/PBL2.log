@@ -1,4 +1,8 @@
 ﻿  Init.cpp
+D:\C++\PBL2\Libraries\GamePlay\Animation\FramesObject.h(37,15): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+D:\C++\PBL2\Libraries\GamePlay\Animation\FramesObject.h(38,15): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+D:\C++\PBL2\Libraries\GamePlay\Object\Racket.h(30,40): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+D:\C++\PBL2\Libraries\GamePlay\Object\Racket.h(30,32): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
 D:\C++\PBL2\Libraries\GamePlay\Object\ObjectText.h(19,12): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
 D:\C++\PBL2\Libraries\GamePlay\Object\ObjectText.h(20,12): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
 D:\C++\PBL2\Libraries\GamePlay\Object\ObjectText.h(21,12): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
@@ -7,4 +11,6 @@ D:\C++\PBL2\Libraries\GamePlay\Object\ObjectText.h(33,12): warning C4244: '=': c
 D:\C++\PBL2\Libraries\GamePlay\Object\ObjectText.h(34,12): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
 D:\C++\PBL2\Libraries\GamePlay\Object\ObjectText.h(35,12): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
 D:\C++\PBL2\Libraries\GamePlay\Object\ObjectText.h(36,12): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+D:\C++\PBL2\Libraries\GamePlay\Init\Init.cpp(49,36): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+D:\C++\PBL2\Libraries\GamePlay\Init\Init.cpp(49,30): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
   PBL2.vcxproj -> D:\C++\PBL2\x64\Debug\PBL2.exe

@@ -1,48 +1,67 @@
 ﻿#include <Manager/ManagerObject.h>
 #include <Load/LoadMusic.h>
-LoadMusic Sound1;
-
-void Manager::Add(Fly a) {
-	/*obJect.push_back(a);
-	(obJect.end() - 1)->UpdateObject(Vector{ (float)(rand() % 1000), (float)(rand() % 500 ) });
-	float goc = (float)(rand() % 360);
-	(obJect.end() - 1)->UpdateVector(Vector{ cos(goc),  sin(goc)});*/
-	//random bị trí xuất hiện trên màn hình
+Manager::Manager() {
+	FlyLinkList = new ObjectLinkList<Fly>();
+}
+void Manager::Add(Fly* a) {
+	FlyLinkList->push(a);
 }
 void Manager::Add(Racket* racKet) {
-	//this->racKet = racKet;
+	this->racKet = racKet;
 }
 void Manager::Add(HandelEvent* Handel) {// thêm con trỏ sự kiện
-	//this->Handel = Handel;
+	
 }
+void Manager::Update() {
+	UpdatePositionAndVector();
+
+	FlyLinkList->resetIndex();
+	racKet->UpdatePositionOfMouse();
+	racKet->UpdateRacket();
+	ManagerFly();
+}
+
 void Manager::render(SDL_Renderer* renderer) {
-	/*for (int i = 0; i < obJect.size(); i++) {
-		obJect[i].Render();
-	}*/
+
+	while (!FlyLinkList->setIndex()&& !FlyLinkList->isEmpty())
+	{
+		FlyLinkList->getIndex()->getData()->Render();
+		FlyLinkList->GoNext();
+	}
+	FlyLinkList->resetIndex();
+	racKet->Render();
 }
 int Manager::getSize() { // hàm lấy giá trị vector
 	return 0;// obJect.size();
 }
 void Manager::UpdatePositionAndVector() {
+	while (!FlyLinkList->setIndex() && !FlyLinkList->isEmpty())
+	{
+		FlyLinkList->getIndex()->getData()->UpdateFly();
+		Fly* fly = FlyLinkList->getIndex()->getData();
 
-	/*for (int i = 0; i < obJect.size(); i++) {
-		obJect[i].Animation(!obJect[i].status);
-		obJect[i].UpdateFly();
-		obJect[i].UpdateScore(100);
-	}*/
-	// xử lí va chạm
-	//for(int i = 0;i <obJect.size();i++){
-	//	if (Collision(racKet->GetRect(), obJect[i].GetRect()) && Handel->BUTTON_LEFT) {
-	//		Sound1.addSound("Data//hit3.wav");
-	//		if(obJect[i].status){
-	//			scored += obJect[i].score;// cộng điểm cho biến điểm
-	//			obJect.erase(obJect.begin() + i);// xoá đối tượng
-	//			break;// break nếu đã xoá 1 đối tượng tránh 1 click xoá nhiều đối tượng
-	//		}
-	//		else{
-	//			obJect[i].status = true; 
-	//			break;
-	//		}
-	//	}
-	//}
+		if (CollisionBlockWidth(fly->GetArea())) fly->UpdateVector(Vector{ fly->getDir().x, fly->getDir().y * -1 });
+		if (CollisionBlockHeight(fly->GetArea())) fly->UpdateVector(Vector{ fly->getDir().x * -1, fly->getDir().y});
+
+		Vector v = fly->getDir();
+		fly->UpdatePosition(Vector{ v.x * Timer::sInit->DeltaTime(), v.y * Timer::sInit->DeltaTime()});
+
+		FlyLinkList->GoNext();
+	}
+	FlyLinkList->resetIndex();
+}
+	
+
+void Manager::ManagerFly() {
+	while (!FlyLinkList->setIndex()&& !FlyLinkList->isEmpty())
+	{
+		Fly* fly =FlyLinkList->getIndex()->getData();
+		if (Collision(fly->GetArea(), racKet->GetArea()) && racKet->GetHit()) {
+			FlyLinkList->deleteNode();
+			FlyLinkList->resetIndex();
+			break;
+		}
+		else FlyLinkList->GoNext();
+	}
+	FlyLinkList->resetIndex();
 }

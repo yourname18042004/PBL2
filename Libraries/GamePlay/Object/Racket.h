@@ -7,34 +7,50 @@
 class Racket : public Object {
 
 private:
-	bool setAnimation;// biến kiểm tra có thực hiện animation hay không
-
+	SDL_FRect area;
+	FramesObject* Racket1 = nullptr;
+	HandelEvent* handleEvent;
 public:
-	// khởi tạo giá trị false cho biến kiểm tra
-	void SetTheAnimation() {
-		this->setAnimation = false;
+	Racket(float pos_x, float pos_y, float width, float height, SDL_Renderer* Render, HandelEvent *handleEvent) : Object(pos_x, pos_y, width, height, Render) 
+	{
+		area.x = pos_x;
+		area.y = pos_y;
+		area.w = width;
+		area.h = height;
+		this->handleEvent = handleEvent;
+		Racket1 = new FramesObject(&area, "Data//Racket_200_100.png", renderer, false);
 	}
+
 	// update vị trí chuột
 	void UpdatePositionOfMouse() {
-	/*	int x, y;
+		int x, y;
 		SDL_GetMouseState(&x, &y);
-		dest.x = (float)(x - dest.w / 2);
-		dest.y = (float)(y - dest.h / 2);*/
+		area.x = (float)(x - area.w / 2);
+		area.y = (float)(y - area.h / 2);
+		Racket1->setPositionDest(area.x, area.y);
+
 
 	}
-	
-	void AnimationRacket(HandelEvent handel) {
-		//if (setAnimation) {
-		//	Animation(true);
-		//	}
-		//if (handel.BUTTON_LEFT) {
-		//	setAnimation = true;
-		//}
-		//if(count == WidthAni / HeightAni + 1) {// nếu count vượt quá giá trị khung hình thì trả về vị trí ban đầu
-		//	setAnimation = false;
-		//	scr.x = 0;// trả về vị trí ban đầu
-		//	count = 0;
-		//}	
+	void UpdateRacket()
+	{
+		if (GetHit()) {
+		
+			Racket1->setRunanimation();
+		}
+		Racket1->UpdateFrames();
+
+	}
+
+	bool GetHit() {
+		return handleEvent->BUTTON_LEFT;
+	}
+
+	void Render()
+	{
+		Racket1->Get_Texture();
+	}
+	SDL_FRect GetArea() {
+		return area;
 	}
 };
 

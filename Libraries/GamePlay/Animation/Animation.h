@@ -7,12 +7,13 @@ private:
 	float time;
 	int max_index_frames;
 	bool loop;
+	bool run;
 	float times_to_change_frames;
 public:
 	Animation(int max_index_frame, bool loop, float times_to_change_frames);
 	void AnimationManager(int& index);
 	bool SetTime();
-
+	void SetRunAnimation() { run = true; };
 };
 
 

@@ -43,7 +43,6 @@ template <typename T> class ObjectLinkList
 private:
 	Node<T>* nodeHead;
 	Node<T>* nodeTail;
-
 	Node<T>* nodeIndex;
 
 public:
@@ -73,7 +72,6 @@ public:
 		}
 		else
 		{
-			std::cout << "Next";
 			Node<T>* newNode = new Node<T>(data);
 			newNode->setPrevious(nodeTail);
 			newNode->setNext(NULL);
@@ -87,9 +85,33 @@ public:
 
 	}
 
-	T popIndex() // lay va xoa
+	void deleteNode() // lay va xoa
 	{
+		if (isEmpty()) {
 
+		}
+		else {
+			if (nodeIndex->getPrevious() == NULL && nodeIndex->getNext() == NULL) {
+				nodeIndex = NULL;
+				nodeHead = NULL;
+				nodeTail = NULL;
+			}
+			else if (nodeIndex->getPrevious() == NULL) {
+				nodeIndex->getNext()->setPrevious(nullptr);
+				nodeHead = nodeIndex->getNext();
+				nodeIndex = nodeIndex->getNext();
+			}
+			else if (nodeIndex->getNext() == NULL) {
+				nodeIndex->getPrevious()->setNext(NULL);
+				nodeTail = nodeIndex->getPrevious();
+				nodeIndex = NULL;
+			}
+			else {
+					nodeIndex->getPrevious()->setNext(nodeIndex->getNext());
+					nodeIndex->getNext()->setPrevious(nodeIndex->getPrevious());
+					nodeIndex = nodeIndex->getNext();
+			}
+		}
 	}
 
 	void resetIndex()
@@ -102,9 +124,12 @@ public:
 	}
 	Node<T>* getIndex() // chi lay ko xoa
 	{
-		Node<T>* node = nodeIndex;
+		
+		return nodeIndex;
+	}
+
+	void GoNext() {
 		nodeIndex = nodeIndex->getNext();
-		return node;
 	}
 };
 

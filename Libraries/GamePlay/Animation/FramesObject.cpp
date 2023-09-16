@@ -2,7 +2,7 @@
 
 
 
-FramesObject::FramesObject(float pos_x, float pos_y, int width, int height, const char* path, SDL_Renderer* renderer) {
+FramesObject::FramesObject(SDL_FRect* dest, const char* path, SDL_Renderer* renderer, bool loop) {
 	Texture = LoadImage::Load(path, renderer);
 	char tmp[100];
 	for (int i = 0; i < strlen(path); i++) {
@@ -17,12 +17,8 @@ FramesObject::FramesObject(float pos_x, float pos_y, int width, int height, cons
 	scr.y = 0;
 	scr.w = HeightAni;
 	scr.h = HeightAni;
-
-	dest.x = pos_x;
-	dest.y = pos_y;
-	dest.w = width;
-	dest.h = height;
-	animation = new Animation(WidthAni/HeightAni, true, 1000);
+	this->dest = dest;
+	animation = new Animation(WidthAni/HeightAni, loop, 100);
 	this->renderer = renderer;
 	Index = 0;
 }
@@ -31,5 +27,5 @@ void FramesObject::UpdateFrames() {
 	scr.x = Index * scr.w;
 }
 void FramesObject::Get_Texture() {
-	SDL_RenderCopyF(renderer, Texture, &scr, &dest);
+	SDL_RenderCopyF(renderer, Texture, &scr, dest);
 }

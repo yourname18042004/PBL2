@@ -9,16 +9,20 @@ FramesObject::FramesObject(SDL_FRect* dest, const char* path, SDL_Renderer* rend
 		tmp[i] = path[i];
 	}
 	char* tmpoftmp = strtok(tmp, "_");
-	char* Width = strtok(NULL, "_");
-	char* Height = strtok(NULL, ".");
-	WidthAni = atoi(Width);
-	HeightAni = atoi(Height);
+	char* WidthImage = strtok(NULL, "_");
+	char* HeightImage = strtok(NULL, "_");
+	char* WidthAnimation = strtok(NULL, "_");
+	char* HeightAnimation = strtok(NULL, ".");
+	WidthImg = atoi(WidthImage);
+	HeightImg = atoi(HeightImage);
+	WidthAni = atoi(WidthAnimation);
+	HeightAni = atoi(HeightAnimation);
 	scr.x = 0;
 	scr.y = 0;
-	scr.w = HeightAni;
-	scr.h = HeightAni;
+	scr.w = WidthImg;
+	scr.h = HeightImg;
 	this->dest = dest;
-	animation = new Animation(WidthAni/HeightAni, loop, 100);
+	animation = new Animation(WidthAni/WidthImg, loop, 100);
 	this->renderer = renderer;
 	Index = 0;
 }

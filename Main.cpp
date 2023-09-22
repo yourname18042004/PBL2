@@ -1,6 +1,6 @@
 ﻿#include <SDL.h>
 #include <SDL_image.h>
-#include <Init/Init.h>
+#include <Init/Window.h>
 
 
 #undef main
@@ -19,21 +19,8 @@ int main(int argc, char* argv[])
 	// tạo của sổ và render
 	window->init("Thanh - Giap", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, WIDTH_SCREEN, HEIGHT_SCREEN, false);
 
-	
-	while (window->Running())
-	{
-
-		// Nhận sự kiện
-		window->handleEvent();
-
 		// Cap nhat doi tuong
 		window->update();
-
-		// hiển thị đối tượng
-		window->render();
-		
-
-	}
 
 	// xóa bộ nhớ
 	window->destroy();

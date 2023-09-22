@@ -1,22 +1,30 @@
-#ifndef MENU_BACKGROUND_H
+﻿#ifndef MENU_BACKGROUND_H
 #define MENU_BACKGROUND_H
 #include <Load/LoadTexture.h>
 #include <SDL.h>
+#include<Init/Window.h>
 
 
-class LoadMenu {
-protected:
-	SDL_Texture* Texture;
-	SDL_Renderer* renderer;
+class Menu {
 public:
-	void LoadMandB(SDL_Renderer* renderer, const char* filepath) {
-		this->renderer = renderer;
-		Texture = LoadImage::Load(filepath, renderer);
-	}
-	void Render(SDL_Renderer* renderer) {
-		SDL_RenderCopy(renderer, Texture, NULL, NULL);
-	}
-
+	Menu(SDL_Renderer* renderer);
+	~Menu();
+	void init();
+	void handleEvent();
+	void update();
+	// Hàm hiện thị đối tượng
+	void render();
+	// Hàm xóa đối tượng
+	void destroy();
+	void Loop();
+	// Hàm trả về giá trị để xét xem chương trình có tiếp tục chạy nữa hay không
+	bool Running() { return isRunning; }
+private:
+	SDL_Renderer* renderer;
+	// đối tượng nhận sự kiện
+	SDL_Event event;
+	// giá trị xet xem cửa sổ đã tắt hay chưa
+	bool isRunning;
 
 };
 

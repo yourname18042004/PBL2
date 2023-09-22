@@ -18,7 +18,7 @@ public:
 		area.w = width;
 		area.h = height;
 		this->handleEvent = handleEvent;
-		Racket1 = new FramesObject(&area, "Data//Racket_200_100.png", renderer, false);
+		Racket1 = new FramesObject(&area, "Data//Racket_100_100_200_100.png", renderer, false);
 	}
 
 	// update vị trí chuột

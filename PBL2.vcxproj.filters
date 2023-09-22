@@ -51,7 +51,7 @@
     <ClCompile Include="Libraries\GamePlay\Object\Object.cpp">
       <Filter>Header Files\GamePlay\Object</Filter>
     </ClCompile>
-    <ClCompile Include="Libraries\GamePlay\Init\Init.cpp">
+    <ClCompile Include="Libraries\GamePlay\Init\Window.cpp">
       <Filter>Header Files\GamePlay\Init</Filter>
     </ClCompile>
     <ClCompile Include="Libraries\GamePlay\Time_vector\Timer.cpp">
@@ -65,6 +65,12 @@
     </ClCompile>
     <ClCompile Include="Libraries\GamePlay\Animation\Animation.cpp">
       <Filter>Header Files\GamePlay\Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="Libraries\GamePlay\Init\MenuAndBackground.cpp">
+      <Filter>Header Files\GamePlay\Init</Filter>
+    </ClCompile>
+    <ClCompile Include="Libraries\GamePlay\Init\Gameplay.cpp">
+      <Filter>Header Files\GamePlay\Init</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -80,7 +86,7 @@
     <ClInclude Include="Libraries\GamePlay\Object\Racket.h">
       <Filter>Header Files\GamePlay\Object</Filter>
     </ClInclude>
-    <ClInclude Include="Libraries\GamePlay\Init\Init.h">
+    <ClInclude Include="Libraries\GamePlay\Init\Window.h">
       <Filter>Header Files\GamePlay\Init</Filter>
     </ClInclude>
     <ClInclude Include="Libraries\GamePlay\Init\MenuAndBackground.h">
@@ -118,6 +124,12 @@
     </ClInclude>
     <ClInclude Include="Libraries\GamePlay\Linklist\Linklist.h">
       <Filter>Header Files\GamePlay\Linklist</Filter>
+    </ClInclude>
+    <ClInclude Include="Libraries\GamePlay\Object\Button.h">
+      <Filter>Header Files\GamePlay\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Libraries\GamePlay\Init\Gameplay.h">
+      <Filter>Header Files\GamePlay\Init</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

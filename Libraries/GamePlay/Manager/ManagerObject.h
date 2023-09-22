@@ -1,7 +1,7 @@
 ﻿#ifndef MANAGER_OBJECT_H
 #define	MANAGER_OBJECT_H
 #include <Object/Object.h>
-#include <Init/Init.h>
+#include <Init/Window.h>
 #include <iostream>
 #include <vector>
 #include <Vacham/CollisionHandling.h>

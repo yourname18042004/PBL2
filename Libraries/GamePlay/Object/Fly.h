@@ -19,7 +19,8 @@ public:
 		area.h = height;
 		area.w = width;
 		this->direction = direction;
-		FlyNormal = new FramesObject(&area, "Data//FlyKing_398_194.png", renderer, true);
+		FlyNormal = new FramesObject(&area, "Data//FlyUpdate_100_100_400_100.png", renderer, true);
+		//FlySuper = new FramesObject(&area, "Data//FlyUpdate_100_100_200_100.png", renderer, true);
 	}
 	
 	int score;

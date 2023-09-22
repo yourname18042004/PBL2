@@ -143,7 +143,9 @@
   <ItemGroup>
     <ClCompile Include="Libraries\GamePlay\Animation\Animation.cpp" />
     <ClCompile Include="Libraries\GamePlay\Animation\FramesObject.cpp" />
-    <ClCompile Include="Libraries\GamePlay\Init\Init.cpp" />
+    <ClCompile Include="Libraries\GamePlay\Init\Gameplay.cpp" />
+    <ClCompile Include="Libraries\GamePlay\Init\Window.cpp" />
+    <ClCompile Include="Libraries\GamePlay\Init\MenuAndBackground.cpp" />
     <ClCompile Include="Libraries\GamePlay\Manager\ManagerObject.cpp" />
     <ClCompile Include="Libraries\GamePlay\Object\Object.cpp" />
     <ClCompile Include="Libraries\GamePlay\Time_vector\Timer.cpp" />
@@ -152,7 +154,8 @@
   <ItemGroup>
     <ClInclude Include="Libraries\GamePlay\Animation\Animation.h" />
     <ClInclude Include="Libraries\GamePlay\Animation\FramesObject.h" />
-    <ClInclude Include="Libraries\GamePlay\Init\Init.h" />
+    <ClInclude Include="Libraries\GamePlay\Init\Gameplay.h" />
+    <ClInclude Include="Libraries\GamePlay\Init\Window.h" />
     <ClInclude Include="Libraries\GamePlay\Init\MenuAndBackground.h" />
     <ClInclude Include="Libraries\GamePlay\Linklist\Linklist.h" />
     <ClInclude Include="Libraries\GamePlay\Load\LoadDocument.h" />
@@ -160,6 +163,7 @@
     <ClInclude Include="Libraries\GamePlay\Load\LoadTexture.h" />
     <ClInclude Include="Libraries\GamePlay\Manager\HandelEvent.h" />
     <ClInclude Include="Libraries\GamePlay\Manager\ManagerObject.h" />
+    <ClInclude Include="Libraries\GamePlay\Object\Button.h" />
     <ClInclude Include="Libraries\GamePlay\Object\Fly.h" />
     <ClInclude Include="Libraries\GamePlay\Object\Object.h" />
     <ClInclude Include="Libraries\GamePlay\Object\ObjectText.h" />

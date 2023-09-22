@@ -15,6 +15,7 @@ private:
 	SDL_Renderer* renderer;
 	SDL_Rect scr; //Khung hình cắt ảnh, độ to của đối tượng và vị trí trên cửa sổ
 	SDL_FRect* dest;
+	int WidthImg, HeightImg;
 	int WidthAni, HeightAni;
 	int Index;
 	int WidthImage, HeightImage;

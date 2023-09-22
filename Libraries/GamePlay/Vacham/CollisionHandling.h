@@ -13,5 +13,9 @@ static bool CollisionBlockWidth(SDL_FRect a) {
 static bool CollisionBlockHeight(SDL_FRect a) {
 	return a.x < 0 || a.x + a.w > 1440;
 }
-
+static bool CollisionButton(SDL_FRect a) {
+	int x, y;
+	SDL_GetMouseState(&x, &y);
+	return (x >= a.x && x <= a.x + a.w) && (y >= a.y && y <= a.y + a.h);
+}
 #endif

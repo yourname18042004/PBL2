@@ -20,9 +20,10 @@ int main(int argc, char* argv[])
 	window->init("Thanh - Giap", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, WIDTH_SCREEN, HEIGHT_SCREEN, false);
 
 		// Cap nhat doi tuong
-		window->update();
+	window->update();
 
 	// xóa bộ nhớ
 	window->destroy();
+
 	return 0;
 }

@@ -6,5 +6,4 @@ Object::Object(float pos_x, float pos_y, float width, float height, SDL_Renderer
 	this->width = width;
 	this->height = height;
 	renderer = Render;
-	
 }

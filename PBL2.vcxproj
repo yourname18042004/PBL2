@@ -155,6 +155,7 @@
     <ClInclude Include="Libraries\GamePlay\Animation\Animation.h" />
     <ClInclude Include="Libraries\GamePlay\Animation\FramesObject.h" />
     <ClInclude Include="Libraries\GamePlay\Init\Gameplay.h" />
+    <ClInclude Include="Libraries\GamePlay\Init\Scene.h" />
     <ClInclude Include="Libraries\GamePlay\Init\Window.h" />
     <ClInclude Include="Libraries\GamePlay\Init\MenuAndBackground.h" />
     <ClInclude Include="Libraries\GamePlay\Linklist\Linklist.h" />

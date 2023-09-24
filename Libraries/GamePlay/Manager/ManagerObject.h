@@ -39,6 +39,10 @@ public:
 	void UpdatePositionAndVector();
 
 	void ManagerFly();
+
+	bool IsEmty();
+
+	void Reset();
 	
 };
 

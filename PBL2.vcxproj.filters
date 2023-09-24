@@ -131,5 +131,8 @@
     <ClInclude Include="Libraries\GamePlay\Init\Gameplay.h">
       <Filter>Header Files\GamePlay\Init</Filter>
     </ClInclude>
+    <ClInclude Include="Libraries\GamePlay\Init\Scene.h">
+      <Filter>Header Files\GamePlay\Init</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

@@ -1,37 +1,27 @@
 ﻿#ifndef GAMEPLAY_H
 #define GAMEPLAY_H
 #include <Init/Window.h>
-class Gameplay {
+#include "Scene.h"
+
+
+class Gameplay :public Scene {
 public:
 	Gameplay(SDL_Renderer* renderer);
 	~Gameplay();
-	void init(int xpos, int ypos, int width, int height, bool fullscreen);
+	virtual void init();
 
-	void Loop();
+	virtual void Loop();
 	// Hàm nhận sự kiện
-	void handleEvent();
+	virtual void handleEvent();
 	// Hàm khởi tạo của sổ
-	void update();
+	virtual void update();
 	// Hàm hiện thị đối tượng
-	void render();
+	virtual void render();
 	// Hàm xóa đối tượng
-	void destroy();
+	virtual void destroy();
 	// Hàm trả về giá trị để xét xem chương trình có tiếp tục chạy nữa hay không
-	bool Running() { return isRunning; }
+	virtual bool Running() { return isRunning; }
+	virtual void SetIsrunning();
 
-private:
-
-	HandelEvent Event;
-	const int FPS_rate = 120;
-	SDL_Renderer* renderer;
-	// đối tượng nhận sự kiện
-	SDL_Event event;
-	// giá trị xet xem cửa sổ đã tắt hay chưa
-	bool isRunning;
 };
-
-
-
-
-
 #endif

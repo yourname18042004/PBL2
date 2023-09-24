@@ -2,6 +2,7 @@
 #define ANIMATION_H
 #include<Time_vector/Timer.h>
 #include <iostream>
+#include <Vacham/CollisionHandling.h>
 class Animation {
 private:
 	float time;
@@ -14,12 +15,8 @@ public:
 	void AnimationManager(int& index);
 	bool SetTime();
 	void SetRunAnimation() { run = true; };
+	void AnimationButton(int& index, SDL_FRect *Dest);  
 };
-
-
-
-
-
 
 
 

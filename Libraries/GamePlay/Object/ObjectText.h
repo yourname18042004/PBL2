@@ -2,6 +2,7 @@
 #define TEXT_H
 #include<SDL.h>
 #include <Load/LoadDocument.h>
+#include <time.h>
 class Text {
 protected:
 	SDL_Texture* texture;
@@ -35,7 +36,6 @@ public:
 		dest.x = x;
 		dest.y = y;
 		SDL_DestroyTexture(tmp);
-
 	}
 	void render() {
 		SDL_RenderCopyF(renderer, texture, NULL, &dest);

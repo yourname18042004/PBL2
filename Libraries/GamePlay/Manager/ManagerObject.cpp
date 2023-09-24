@@ -39,15 +39,28 @@ void Manager::UpdatePositionAndVector() {
 	{
 		FlyLinkList->getIndex()->getData()->UpdateFly();
 		Fly* fly = FlyLinkList->getIndex()->getData();
-
-		if (CollisionBlockWidth(fly->GetArea())) fly->UpdateVector(Vector{ fly->getDir().x, fly->getDir().y * -1 });
-		if (CollisionBlockHeight(fly->GetArea())) fly->UpdateVector(Vector{ fly->getDir().x * -1, fly->getDir().y});
-
 		Vector v = fly->getDir();
-		fly->UpdatePosition(Vector{ v.x * Timer::sInit->DeltaTime(), v.y * Timer::sInit->DeltaTime()});
+		fly->UpdatePosition(Vector{ v.x * Timer::sInit->DeltaTime() * 100, v.y * Timer::sInit->DeltaTime() * 100 });
+
+		if (CollisionBlockWidth(fly->GetArea()))
+		{
+			if (fly->GetArea().x <= 0) fly->SetArea(-fly->GetArea().x, fly->GetArea().y);
+			if (fly->GetArea().x + fly->GetArea().w >= 1440) fly->SetArea(2*1440 - (fly->GetArea().x + fly->GetArea().w), fly->GetArea().y);
+			fly->UpdateVector(Vector{ fly->getDir().x, fly->getDir().y * -1 });
+			Vector v = fly->getDir();
+			fly->UpdatePosition(Vector{ v.x * Timer::sInit->DeltaTime() * 100, v.y * Timer::sInit->DeltaTime() * 100 });
+		}
+		if (CollisionBlockHeight(fly->GetArea()))
+		{
+			if (fly->GetArea().y <= 0) fly->SetArea(fly->GetArea().x, -fly->GetArea().y);
+			if (fly->GetArea().y + fly->GetArea().h >= 720) fly->SetArea(fly->GetArea().x, 2*720 - (fly->GetArea().y + fly->GetArea().h));
+			fly->UpdateVector(Vector{ fly->getDir().x * -1, fly->getDir().y });
+			Vector v = fly->getDir();
+			fly->UpdatePosition(Vector{ v.x * Timer::sInit->DeltaTime() * 100, v.y * Timer::sInit->DeltaTime() * 100 });
+		}
 
 		FlyLinkList->GoNext();
-	}
+	} 
 	FlyLinkList->resetIndex();
 }
 	
@@ -57,6 +70,8 @@ void Manager::ManagerFly() {
 	{
 		Fly* fly =FlyLinkList->getIndex()->getData();
 		if (Collision(fly->GetArea(), racKet->GetArea()) && racKet->GetHit()) {
+
+			scored+=FlyLinkList->getIndex()->getData()->Getscore();
 			FlyLinkList->deleteNode();
 			FlyLinkList->resetIndex();
 			break;
@@ -64,4 +79,14 @@ void Manager::ManagerFly() {
 		else FlyLinkList->GoNext();
 	}
 	FlyLinkList->resetIndex();
+}
+bool Manager::IsEmty() {
+	return FlyLinkList->isEmpty();
+}
+void Manager::Reset() {
+	scored = 0;
+	while (!FlyLinkList->setIndex() && !FlyLinkList->isEmpty()) {
+		FlyLinkList->deleteNode();
+		FlyLinkList->GoNext();
+	}
 }

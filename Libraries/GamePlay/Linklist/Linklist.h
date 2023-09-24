@@ -80,11 +80,6 @@ public:
 		}
 	}
 
-	T pop()
-	{
-
-	}
-
 	void deleteNode() // lay va xoa
 	{
 		if (isEmpty()) {

@@ -40,7 +40,10 @@ float Timer::TimeScale() {
 	return timeScale;
 }
 void Timer::Update() {
+	//elapsedTick = SDL_GetTicks() - startTick;
+	//deltaTime = elapsedTick * 0.001f;
 	elapsedTick = SDL_GetTicks() - startTick;
-	deltaTime = elapsedTick * 0.001f;
+	deltaTime = (float)elapsedTick * 0.001f; 
+	startTick = SDL_GetTicks();
 }
 	

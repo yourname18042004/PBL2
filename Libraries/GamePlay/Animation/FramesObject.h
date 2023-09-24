@@ -6,9 +6,7 @@
 #include <Animation/Animation.h>
 #include<cstring>
 #pragma warning(disable : 4996)
-/// <summary>
-/// 
-/// </summary>
+
 class FramesObject {
 private:
 	SDL_Texture* Texture;
@@ -24,6 +22,7 @@ private:
 public:
 	FramesObject(SDL_FRect* dest, const char* path, SDL_Renderer* renderer, bool loop);
 	void Get_Texture();
+	void Get_Texture(double angle);
 	void UpdateFrames();
 	int getWidthAni() {
 		return WidthAni;
@@ -42,6 +41,7 @@ public:
 	void setRunanimation() {
 		animation->SetRunAnimation();
 	}
+	void ButtonAnimation();
 };
 
 

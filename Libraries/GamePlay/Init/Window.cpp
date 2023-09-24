@@ -1,9 +1,10 @@
 ﻿#include "Window.h"
 
-
+bool Quit = false;
 
 Gameplay* gameplay = nullptr;
 Menu* background = nullptr;
+ObjectLinkList <Scene> scene1;
 
 const int FPS_rate = 120;
 
@@ -31,12 +32,17 @@ void Window::init(const char* title, int xpos, int ypos, int width, int height, 
 
 		TTF_Init();
 		isRunning = true;
-		mtimer = Timer::Init();
-
+		mtimer = Timer::Init();//Khởi tạo thời gian
+		//khởi tạo menu
 		background = new Menu(renderer);
 		background->init();
+		//khởi tạo gameplay
 		gameplay = new Gameplay(renderer);
-		gameplay->init(xpos, ypos, width, height, flag);
+		gameplay->init();
+		//Link background với gameplay
+		scene1.push(background);
+		scene1.push(gameplay);
+		
 	}
 	else
 	{
@@ -47,10 +53,28 @@ void Window::init(const char* title, int xpos, int ypos, int width, int height, 
 
 void Window::update()
 {	
-	background->Loop();
-	gameplay->Loop();
-}
+	while (true)
+	{
+		scene1.getIndex()->getData()->Loop();//BackGroundLoop
+		if (scene1.getIndex()->getData()->quit) return;//Neu tat cua so-> thoat loop
+		// Nhảy qua Gameplay
+		scene1.GoNext();
+	
+		//Loop Gameplay
+		scene1.getIndex()->getData()->Loop();
 
+		if (scene1.getIndex()->getData()->quit) return;// Tắt cửa sổ gameplay -> thoát loop
+			//Set is Running gameplay
+		scene1.getIndex()->getData()->SetIsrunning();
+			//Init fly gameplay
+		scene1.getIndex()->getData()->init();
+		
+			//Set isRunning background
+		scene1.getIndex()->getPrevious()->getData()->SetIsrunning();
+			//Gọi background loop
+		scene1.resetIndex();
+	}
+}
 void Window::destroy()
 {
 	mtimer->release();

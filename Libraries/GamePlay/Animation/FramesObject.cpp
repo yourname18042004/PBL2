@@ -33,3 +33,15 @@ void FramesObject::UpdateFrames() {
 void FramesObject::Get_Texture() {
 	SDL_RenderCopyF(renderer, Texture, &scr, dest);
 }
+void FramesObject::Get_Texture(double angle) {
+	SDL_Rect tmp;
+	tmp.x = (int)dest->x;
+	tmp.y = (int)dest->y;
+	tmp.w = (int)dest->w;
+	tmp.h = (int)dest->h;
+	SDL_RenderCopyEx(renderer, Texture, &scr, &tmp, angle, NULL, SDL_FLIP_NONE);
+}
+void FramesObject::ButtonAnimation() {
+	animation->AnimationButton(Index, dest);
+	scr.x = Index * scr.w;
+}

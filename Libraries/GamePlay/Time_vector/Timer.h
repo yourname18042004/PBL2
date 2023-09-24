@@ -1,4 +1,4 @@
-#ifndef _TIMER_H_
+﻿#ifndef _TIMER_H_
 #define _TIMER_H_
 #include <SDL.h>
 
@@ -7,7 +7,6 @@
 
 class Timer {
 private:
-	
 
 	unsigned int startTick;
 	unsigned int elapsedTick;
@@ -20,18 +19,17 @@ public:
 	static void release();
 
 	void reset();
-	float DeltaTime();
+	float DeltaTime();//Khoảng cách giữa 2 frames
 
 	void TimeScale(float t);
 	float TimeScale();
+
 	void Update();
+
 private:
 	Timer();
 	~Timer();
 
 };
-
-
-
 
 #endif // !_TIMER_H_

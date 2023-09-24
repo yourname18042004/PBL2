@@ -28,8 +28,6 @@ public:
 		area.x = (float)(x - area.w / 2);
 		area.y = (float)(y - area.h / 2);
 		Racket1->setPositionDest(area.x, area.y);
-
-
 	}
 	void UpdateRacket()
 	{

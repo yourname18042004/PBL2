@@ -28,6 +28,7 @@ public:
 		frame->Get_Texture();
 	}
 	void Setclick(bool press) {
+		frame->ButtonAnimation();
 		if (CollisionButton(Dest) && press)
 			click = true;
 		else click = false;

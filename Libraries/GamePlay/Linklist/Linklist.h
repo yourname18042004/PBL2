@@ -102,9 +102,9 @@ public:
 				nodeIndex = NULL;
 			}
 			else {
-					nodeIndex->getPrevious()->setNext(nodeIndex->getNext());
-					nodeIndex->getNext()->setPrevious(nodeIndex->getPrevious());
-					nodeIndex = nodeIndex->getNext();
+				nodeIndex->getPrevious()->setNext(nodeIndex->getNext());
+				nodeIndex->getNext()->setPrevious(nodeIndex->getPrevious());
+				nodeIndex = nodeIndex->getNext();
 			}
 		}
 	}

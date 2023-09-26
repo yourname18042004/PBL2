@@ -31,14 +31,14 @@ public:
 	
 	void Add(HandelEvent* Handel);
 
-	void Update();
+	void Update(bool set);
 	void render(SDL_Renderer* renderer);
 	//Lấy giá trị độ lớn mảng vector
 	int getSize();
 	//Update vị trí, vector độ dời của đối tượng
 	void UpdatePositionAndVector();
 
-	void ManagerFly();
+	void ManagerFly(bool set);
 
 	bool IsEmty();
 

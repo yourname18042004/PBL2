@@ -6,5 +6,4 @@ struct Vector{
 	float y;
 };
 
-
 #endif

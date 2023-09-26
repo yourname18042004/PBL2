@@ -1,4 +1,4 @@
-﻿  Gameplay.cpp
+﻿  ManagerObject.cpp
 D:\PBL2\Libraries\GamePlay\Animation\FramesObject.h(37,15): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
 D:\PBL2\Libraries\GamePlay\Animation\FramesObject.h(38,15): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
 D:\PBL2\Libraries\GamePlay\Object\Racket.h(30,40): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data

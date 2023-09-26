@@ -12,13 +12,13 @@ void Manager::Add(Racket* racKet) {
 void Manager::Add(HandelEvent* Handel) {// thêm con trỏ sự kiện
 	
 }
-void Manager::Update() {
+void Manager::Update(bool set) {
 	UpdatePositionAndVector();
 
 	FlyLinkList->resetIndex();
 	racKet->UpdatePositionOfMouse();
 	racKet->UpdateRacket();
-	ManagerFly();
+	ManagerFly(set);
 }
 
 void Manager::render(SDL_Renderer* renderer) {
@@ -65,8 +65,9 @@ void Manager::UpdatePositionAndVector() {
 }
 	
 
-void Manager::ManagerFly() {
-	while (!FlyLinkList->setIndex()&& !FlyLinkList->isEmpty())
+void Manager::ManagerFly(bool set) {
+	if (set) {
+		while (!FlyLinkList->setIndex()&& !FlyLinkList->isEmpty())
 	{
 		Fly* fly =FlyLinkList->getIndex()->getData();
 		if (Collision(fly->GetArea(), racKet->GetArea()) && racKet->GetHit()) {
@@ -79,14 +80,19 @@ void Manager::ManagerFly() {
 		else FlyLinkList->GoNext();
 	}
 	FlyLinkList->resetIndex();
+	}
+	else {
+
+	}
 }
 bool Manager::IsEmty() {
 	return FlyLinkList->isEmpty();
 }
 void Manager::Reset() {
 	scored = 0;
-	while (!FlyLinkList->setIndex() && !FlyLinkList->isEmpty()) {
-		FlyLinkList->deleteNode();
-		FlyLinkList->GoNext();
+		while (!FlyLinkList->setIndex() && !FlyLinkList->isEmpty()) {
+			FlyLinkList->deleteNode();
+			FlyLinkList->resetIndex();
+		}
 	}
-}
+

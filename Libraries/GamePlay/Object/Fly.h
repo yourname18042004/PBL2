@@ -14,6 +14,12 @@ protected:
 	FramesObject* FlySuper = nullptr;
 	SDL_FRect area;
 	int score;
+	Vector Start;
+	Vector End;
+	float speed;
+	bool status;
+	float t_to_a; //time to apear
+
 public:
 	Fly(float pos_x, float pos_y, float width, float height, Vector direction, SDL_Renderer* Render, int score) : Object(pos_x, pos_y, width, height, Render){
 		area.x = pos_x;
@@ -23,10 +29,10 @@ public:
 		this->direction = direction;
 		this->score = score;
 		FlyNormal = new FramesObject(&area, "Data//FlyUpdate_100_100_400_100.png", renderer, true);
-		//FlySuper = new FramesObject(&area, "Data//FlyUpdate_100_100_200_100.png", renderer, true);
+		
 	}
 
-	bool status;
+
 	// hàm cập nhật điểm cho đối tượng (chú ý không gán trực tiếp lúc khai báo)
 
 	void UpdateScore(int score) {
@@ -69,6 +75,15 @@ public:
 	int Getscore() {
 		return score;
 	}
+
+	void move() {
+		
+		
+	}
+	void setStatus(bool set) {
+		this->status = set;
+	}
+
 };
 
 

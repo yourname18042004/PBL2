@@ -9,16 +9,23 @@ void Manager::Add(Fly* a) {
 void Manager::Add(Racket* racKet) {
 	this->racKet = racKet;
 }
-void Manager::Add(HandelEvent* Handel) {// thêm con trỏ sự kiện
-	
-}
-void Manager::Update(bool set) {
-	UpdatePositionAndVector();
 
+void Manager::Add(float* timegame)
+{
+	this->timegame = timegame;
+}
+
+void Manager::ReadMap(SDL_Renderer* renderer, const char* path)
+{
+	ReadFile(FlyLinkList, renderer, timegame, path);
+}
+
+void Manager::Update(bool set, int &heart) {
+	UpdatePositionAndVector();
 	FlyLinkList->resetIndex();
 	racKet->UpdatePositionOfMouse();
 	racKet->UpdateRacket();
-	ManagerFly(set);
+	ManagerFly(set, heart);
 }
 
 void Manager::render(SDL_Renderer* renderer) {
@@ -39,25 +46,8 @@ void Manager::UpdatePositionAndVector() {
 	{
 		FlyLinkList->getIndex()->getData()->UpdateFly();
 		Fly* fly = FlyLinkList->getIndex()->getData();
-		Vector v = fly->getDir();
-		fly->UpdatePosition(Vector{ v.x * Timer::sInit->DeltaTime() * 100, v.y * Timer::sInit->DeltaTime() * 100 });
-
-		if (CollisionBlockWidth(fly->GetArea()))
-		{
-			if (fly->GetArea().x <= 0) fly->SetArea(-fly->GetArea().x, fly->GetArea().y);
-			if (fly->GetArea().x + fly->GetArea().w >= 1440) fly->SetArea(2*1440 - (fly->GetArea().x + fly->GetArea().w), fly->GetArea().y);
-			fly->UpdateVector(Vector{ fly->getDir().x, fly->getDir().y * -1 });
-			Vector v = fly->getDir();
-			fly->UpdatePosition(Vector{ v.x * Timer::sInit->DeltaTime() * 100, v.y * Timer::sInit->DeltaTime() * 100 });
-		}
-		if (CollisionBlockHeight(fly->GetArea()))
-		{
-			if (fly->GetArea().y <= 0) fly->SetArea(fly->GetArea().x, -fly->GetArea().y);
-			if (fly->GetArea().y + fly->GetArea().h >= 720) fly->SetArea(fly->GetArea().x, 2*720 - (fly->GetArea().y + fly->GetArea().h));
-			fly->UpdateVector(Vector{ fly->getDir().x * -1, fly->getDir().y });
-			Vector v = fly->getDir();
-			fly->UpdatePosition(Vector{ v.x * Timer::sInit->DeltaTime() * 100, v.y * Timer::sInit->DeltaTime() * 100 });
-		}
+		
+		fly->move();
 
 		FlyLinkList->GoNext();
 	} 
@@ -65,21 +55,25 @@ void Manager::UpdatePositionAndVector() {
 }
 	
 
-void Manager::ManagerFly(bool set) {
+void Manager::ManagerFly(bool set, int &heart) {
 	if (set) {
-		while (!FlyLinkList->setIndex()&& !FlyLinkList->isEmpty())
-	{
-		Fly* fly =FlyLinkList->getIndex()->getData();
-		if (Collision(fly->GetArea(), racKet->GetArea()) && racKet->GetHit()) {
-
-			scored+=FlyLinkList->getIndex()->getData()->Getscore();
-			FlyLinkList->deleteNode();
-			FlyLinkList->resetIndex();
-			break;
+		while (!FlyLinkList->setIndex()&& !FlyLinkList->isEmpty()){
+			Fly* fly =FlyLinkList->getIndex()->getData();
+			if (Collision(fly->GetArea(), racKet->GetArea()) && racKet->GetHit()) {
+				if (!FlyLinkList->getIndex()->getData()->status) {
+					heart--;
+					break;
+				}
+				else {
+					scored+=FlyLinkList->getIndex()->getData()->Getscore();
+					FlyLinkList->deleteNode();
+					FlyLinkList->resetIndex();
+					break;
+				}
+			}
+			FlyLinkList->GoNext();
 		}
-		else FlyLinkList->GoNext();
-	}
-	FlyLinkList->resetIndex();
+		FlyLinkList->resetIndex();
 	}
 	else {
 
@@ -94,5 +88,6 @@ void Manager::Reset() {
 			FlyLinkList->deleteNode();
 			FlyLinkList->resetIndex();
 		}
-	}
+}
+
 

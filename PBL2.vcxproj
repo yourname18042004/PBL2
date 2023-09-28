@@ -144,6 +144,7 @@
     <ClCompile Include="Libraries\GamePlay\Animation\Animation.cpp" />
     <ClCompile Include="Libraries\GamePlay\Animation\FramesObject.cpp" />
     <ClCompile Include="Libraries\GamePlay\Init\Gameplay.cpp" />
+    <ClCompile Include="Libraries\GamePlay\Init\Listmap.cpp" />
     <ClCompile Include="Libraries\GamePlay\Init\Window.cpp" />
     <ClCompile Include="Libraries\GamePlay\Init\MenuAndBackground.cpp" />
     <ClCompile Include="Libraries\GamePlay\Manager\ManagerObject.cpp" />
@@ -155,6 +156,7 @@
     <ClInclude Include="Libraries\GamePlay\Animation\Animation.h" />
     <ClInclude Include="Libraries\GamePlay\Animation\FramesObject.h" />
     <ClInclude Include="Libraries\GamePlay\Init\Gameplay.h" />
+    <ClInclude Include="Libraries\GamePlay\Init\Listmap.h" />
     <ClInclude Include="Libraries\GamePlay\Init\Scene.h" />
     <ClInclude Include="Libraries\GamePlay\Init\Window.h" />
     <ClInclude Include="Libraries\GamePlay\Init\MenuAndBackground.h" />
@@ -162,6 +164,7 @@
     <ClInclude Include="Libraries\GamePlay\Load\LoadDocument.h" />
     <ClInclude Include="Libraries\GamePlay\Load\LoadMusic.h" />
     <ClInclude Include="Libraries\GamePlay\Load\LoadTexture.h" />
+    <ClInclude Include="Libraries\GamePlay\Manager\Docfile.h" />
     <ClInclude Include="Libraries\GamePlay\Manager\HandelEvent.h" />
     <ClInclude Include="Libraries\GamePlay\Manager\ManagerObject.h" />
     <ClInclude Include="Libraries\GamePlay\Object\Button.h" />

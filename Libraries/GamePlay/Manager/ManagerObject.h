@@ -10,12 +10,15 @@
 #include "HandelEvent.h"
 #include <cstdlib>
 #include <Time_vector/Timer.h>
+#include <Manager/Docfile.h>
 
 #define pi 3.1415926
 
 
 class Manager {
 private:
+	float* timegame; // con tro tiem tro den bien time game cua gameplay roi tiep tuc truyen den cho game play
+	
 	std::vector<Fly> obJect;
 	Racket* racKet;
 	//HandelEvent* Handel;
@@ -31,18 +34,23 @@ public:
 	
 	void Add(HandelEvent* Handel);
 
-	void Update(bool set);
+	void Add(float* timegame);
+
+	void ReadMap(SDL_Renderer* renderer, const char* path);
+
+	void Update(bool set, int &heart);
 	void render(SDL_Renderer* renderer);
 	//Lấy giá trị độ lớn mảng vector
 	int getSize();
 	//Update vị trí, vector độ dời của đối tượng
 	void UpdatePositionAndVector();
 
-	void ManagerFly(bool set);
+	void ManagerFly(bool set, int &heart);
 
 	bool IsEmty();
 
 	void Reset();
+
 	
 };
 

@@ -25,6 +25,7 @@
 #include <sstream>
 #include <string.h>
 #include "Gameplay.h"
+#include <Init/Listmap.h>
 
 // đối tượng nhận và xử lý tất cả các đối tượng sự kiện khác
 

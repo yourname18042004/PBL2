@@ -2,9 +2,13 @@
 #define GAMEPLAY_H
 #include <Init/Window.h>
 #include "Scene.h"
+#include <vector>
 
 
 class Gameplay :public Scene {
+private: 
+	float timegame;
+	int* choose;
 public:
 	Gameplay(SDL_Renderer* renderer);
 	~Gameplay();
@@ -22,6 +26,9 @@ public:
 	// Hàm trả về giá trị để xét xem chương trình có tiếp tục chạy nữa hay không
 	virtual bool Running() { return isRunning; }
 	virtual void SetIsrunning();
-
+	void setChoose(int* choose)
+	{
+		this->choose = choose;
+	}
 };
 #endif

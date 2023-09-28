@@ -1,7 +1,5 @@
 #include "FramesObject.h"
 
-
-
 FramesObject::FramesObject(SDL_FRect* dest, const char* path, SDL_Renderer* renderer, bool loop) {
 	Texture = LoadImage::Load(path, renderer);
 	char tmp[100];

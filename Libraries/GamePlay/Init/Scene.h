@@ -1,7 +1,12 @@
 ﻿#ifndef SCENE_H
 #define SCENE_H
+
+
+
 class Scene {
+
 protected:
+
 	const int FPS_rate = 120;
 	bool isRunning;
 	SDL_Renderer* renderer;
@@ -9,9 +14,12 @@ protected:
 	SDL_Event event;
 	HandelEvent Event;
 
-
+	
 public:
+	
 	bool quit;
+	bool back;
+	bool next;
 	virtual void Loop() = 0;
 	// Hàm nhận sự kiện
 	virtual void handleEvent() = 0;

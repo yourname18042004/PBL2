@@ -36,6 +36,13 @@ public:
 	bool Getclick() {
 		return click;
 	}
+	void setDest(float x, float y)
+	{
+		Dest.x = x;
+		Dest.y = y;
+	}
+
+	SDL_FRect getDest() { return Dest; }
 };
 
 

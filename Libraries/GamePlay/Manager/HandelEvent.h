@@ -8,6 +8,8 @@ class HandelEvent
 public:
 	bool BUTTON_LEFT = false;
 	bool set = true;
+	bool crossUp = false;
+	bool crossDown = false;
 	int MOUSE_X = 0;
 	int MOUSE_Y = 0;
 	
@@ -25,7 +27,21 @@ public:
 				set = false;
 			}
 		}
-	}
+		if (event.wheel.y == 1)
+		{
+			crossUp = true;
+			crossDown = false;
+		}
+		if (event.wheel.y == -1)
+		{
+			crossDown = true;
+			crossUp = false;
+		}
+		if (event.wheel.y == 0) {
+			crossUp = false;
+			crossDown = false;
+		}
+ 	}
 };
 
 #endif // !HANDEL_EVENT_H

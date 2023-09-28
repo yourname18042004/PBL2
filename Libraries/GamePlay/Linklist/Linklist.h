@@ -126,6 +126,9 @@ public:
 	void GoNext() {
 		nodeIndex = nodeIndex->getNext();
 	}
+	void GoPrevious() {
+		nodeIndex = nodeIndex->getPrevious();
+	}
 };
 
 

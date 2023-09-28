@@ -25,7 +25,4 @@ public:
 	virtual void SetIsrunning();
 };
 
-
-
-
 #endif

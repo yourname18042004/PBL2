@@ -13,6 +13,7 @@ private:
 	SDL_Renderer* renderer;
 	SDL_Rect scr; //Khung hình cắt ảnh, độ to của đối tượng và vị trí trên cửa sổ
 	SDL_FRect* dest;
+	SDL_FRect rectTmp;
 	int WidthImg, HeightImg;
 	int WidthAni, HeightAni;
 	int Index;
@@ -22,7 +23,8 @@ private:
 public:
 	FramesObject(SDL_FRect* dest, const char* path, SDL_Renderer* renderer, bool loop);
 	void Get_Texture();
-	void Get_Texture(double angle);
+	void Get_Texture(double angle); // xoay hinh tai vi tri trung tam cua hinh
+	void Get_Texture(double angle, SDL_Point); // xoay hinh tai vi tri bay ki cua hinh
 	void UpdateFrames();
 	int getWidthAni() {
 		return WidthAni;
@@ -42,6 +44,8 @@ public:
 		animation->SetRunAnimation();
 	}
 	void ButtonAnimation();
+
+	void updateTmpRect(float x, float y);
 };
 
 

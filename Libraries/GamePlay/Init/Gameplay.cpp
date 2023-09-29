@@ -95,14 +95,7 @@ void Gameplay::Loop() {
 	Timer::sInit->reset();
 
 	//chọn map
-	switch (*choose) {
-	case 1:
-		ManagerObject.ReadMap(renderer, "Data//Map-dif//Difficult.txt");
-		break;
-	case 2:
-		ManagerObject.ReadMap(renderer, "Data//Map-dif//Level1.txt");
-		break;
-	}
+	chooseMap();
 	SDL_ShowCursor(false);//ẩn con trỏ chuột
 
 	//vòng lặp gameplay 
@@ -159,15 +152,8 @@ void Gameplay::Loop() {
 				heart = 5;// cài lại số mạng
 				ManagerObject.Reset();
 				// cài lại map
-				switch (*choose) {
-				case 1:
-					ManagerObject.ReadMap(renderer, "Data//Map-dif//Difficult.txt");
-					break;
-				case 2:
-					ManagerObject.ReadMap(renderer, "Data//Map-dif//Level1.txt");
-					break;
-					}
-				}
+				chooseMap();
+			}
 			if (buttonEnd1->Getclick()) {
 				//lùi lại listmap
 				back = true;
@@ -190,14 +176,7 @@ void Gameplay::Loop() {
 				timegame = 0;
 				ManagerObject.Reset();
 				heart = 5;
-				switch (*choose) {
-				case 1:
-					ManagerObject.ReadMap(renderer, "Data//Map-dif//Difficult.txt");
-					break;
-				case 2:
-					ManagerObject.ReadMap(renderer, "Data//Map-dif//Level1.txt");
-					break;
-				}
+				chooseMap();
 			}
 			if (buttonEnd1->Getclick()) {
 				//quay lại litsmap
@@ -211,14 +190,8 @@ void Gameplay::Loop() {
 				//qua màn tiếp theo
 				timegame = 0;
 				heart = 5;
-				switch (*choose+1) {
-				case 1:
-					ManagerObject.ReadMap(renderer, "Data//Map-dif//Difficult.txt");
-					break;
-				case 2:
-					ManagerObject.ReadMap(renderer, "Data//Map-dif//Level1.txt");
-					break;
-				}
+				(*choose)++;
+				chooseMap();
 			}
 		}
 	}
@@ -259,6 +232,17 @@ void Gameplay::update()
 	HightScore.update(565,350,300,50, "Data//Galhau_Regular.ttf", 25, { 255,0,0, 255 }, Maxscored);
 }
 
+void Gameplay::chooseMap()
+{
+	switch (*choose) {
+	case 1:
+		ManagerObject.ReadMap(renderer, "Data//Map-dif//Difficult.txt");
+		break;
+	case 2:
+		ManagerObject.ReadMap(renderer, "Data//Map-dif//Level1.txt");
+		break;
+	}
+}
 void Gameplay::render()
 {
 		//Kẹp giữa dòng đầu 

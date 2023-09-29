@@ -7,11 +7,11 @@ static bool Collision(SDL_FRect a, SDL_FRect b) {
 }
 
 static bool CollisionBlockWidth(SDL_FRect a) {
-	return a.y <= 0|| a.y + a.h >= 680;
+	return a.y <= 0|| a.y + a.h >= 720;
 }
 
 static bool CollisionBlockHeight(SDL_FRect a) {
-	return a.x <= 0 || a.x + a.w >= 1400;
+	return a.x <= 0 || a.x + a.w >= 1440;
 }
 static bool CollisionButton(SDL_FRect a) {
 	int x, y;

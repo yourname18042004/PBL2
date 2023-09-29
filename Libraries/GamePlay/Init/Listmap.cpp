@@ -61,8 +61,8 @@ void ListMap::handleEvent() {
 }
 // Hàm khởi tạo của sổ
 void ListMap::update() {
-	if (Event.crossUp) pos_y_button += 30.0f;
-	if (Event.crossDown) pos_y_button -= 30.0f;
+	if (Event.crossUp && pos_y_button + 10 * 100 > 720) pos_y_button -= 30.0f;
+	if (Event.crossDown && pos_y_button < 50) pos_y_button += 30.0f;
 	//std::cout << pos_y_button << std::endl;
 	level1->setDest(level1->getDest().x, pos_y_button);
 	level2->setDest(level1->getDest().x, pos_y_button + 100);

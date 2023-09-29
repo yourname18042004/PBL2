@@ -27,12 +27,12 @@ public:
 				set = false;
 			}
 		}
-		if (event.wheel.y == 1)
+		if (event.wheel.y == -1)
 		{
 			crossUp = true;
 			crossDown = false;
 		}
-		if (event.wheel.y == -1)
+		if (event.wheel.y == 1)
 		{
 			crossDown = true;
 			crossUp = false;

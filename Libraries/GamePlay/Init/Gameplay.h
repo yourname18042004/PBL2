@@ -30,5 +30,6 @@ public:
 	{
 		this->choose = choose;
 	}
+	void chooseMap();
 };
 #endif

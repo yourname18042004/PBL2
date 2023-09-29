@@ -14,7 +14,12 @@ protected:
 	double angle;
 	FramesObject* FlyNormal = nullptr;
 	FramesObject* FlySuper = nullptr;
+	FramesObject* Goal = nullptr;
+	FramesObject* Line = nullptr;
 	SDL_FRect area;
+	SDL_FRect goal;
+	SDL_FRect line;
+	SDL_Point linePoint;
 	int score;
 	Vector Start;
 	Vector End;
@@ -26,10 +31,10 @@ protected:
 public:
 	Fly
 	(
-		float pos_x, float pos_y, float width, float height, 
-		float end_x, float end_y, float t_to_a, float t_to_land, 
-		float speed, SDL_Renderer* Render, int score, float* timegame) 
-		: Object(pos_x, pos_y, width, height, Render){
+		float pos_x, float pos_y, float width, float height,
+		float end_x, float end_y, float t_to_a, float t_to_land,
+		float speed, SDL_Renderer* Render, int score, float* timegame)
+		: Object(pos_x, pos_y, width, height, Render) {
 		area.x = pos_x;
 		area.y = pos_y;
 		area.h = height;
@@ -43,15 +48,35 @@ public:
 
 		direction.x = End.x - Start.x;
 		direction.y = End.y - Start.y;
-		direction.x = direction.x / sqrt((pow(direction.x, 2) + pow(direction.y, 2)));
-		direction.y = direction.y / sqrt((pow(direction.x, 2) + pow(direction.y, 2)));
+		float r = sqrt(direction.x * direction.x + direction.y * direction.y);
+		direction.x = direction.x / r;
+		direction.y = direction.y / r;
 
 		status = false;//Trangj thái di chuyển
 		this->score = score;
-		
+
 		FlyNormal = new FramesObject(&area, "Data//fly_100_100_200_100.png", renderer, true);
-		
+
 		this->timegame = timegame;
+
+
+		// dat vi tri chi line va goal
+		line.w = 100;
+		line.h = r;
+		line.x = Start.x + width / 2.0f - line.w / 2.0f ;
+		line.y = Start.y  - line.h + area.h/2;
+
+		goal.x = area.x + End.x - Start.x;
+		goal.y = area.y + End.y - Start.y;
+		goal.h = height;
+		goal.w = width;
+
+		// dat vi tri xoay cua hinh chu Line
+		linePoint.x = line.w / 2;
+		linePoint.y = line.h;
+
+		Line = new FramesObject(&line, "Data//Line_100_100_100_100.png", renderer, false);
+		Goal = new FramesObject(&goal, "Data//Goal_100_100_100_100.png", renderer, false);
 	}
 
 	bool status;
@@ -78,6 +103,9 @@ public:
 		{
 			double angle = atan((double)direction.y / (double)direction.x);
 			if (direction.x < 0) angle += pi;
+			// ve line va goal
+			Line->Get_Texture((angle * 180) / pi + 90, linePoint);
+			Goal->Get_Texture();
 			FlyNormal->Get_Texture((angle * 180) / pi + 90);
 		}
 	}

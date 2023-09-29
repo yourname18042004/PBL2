@@ -40,6 +40,7 @@ public:
 	{
 		Dest.x = x;
 		Dest.y = y;
+		frame->updateTmpRect(x, y);
 	}
 
 	SDL_FRect getDest() { return Dest; }

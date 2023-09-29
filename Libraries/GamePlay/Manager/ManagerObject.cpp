@@ -61,7 +61,7 @@ void Manager::ManagerFly(bool set, int &heart) {
 			Fly* fly =FlyLinkList->getIndex()->getData();
 			if (Collision(fly->GetArea(), racKet->GetArea()) && racKet->GetHit()) {
 				if (!FlyLinkList->getIndex()->getData()->status) {
-					heart--;
+					heart--; // tru mang
 					break;
 				}
 				else {
@@ -70,6 +70,12 @@ void Manager::ManagerFly(bool set, int &heart) {
 					FlyLinkList->resetIndex();
 					break;
 				}
+			}
+			if (CollisionBlockWidth(fly->GetArea()) || CollisionBlockHeight(fly->GetArea()))
+			{
+				FlyLinkList->deleteNode();
+				FlyLinkList->resetIndex();
+				break;
 			}
 			FlyLinkList->GoNext();
 		}

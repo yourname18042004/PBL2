@@ -36,7 +36,7 @@ void ListMap::init() {
 	backMenu = new Buttons(1390, 670, 150, 150, "Data//ButtonBack_100_100_200_100.png", renderer);
 	// khởi tạo các biến quản lý 
 	back = false; // đi lùi
-	next = false;
+	Index = -1;
 	isRunning = true;
 
 	pos_y_button = 50;
@@ -89,19 +89,19 @@ void ListMap::update() {
 	backMenu->Setclick(Event.BUTTON_LEFT);
 	if (level1->Getclick()) {
 		choose = 1;
-		next = true;
+		Index = 0;
 		isRunning = false;
 		
 	}
 	if (level2->Getclick()) {
-		next = true;
+		Index = 0;
 		choose = 2;
 		isRunning = false;
 	}
 	if (backMenu->Getclick()) {
 		back = true;
 		isRunning = false;
-		
+
 	}
 
 }
@@ -131,6 +131,4 @@ void ListMap::destroy() {
 }
 // Hàm trả về giá trị để xét xem chương trình có tiếp tục chạy nữa hay không
 
-void ListMap::SetIsrunning() {
-	isRunning = true;
-}
+

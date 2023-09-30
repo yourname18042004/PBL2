@@ -24,6 +24,8 @@ FramesObject* background1; // viền game
 FramesObject* ScoreTab; // thanh viền ghi điểm
 std::vector <FramesObject> Heart;// vector chứa các mạng game
 
+LoadMusic MixBackGround;
+
 int MaxScored = 0;
 int heart = 5;
 
@@ -61,7 +63,7 @@ void Gameplay::init()
 	}
 
 	// thêm vào biến quản lý
-	ManagerObject.Add(new Racket(100, 100,100, 100, renderer, &Event));
+	ManagerObject.Add(new Racket(100, 100,120, 120, renderer, &Event));
 	ManagerObject.Add(&timegame);
 
 	// khởi tạo các văn bản
@@ -93,13 +95,14 @@ void Gameplay::init()
 
 void Gameplay::Loop() {
 	Timer::sInit->reset();
-
+	MixBackGround.addSound("Data//run.mp3");
 	//chọn map
 	chooseMap();
 	SDL_ShowCursor(false);//ẩn con trỏ chuột
 
 	//vòng lặp gameplay 
 	isRunning = true;
+	Index = -1;
 	while (isRunning && !quit) {
 		//std::cout << timegame << std::endl;
 		handleEvent();//nhận sự kiện
@@ -167,32 +170,62 @@ void Gameplay::Loop() {
 		}
 			//thắng game		
 		if (ManagerObject.IsEmty()) {
+			if (ManagerObject.scored > 0) {
+				buttonEnd1->Setclick(Event.BUTTON_LEFT);// quay về listmap
+				buttonBack->Setclick(Event.BUTTON_LEFT);// chơi lại màn chơi
+				buttonNext->Setclick(Event.BUTTON_LEFT);// qua màn kế tiếp
+				if (buttonBack->Getclick()) {
+					//reset thông số màn chơi
+					timegame = 0;
+					ManagerObject.Reset();
+					heart = 5;
+					chooseMap();
+				}
+				if (buttonEnd1->Getclick()) {
+					//quay lại litsmap
+					back = true;
+					timegame = 0;
+					heart = 5;
+					ManagerObject.Reset();
+					isRunning = false;
+				}
+				if (buttonNext->Getclick()) {
+					//qua màn tiếp theo
+					timegame = 0;
+					heart = 5;
+					(*choose)++;
+					chooseMap();
+				}
+				
+			}
+			else {
+				sethit = false; // không cho phép đánh fly
+				SDL_ShowCursor(true);
 
-			buttonEnd1->Setclick(Event.BUTTON_LEFT);// quay về listmap
-			buttonBack->Setclick(Event.BUTTON_LEFT);// chơi lại màn chơi
-			buttonNext->Setclick(Event.BUTTON_LEFT);// qua màn kế tiếp
-			if (buttonBack->Getclick()) {
-				//reset thông số màn chơi
-				timegame = 0;
-				ManagerObject.Reset();
-				heart = 5;
-				chooseMap();
+				buttonEnd1->Setclick(Event.BUTTON_LEFT);
+				buttonBack->Setclick(Event.BUTTON_LEFT);
+				if (buttonBack->Getclick()) {
+					//chơi lại game
+					timegame = 0;
+					sethit = true; // cho phép đánh
+					SDL_ShowCursor(false);
+					heart = 5;// cài lại số mạng
+					ManagerObject.Reset();
+					// cài lại map
+					chooseMap();
+				}
+				if (buttonEnd1->Getclick()) {
+					//lùi lại listmap
+					back = true;
+					timegame = 0;
+					sethit = true; // cho phép đánh
+					SDL_ShowCursor(false);
+					heart = 5;
+					ManagerObject.Reset();
+					isRunning = false;
+				}
 			}
-			if (buttonEnd1->Getclick()) {
-				//quay lại litsmap
-				back = true;
-				timegame = 0;
-				heart = 5;
-				ManagerObject.Reset();
-				isRunning = false;
-			}
-			if (buttonNext->Getclick()) {
-				//qua màn tiếp theo
-				timegame = 0;
-				heart = 5;
-				(*choose)++;
-				chooseMap();
-			}
+			
 		}
 	}
 }
@@ -204,9 +237,10 @@ void Gameplay::update()
 	
 	if(!resume){
 		timegame += Timer::sInit->DeltaTime();
+		ManagerObject.Update(sethit,heart);
 	}
-
-	ManagerObject.Update(sethit,heart);
+	//ManagerObject.Update(sethit, heart);
+	
 
 	for (int i = 0; i < heart; i++) {
 		Heart[i].UpdateFrames();
@@ -243,36 +277,50 @@ void Gameplay::chooseMap()
 		break;
 	}
 }
-void Gameplay::render()
-{
+
+void Gameplay::render() {
+
 		//Kẹp giữa dòng đầu 
 		SDL_RenderClear(renderer);
-
+		//winloseresume(resume, ManagerObject.IsEmty(), heart, ManagerObject.scored );
 		background1->Get_Texture();//viền game
 		ScoreTab->Get_Texture();// thanh điểm
 		ScoreNote.render();// điểm
 		buttonResume->Render();// nút resume
+		//// in số hình trái tim tượng trưng cho số mạng
 
-		// in số hình trái tim tượng trưng cho số mạng
-
-		for (int i = 0; i < heart; i++) {
+		 for (int i = 0; i < heart; i++) {
 			Heart[i].Get_Texture();
-		}
+		 }
+
 		// thắng game 
 		if (ManagerObject.IsEmty()) {
-			// render hộp thoại thắng
-			box->Render();
-			buttonEnd1->Render();
-			buttonBack->Render();
-			buttonNext->Render();
-			Noti.render();
-			HightScore.render();
-			ifWin.render();
+			if (ManagerObject.scored > 0) {
+				// render hộp thoại thắng
+				box->Render();
+				buttonEnd1->Render();
+				buttonBack->Render();
+				buttonNext->Render();
+				Noti.render();
+				HightScore.render();
+				ifWin.render();
+
+			}
+			else {
+				//nếu điểm bằng 0 thì thua 
+				box->Render();
+				buttonEnd1->Render();
+				buttonBack->Render();
+				Noti.render();
+				HightScore.render();
+				ifLose.render();
+			}
+			
 		}
 		//nếu chưa dừng
 		if (!resume) {
-			// nếu số mạng chưa thua thì render đối tượng
-			if(heart > 0) ManagerObject.render(renderer);
+			           // nếu số mạng chưa thua thì render đối tượng
+			if (heart > 0) ManagerObject.render(renderer);
 			else {
 				// nếu thua thì không render đối tượng mà render hộp thoại thua
 				box->Render();
@@ -302,6 +350,4 @@ void Gameplay::destroy()
 	Timer::sInit->release();// xoá thời gian
 	SDL_DestroyRenderer(renderer);
 }
-void Gameplay::SetIsrunning() {
-	isRunning = true;
-}
+

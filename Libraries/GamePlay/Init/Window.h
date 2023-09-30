@@ -19,12 +19,14 @@
 #include <Load/LoadDocument.h>
 #include <Object/ObjectText.h>
 #include "MenuAndBackground.h"
-#include <Linklist/Linklist.h>
+#include <Data Structure/Tree.h>
+#include <Data Structure/Linklist.h>
 #include <Object/Button.h>
 #include <cstring>
 #include <sstream>
 #include <string.h>
 #include "Gameplay.h"
+#include "ToolEdit.h"
 #include <Init/Listmap.h>
 
 // đối tượng nhận và xử lý tất cả các đối tượng sự kiện khác

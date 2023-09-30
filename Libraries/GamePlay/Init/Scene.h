@@ -7,7 +7,7 @@ class Scene {
 
 protected:
 
-	const int FPS_rate = 120;
+
 	bool isRunning;
 	SDL_Renderer* renderer;
 	// đối tượng nhận sự kiện
@@ -19,7 +19,8 @@ public:
 	
 	bool quit;
 	bool back;
-	bool next;
+	int Index;
+
 	virtual void Loop() = 0;
 	// Hàm nhận sự kiện
 	virtual void handleEvent() = 0;
@@ -31,7 +32,7 @@ public:
 	virtual void destroy() = 0;
 	// Hàm trả về giá trị để xét xem chương trình có tiếp tục chạy nữa hay không
 	virtual bool Running() { return isRunning; }
-	virtual void SetIsrunning() = 0;
+
 	virtual void init() = 0;
 };
 

@@ -61,15 +61,15 @@ public:
 
 
 		// dat vi tri chi line va goal
-		line.w = 100;
+		line.w = 30;
 		line.h = r;
 		line.x = Start.x + width / 2.0f - line.w / 2.0f ;
 		line.y = Start.y  - line.h + area.h/2;
 
-		goal.x = area.x + End.x - Start.x;
-		goal.y = area.y + End.y - Start.y;
-		goal.h = height;
-		goal.w = width;
+		goal.x = End.x + 25;
+ 		goal.y = End.y + 25;
+		goal.h = height - 50;
+		goal.w = width - 50;
 
 		// dat vi tri xoay cua hinh chu Line
 		linePoint.x = line.w / 2;

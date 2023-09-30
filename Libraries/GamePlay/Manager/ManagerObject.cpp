@@ -1,5 +1,8 @@
 ﻿#include <Manager/ManagerObject.h>
 #include <Load/LoadMusic.h>
+
+LoadMusic hit;
+
 Manager::Manager() {
 	FlyLinkList = new ObjectLinkList<Fly>();
 }
@@ -65,14 +68,16 @@ void Manager::ManagerFly(bool set, int &heart) {
 					break;
 				}
 				else {
+					//hit.addSound("Data//hit3.wav");
 					scored+=FlyLinkList->getIndex()->getData()->Getscore();
 					FlyLinkList->deleteNode();
 					FlyLinkList->resetIndex();
 					break;
 				}
 			}
-			if (CollisionBlockWidth(fly->GetArea()) || CollisionBlockHeight(fly->GetArea()))
-			{
+			if (CollisionBlockWidth(fly->GetArea()) || CollisionBlockHeight(fly->GetArea())){
+				scored -= FlyLinkList->getIndex()->getData()->Getscore();
+				if (scored < 0) scored = 0;
 				FlyLinkList->deleteNode();
 				FlyLinkList->resetIndex();
 				break;

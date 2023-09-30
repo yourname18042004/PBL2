@@ -24,7 +24,7 @@ public:
 	// Hàm trả về giá trị để xét xem chương trình có tiếp tục chạy nữa hay không
 	virtual bool Running() { return isRunning; }
 
-	virtual void SetIsrunning();
+
 
 	int* getChoose() { return &choose; }
 

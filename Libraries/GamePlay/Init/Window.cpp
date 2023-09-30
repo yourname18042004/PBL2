@@ -5,8 +5,10 @@ bool Quit = false;
 Gameplay* gameplay = nullptr;
 Menu* background = nullptr;
 ListMap* map = nullptr;
-ObjectLinkList <Scene> scene1;
+Tool* tool = nullptr;
 
+ObjectLinkList <Scene> scene1;
+Tree <Scene> scene2;
 const int FPS_rate = 120;
 
 Window::Window() {}
@@ -33,6 +35,7 @@ void Window::init(const char* title, int xpos, int ypos, int width, int height, 
 
 		TTF_Init();
 		isRunning = true;
+		
 		mtimer = Timer::Init();//Khởi tạo thời gian
 		//khởi tạo menu
 		
@@ -44,13 +47,16 @@ void Window::init(const char* title, int xpos, int ypos, int width, int height, 
 
 		map = new ListMap(renderer);
 		map->init();
-
+		tool = new Tool(renderer);
+		tool->init();
 		gameplay->setChoose(map->getChoose());
+		scene2.Push(background);
+		scene2.Push(map);
+		scene2.Push(tool);
+		scene2.NextIndex(0);
+		scene2.Push(gameplay);
+		scene2.Reset();
 
-		//Link background với gameplay
-		scene1.push(background);
-		scene1.push(map);
-		scene1.push(gameplay);
 	}
 	else
 	{
@@ -59,20 +65,20 @@ void Window::init(const char* title, int xpos, int ypos, int width, int height, 
 }
 
 void Window::update()
-{	
-	while (scene1.getIndex() != NULL)
+{
+	while (scene2.getNodeIndex() != NULL)
 	{
-		scene1.getIndex()->getData()->Loop();
-		if (scene1.getIndex()->getData()->quit) return;
-		std::cout << scene1.getIndex()->getData()->back << std::endl;
-		if (scene1.getIndex()->getData()->back) {
-			scene1.GoPrevious();
-			scene1.getIndex()->getData()->next = false;
+		scene2.getNodeIndex()->getData()->Loop();
+		if (scene2.getNodeIndex()->getData()->quit) return;
 
+		
+		if (scene2.getNodeIndex()->getData()->Index != -1) {
+			scene2.getNodeIndex()->getData()->back = false;
+			scene2.NextIndex(scene2.getNodeIndex()->getData()->Index);
 		}
-		if (scene1.getIndex()->getData()->next) {
-			scene1.GoNext();
-			scene1.getIndex()->getData()->back = false;
+		else if (scene2.getNodeIndex()->getData()->back) {
+			scene2.PreviousIndex();
+			scene2.getNodeIndex()->getData()->Index = -1;
 		}
 	}
 }

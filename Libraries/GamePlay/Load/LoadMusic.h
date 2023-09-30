@@ -19,7 +19,7 @@ public:
 
 		sound = Mix_LoadWAV(SoundPath);
 		
-		Mix_PlayChannelTimed(-1, sound, 0, -1);
+		Mix_PlayChannelTimed(1, sound, 0, -1);
 		//Mix_FreeChunk(sound);
 		
 		//sound = nullptr;

@@ -38,14 +38,14 @@ public:
 
 	void ReadMap(SDL_Renderer* renderer, const char* path);
 
-	void Update(bool set, int &heart);
+	void Update(bool set, int &heart, bool autorun, float *timegame);
 	void render(SDL_Renderer* renderer);
 	//Lấy giá trị độ lớn mảng vector
 	int getSize();
 	//Update vị trí, vector độ dời của đối tượng
 	void UpdatePositionAndVector();
 
-	void ManagerFly(bool set, int &heart);
+	void ManagerFly(bool set, int &heart, bool Autorun, float *timegame);
 
 	bool IsEmty();
 

@@ -23,12 +23,17 @@ void Manager::ReadMap(SDL_Renderer* renderer, const char* path)
 	ReadFile(FlyLinkList, renderer, timegame, path);
 }
 
-void Manager::Update(bool set, int &heart) {
+void Manager::Update(bool set, int& heart, bool autorun, float *timegame) {
 	UpdatePositionAndVector();
 	FlyLinkList->resetIndex();
-	racKet->UpdatePositionOfMouse();
+	ManagerFly(set, heart, autorun, timegame);
+	if (!autorun) {
+		racKet->UpdatePositionOfMouse();
+	}
+	else {
+
+	}
 	racKet->UpdateRacket();
-	ManagerFly(set, heart);
 }
 
 void Manager::render(SDL_Renderer* renderer) {
@@ -56,39 +61,50 @@ void Manager::UpdatePositionAndVector() {
 	} 
 	FlyLinkList->resetIndex();
 }
-	
 
-void Manager::ManagerFly(bool set, int &heart) {
+void Manager::ManagerFly(bool set, int& heart, bool Autorun, float *timegame) {
 	if (set) {
-		while (!FlyLinkList->setIndex()&& !FlyLinkList->isEmpty()){
-			Fly* fly =FlyLinkList->getIndex()->getData();
-			if (Collision(fly->GetArea(), racKet->GetArea()) && racKet->GetHit()) {
-				if (!FlyLinkList->getIndex()->getData()->status) {
-					heart--; // tru mang
-					break;
+		while (!FlyLinkList->setIndex() && !FlyLinkList->isEmpty()) {
+			if (!Autorun) {
+				Fly* fly = FlyLinkList->getIndex()->getData();
+				if (Collision(fly->GetArea(), racKet->GetArea()) && racKet->GetHit()) {
+					if (!FlyLinkList->getIndex()->getData()->status) {
+						heart--; // tru mang
+						break;
+					}
+					else {
+						//hit.addSound("Data//hit3.wav");
+						scored += FlyLinkList->getIndex()->getData()->Getscore();
+						FlyLinkList->deleteNode();
+						FlyLinkList->resetIndex();
+						break;
+					}
 				}
-				else {
-					//hit.addSound("Data//hit3.wav");
-					scored+=FlyLinkList->getIndex()->getData()->Getscore();
+				if (CollisionBlockWidth(fly->GetArea()) || CollisionBlockHeight(fly->GetArea())) {
+					scored -= FlyLinkList->getIndex()->getData()->Getscore();
+					if (scored < 0) scored = 0;
 					FlyLinkList->deleteNode();
 					FlyLinkList->resetIndex();
 					break;
+					}
 				}
+			else {
+					if (FlyLinkList->getIndex()->getData()->TimeLand(timegame)) {
+						racKet->Updateifautorun(FlyLinkList->getIndex()->getData()->GetEnd());
+						if (Collision(racKet->GetArea(), FlyLinkList->getIndex()->getData()->GetArea())) {
+							racKet->AutoHit();
+							scored += FlyLinkList->getIndex()->getData()->Getscore();
+							FlyLinkList->deleteNode();
+							FlyLinkList->resetIndex();
+							break;
+						}
+					}
+				}
+				FlyLinkList->GoNext();
 			}
-			if (CollisionBlockWidth(fly->GetArea()) || CollisionBlockHeight(fly->GetArea())){
-				scored -= FlyLinkList->getIndex()->getData()->Getscore();
-				if (scored < 0) scored = 0;
-				FlyLinkList->deleteNode();
-				FlyLinkList->resetIndex();
-				break;
-			}
-			FlyLinkList->GoNext();
+			FlyLinkList->resetIndex();
 		}
-		FlyLinkList->resetIndex();
-	}
-	else {
-
-	}
+	
 }
 bool Manager::IsEmty() {
 	return FlyLinkList->isEmpty();

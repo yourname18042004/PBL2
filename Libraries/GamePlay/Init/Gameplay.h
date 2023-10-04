@@ -9,6 +9,7 @@ class Gameplay :public Scene {
 private: 
 	float timegame;
 	int* choose;
+	bool* Autorun;
 public:
 	Gameplay(SDL_Renderer* renderer);
 	~Gameplay();
@@ -29,6 +30,9 @@ public:
 	void setChoose(int* choose)
 	{
 		this->choose = choose;
+	}
+	void setAutorun(bool* Autorun) {
+		this->Autorun = Autorun;
 	}
 	void chooseMap();
 	

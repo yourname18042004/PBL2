@@ -58,7 +58,7 @@ void Gameplay::init()
 	// khởi tạo mạng chơi
 	for (int i = 0; i < heart; i++) {
 		FramesObject* tmp = new FramesObject(new SDL_FRect{ (i + 1) * 30.0f + 900, 0, 50.0f, 50.0f }, 
-			"Data//heart_100_100_200_100.png", renderer, true);
+			"Data//Picture//heart_100_100_200_100.png", renderer, true);
 		Heart.push_back(*tmp);
 	}
 
@@ -75,17 +75,17 @@ void Gameplay::init()
 	ifResume.init(620, 250, 200, 50, "Data//Galhau_Regular.ttf", 25, { 255,0,0, 255 }, "Resume", renderer);
 
 	//khởi tạo các nút bấm
-	buttonBack = new Buttons(630, 450, 100, 100, "Data//ButtonBack_100_100_200_100.png", renderer);
-	buttonEnd1 = new Buttons(730, 450, 100, 100, "Data//ButtonEnd_100_100_200_100.png", renderer);
-	buttonResume = new Buttons(1400, 690, 100, 100, "Data//ButtonResume_100_100_200_100.png", renderer);
-	buttonNext = new Buttons(830, 450, 100, 100, "Data//ButtonNext_100_100_200_100.png", renderer);
+	buttonBack = new Buttons(630, 450, 100, 100, "Data//Picture//ButtonBack_100_100_200_100.png", renderer);
+	buttonEnd1 = new Buttons(730, 450, 100, 100, "Data//Picture//ButtonEnd_100_100_200_100.png", renderer);
+	buttonResume = new Buttons(1400, 690, 100, 100, "Data//Picture//ButtonResume_100_100_200_100.png", renderer);
+	buttonNext = new Buttons(830, 450, 100, 100, "Data//Picture//ButtonNext_100_100_200_100.png", renderer);
 
 	// khởi tạo hộp thoại
-	box = new Buttons(720, 350, 450, 300, "Data//box_300_200_600_200.png", renderer);
+	box = new Buttons(720, 350, 450, 300, "Data//Picture//box_300_200_600_200.png", renderer);
 
 	// khởi tạo viền map và thanh viền điểm
-	background1 = new FramesObject(new SDL_FRect{ 0, 0, 1440.0f, 720.0f }, "Data//borders_640_320_640_320.png", renderer, false);
-	ScoreTab = new FramesObject(new SDL_FRect{ 0, 0, 300.0f, 70.0f }, "Data//ScoreTab_600_100_600_100.png", renderer, false);
+	background1 = new FramesObject(new SDL_FRect{ 0, 0, 1440.0f, 720.0f }, "Data//Picture//borders_640_320_640_320.png", renderer, false);
+	ScoreTab = new FramesObject(new SDL_FRect{ 0, 0, 300.0f, 70.0f }, "Data//Picture//ScoreTab_600_100_600_100.png", renderer, false);
 
 	
 	// cho chạy map
@@ -95,7 +95,7 @@ void Gameplay::init()
 
 void Gameplay::Loop() {
 	Timer::sInit->reset();
-	MixBackGround.addSound("Data//run.mp3");
+	//MixBackGround.addSound("Data//run.mp3");
 	//chọn map
 	chooseMap();
 	SDL_ShowCursor(false);//ẩn con trỏ chuột
@@ -237,9 +237,8 @@ void Gameplay::update()
 	
 	if(!resume){
 		timegame += Timer::sInit->DeltaTime();
-		ManagerObject.Update(sethit,heart);
+		ManagerObject.Update(sethit, heart, *Autorun, &timegame);
 	}
-	//ManagerObject.Update(sethit, heart);
 	
 
 	for (int i = 0; i < heart; i++) {

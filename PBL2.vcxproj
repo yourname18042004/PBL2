@@ -112,7 +112,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)\Libraries\GamePlay;$(SolutionDir)\Libraries\SDL_library\SDL2_mixer-2.0.2\include;$(SolutionDir)\Libraries\SDL_library\SDL2_image\include;$(SolutionDir)\Libraries\SDL_library\SDL2\include;$(SolutionDir)\Libraries\SDL_library\SDL2_ttf-2.0.14\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)\Libraries\Edit;$(SolutionDir)\Libraries\GamePlay;$(SolutionDir)\Libraries\SDL_library\SDL2_mixer-2.0.2\include;$(SolutionDir)\Libraries\SDL_library\SDL2_image\include;$(SolutionDir)\Libraries\SDL_library\SDL2\include;$(SolutionDir)\Libraries\SDL_library\SDL2_ttf-2.0.14\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -141,6 +141,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Libraries\Edit\ButtonTable.cpp" />
+    <ClCompile Include="Libraries\Edit\FlyEdit.cpp" />
+    <ClCompile Include="Libraries\Edit\ScrollBar.cpp" />
+    <ClCompile Include="Libraries\Edit\Table.cpp" />
     <ClCompile Include="Libraries\GamePlay\Animation\Animation.cpp" />
     <ClCompile Include="Libraries\GamePlay\Animation\FramesObject.cpp" />
     <ClCompile Include="Libraries\GamePlay\Init\Gameplay.cpp" />
@@ -154,6 +158,12 @@
     <ClCompile Include="Main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Libraries\Edit\ButtonTable.h" />
+    <ClInclude Include="Libraries\Edit\Content.h" />
+    <ClInclude Include="Libraries\Edit\FileOut.h" />
+    <ClInclude Include="Libraries\Edit\FlyEdit.h" />
+    <ClInclude Include="Libraries\Edit\ScrollBar.h" />
+    <ClInclude Include="Libraries\Edit\Table.h" />
     <ClInclude Include="Libraries\GamePlay\Animation\Animation.h" />
     <ClInclude Include="Libraries\GamePlay\Animation\FramesObject.h" />
     <ClInclude Include="Libraries\GamePlay\Data Structure\Linklist.h" />

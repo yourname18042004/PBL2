@@ -55,7 +55,7 @@ public:
 		status = false;//Trangj thái di chuyển
 		this->score = score;
 
-		FlyNormal = new FramesObject(&area, "Data//fly_100_100_200_100.png", renderer, true);
+		FlyNormal = new FramesObject(&area, "Data//Picture//fly_100_100_200_100.png", renderer, true);
 
 		this->timegame = timegame;
 
@@ -75,8 +75,8 @@ public:
 		linePoint.x = line.w / 2;
 		linePoint.y = line.h;
 
-		Line = new FramesObject(&line, "Data//Line_100_100_100_100.png", renderer, false);
-		Goal = new FramesObject(&goal, "Data//Goal_100_100_100_100.png", renderer, false);
+		Line = new FramesObject(&line, "Data//Picture//Line_100_100_100_100.png", renderer, false);
+		Goal = new FramesObject(&goal, "Data//Picture//Goal_100_100_100_100.png", renderer, false);
 	}
 
 	bool status;
@@ -148,6 +148,15 @@ public:
 	}
 	bool Collison(SDL_FRect Racket) {
 		return Collision(area, Racket);
+	}
+	bool TimeLand(float *timegame) {
+		float r = sqrt((End.x - Start.x) * (End.x - Start.x) + (End.y - Start.y) * (End.y - Start.y));
+		float t = r / speed;
+		if (t - *timegame + t_to_a < 0.1) return true;
+		else return false;
+	}
+	Vector GetEnd() {
+		return End;
 	}
 };
 

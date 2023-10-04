@@ -11,8 +11,14 @@ Buttons* level8 = nullptr;
 Buttons* level9 = nullptr;
 Buttons* level10 = nullptr;
 
+Buttons* yes = nullptr;
+Buttons* no = nullptr;
 Buttons* backMenu = nullptr;
-FramesObject* background2;
+FramesObject* background2 = nullptr;
+FramesObject* Box = nullptr;
+
+Text textAutorun;
+
 
 ListMap::ListMap(SDL_Renderer* renderer) {
 	this->renderer = renderer;
@@ -21,19 +27,24 @@ ListMap::~ListMap() { }
 
 void ListMap::init() {
 	background2 = new FramesObject(new SDL_FRect{ 0, 0, 1440.0f, 720.0f },
-		"Data//background2_640_320_640_320.png", renderer, false);
-	level1 = new Buttons(980, 320, 280, 85, "Data//Level1_350_100_700_100.png", renderer);
-	level2 = new Buttons(980, 420, 280, 85, "Data//Level2_350_100_700_100.png", renderer);
-	level3 = new Buttons(980, 420, 280, 85, "Data//Level2_350_100_700_100.png", renderer);
-	level4 = new Buttons(980, 420, 280, 85, "Data//Level2_350_100_700_100.png", renderer);
-	level5 = new Buttons(980, 420, 280, 85, "Data//Level2_350_100_700_100.png", renderer);
-	level6 = new Buttons(980, 420, 280, 85, "Data//Level2_350_100_700_100.png", renderer);
-	level7 = new Buttons(980, 420, 280, 85, "Data//Level2_350_100_700_100.png", renderer);
-	level8 = new Buttons(980, 420, 280, 85, "Data//Level2_350_100_700_100.png", renderer);
-	level9 = new Buttons(980, 420, 280, 85, "Data//Level2_350_100_700_100.png", renderer);
-	level10 = new Buttons(980, 420, 280, 85, "Data//Level2_350_100_700_100.png", renderer);
+		"Data//Picture//background2_640_320_640_320.png", renderer, false);
+	level1 = new Buttons(980, 320, 280, 85, "Data//Picture//Level1_350_100_700_100.png", renderer);
+	level2 = new Buttons(980, 420, 280, 85, "Data//Picture//Level2_350_100_700_100.png", renderer);
+	level3 = new Buttons(980, 420, 280, 85, "Data//Picture//Level2_350_100_700_100.png", renderer);
+	level4 = new Buttons(980, 420, 280, 85, "Data//Picture//Level2_350_100_700_100.png", renderer);
+	level5 = new Buttons(980, 420, 280, 85, "Data//Picture//Level2_350_100_700_100.png", renderer);
+	level6 = new Buttons(980, 420, 280, 85, "Data//Picture//Level2_350_100_700_100.png", renderer);
+	level7 = new Buttons(980, 420, 280, 85, "Data//Picture//Level2_350_100_700_100.png", renderer);
+	level8 = new Buttons(980, 420, 280, 85, "Data//Picture//Level2_350_100_700_100.png", renderer);
+	level9 = new Buttons(980, 420, 280, 85, "Data//Picture//Level2_350_100_700_100.png", renderer);
+	level10 = new Buttons(980, 420, 280, 85, "Data//Picture//Level2_350_100_700_100.png", renderer);
+	yes = new Buttons(100, 320, 280, 85, "Data//Picture//Level1_350_100_700_100.png", renderer);
+	no = new Buttons(200, 320, 280, 85, "Data//Picture//Level2_350_100_700_100.png", renderer);
+	Box = new FramesObject(new SDL_FRect{ 230, 400, 450.0f, 300.0f }, "Data//Picture//Box_300_200_600_200.png", renderer, false);
 	
-	backMenu = new Buttons(1390, 670, 150, 150, "Data//ButtonBack_100_100_200_100.png", renderer);
+	backMenu = new Buttons(1390, 670, 150, 150, "Data//Picture//ButtonBack_100_100_200_100.png", renderer);
+
+	textAutorun.init(330,450,250,50, "Data//Galhau_Regular.ttf", 25, { 255,0,0, 255 }, "AUTORUN?", renderer);
 	// khởi tạo các biến quản lý 
 	back = false; // đi lùi
 	Index = -1;
@@ -86,6 +97,8 @@ void ListMap::update() {
 	level9->Setclick(Event.BUTTON_LEFT);
 	level10->Setclick(Event.BUTTON_LEFT);
 
+	yes->Setclick(Event.BUTTON_LEFT);
+	no->Setclick(Event.BUTTON_LEFT);
 	backMenu->Setclick(Event.BUTTON_LEFT);
 	if (level1->Getclick()) {
 		choose = 1;
@@ -102,6 +115,12 @@ void ListMap::update() {
 		back = true;
 		isRunning = false;
 
+	}
+	if (no->Getclick()) {
+		Autorun = false;
+	}
+	if (yes->Getclick()) {
+		Autorun = true;
 	}
 
 }
@@ -120,9 +139,11 @@ void ListMap::render() {
 	level8->Render();
 	level9->Render();
 	level10->Render();
-
+	yes->Render();
+	no->Render();
 	backMenu->Render();
-
+	Box->Get_Texture();
+	textAutorun.render();
 	SDL_RenderPresent(renderer);
 }
 // Hàm xóa đối tượng

@@ -18,7 +18,7 @@ public:
 		area.w = width;
 		area.h = height;
 		this->handleEvent = handleEvent;
-		Racket1 = new FramesObject(&area, "Data//Racket_100_100_200_100.png", renderer, false);
+		Racket1 = new FramesObject(&area, "Data//Picture//Racket_100_100_200_100.png", renderer, false);
 	}
 
 	// update vị trí chuột
@@ -48,7 +48,32 @@ public:
 		Racket1->Get_Texture();
 	}
 	SDL_FRect GetArea() {
-		return area;
+		SDL_FRect tmp;
+		tmp.x = area.x + area.w / 2;
+		tmp.y = area.y + area.h / 2;
+		tmp.h = area.h / 20;
+		tmp.w = area.h / 20;
+		return tmp;
+	}
+	void Updateifautorun(Vector EndFly) {
+		area.x += FindDirection(EndFly).x * 5;
+		area.y += FindDirection(EndFly).y * 5;
+		if (area.x > 1440 || area.x < 0) area.x = 720;
+		if (area.y > 720 || area.y < 0) area.y = 320;
+		Racket1->setPositionDest(area.x, area.y);
+	}
+	Vector FindDirection(Vector EndFly) {
+		Vector Find;
+		Find.x  = EndFly.x - area.x;
+		Find.y  = EndFly.y - area.y;
+		float r = sqrt(Find.x * Find.x + Find.y * Find.y);
+		Find.x = Find.x / r;
+		Find.y = Find.y / r;
+		return Find;
+	}
+	void AutoHit() {
+		Racket1->setRunanimation();
+		Racket1->UpdateFrames();
 	}
 };
 

@@ -43,6 +43,9 @@
     <Filter Include="Header Files\GamePlay\Data Structure">
       <UniqueIdentifier>{db5c5920-9226-4eb1-aa1c-77e4a4b04dcb}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Edit">
+      <UniqueIdentifier>{64a37d22-fee5-4f6d-a18c-a5431af002e0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -77,6 +80,18 @@
     </ClCompile>
     <ClCompile Include="Libraries\GamePlay\Init\ToolEdit.cpp">
       <Filter>Header Files\GamePlay\Init</Filter>
+    </ClCompile>
+    <ClCompile Include="Libraries\Edit\FlyEdit.cpp">
+      <Filter>Header Files\Edit</Filter>
+    </ClCompile>
+    <ClCompile Include="Libraries\Edit\ScrollBar.cpp">
+      <Filter>Header Files\Edit</Filter>
+    </ClCompile>
+    <ClCompile Include="Libraries\Edit\Table.cpp">
+      <Filter>Header Files\Edit</Filter>
+    </ClCompile>
+    <ClCompile Include="Libraries\Edit\ButtonTable.cpp">
+      <Filter>Header Files\Edit</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -151,6 +166,24 @@
     </ClInclude>
     <ClInclude Include="Libraries\GamePlay\Init\ToolEdit.h">
       <Filter>Header Files\GamePlay\Init</Filter>
+    </ClInclude>
+    <ClInclude Include="Libraries\Edit\Content.h">
+      <Filter>Header Files\Edit</Filter>
+    </ClInclude>
+    <ClInclude Include="Libraries\Edit\FlyEdit.h">
+      <Filter>Header Files\Edit</Filter>
+    </ClInclude>
+    <ClInclude Include="Libraries\Edit\ScrollBar.h">
+      <Filter>Header Files\Edit</Filter>
+    </ClInclude>
+    <ClInclude Include="Libraries\Edit\Table.h">
+      <Filter>Header Files\Edit</Filter>
+    </ClInclude>
+    <ClInclude Include="Libraries\Edit\ButtonTable.h">
+      <Filter>Header Files\Edit</Filter>
+    </ClInclude>
+    <ClInclude Include="Libraries\Edit\FileOut.h">
+      <Filter>Header Files\Edit</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

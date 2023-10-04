@@ -50,6 +50,7 @@ void Window::init(const char* title, int xpos, int ypos, int width, int height, 
 		tool = new Tool(renderer);
 		tool->init();
 		gameplay->setChoose(map->getChoose());
+		gameplay->setAutorun(map->getAutorun());
 		scene2.Push(background);
 		scene2.Push(map);
 		scene2.Push(tool);

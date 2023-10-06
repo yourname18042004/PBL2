@@ -92,7 +92,7 @@ public:
 		linePoint.x = line.w / 2;
 		linePoint.y = line.h;
 
-		renderFly = new FramesObject(&Fly, "Data//fly_100_100_200_100.png", renderer, true);
+		renderFly = new FramesObject(&Fly, "Data//Picture//fly_100_100_200_100.png", renderer, true);
 		Line = new FramesObject(&line, "Data//Edit//Line_50_50_50_50.png", renderer, false);
 		renderStart = new FramesObject(&Start, "Data//Edit//Goal_50_50_50_50.png", renderer, false);
 		renderEnd = new FramesObject(&End, "Data//Edit//Goal_50_50_50_50.png", renderer, false);

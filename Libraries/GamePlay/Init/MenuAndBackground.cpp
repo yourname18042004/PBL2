@@ -19,8 +19,7 @@ void Menu::init() {
 	background = new FramesObject(new SDL_FRect{0, 0, 1440.0f, 720.0f}, "Data//Picture//Main_640_320_640_320.png", renderer, false);
 	buttonStart = new Buttons(880,520, 280, 85, "Data//Picture//Button_350_100_700_100.png", renderer);
 	buttonEnd = new Buttons(880, 620, 280, 85, "Data//Picture//ButtonEnd_350_100_700_100.png", renderer);
-	buttonTool = new Buttons(880, 120, 280, 85, "Data//Picture//ButtonEnd_350_100_700_100.png", renderer);
-
+	buttonTool = new Buttons(1380, 660, 100, 100, "Data//Picture//Gear_100_100_200_100.png", renderer);
 	isRunning = true;
 	Index = -1;
 	back = false;

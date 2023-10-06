@@ -99,7 +99,7 @@ void Gameplay::Loop() {
 	//chọn map
 	chooseMap();
 	SDL_ShowCursor(false);//ẩn con trỏ chuột
-
+	if (*Autorun) SDL_ShowCursor(true);
 	//vòng lặp gameplay 
 	isRunning = true;
 	Index = -1;
@@ -170,7 +170,9 @@ void Gameplay::Loop() {
 		}
 			//thắng game		
 		if (ManagerObject.IsEmty()) {
+			SDL_ShowCursor(true);
 			if (ManagerObject.scored > 0) {
+
 				buttonEnd1->Setclick(Event.BUTTON_LEFT);// quay về listmap
 				buttonBack->Setclick(Event.BUTTON_LEFT);// chơi lại màn chơi
 				buttonNext->Setclick(Event.BUTTON_LEFT);// qua màn kế tiếp
@@ -200,7 +202,6 @@ void Gameplay::Loop() {
 			}
 			else {
 				sethit = false; // không cho phép đánh fly
-				SDL_ShowCursor(true);
 
 				buttonEnd1->Setclick(Event.BUTTON_LEFT);
 				buttonBack->Setclick(Event.BUTTON_LEFT);
@@ -269,10 +270,10 @@ void Gameplay::chooseMap()
 {
 	switch (*choose) {
 	case 1:
-		ManagerObject.ReadMap(renderer, "Data//Map-dif//Difficult.txt");
+		ManagerObject.ReadMap(renderer, "Data//Map-dif//Level1.txt");
 		break;
 	case 2:
-		ManagerObject.ReadMap(renderer, "Data//Map-dif//Level1.txt");
+		ManagerObject.ReadMap(renderer, "Data//Map-dif//Level2.txt");
 		break;
 	}
 }

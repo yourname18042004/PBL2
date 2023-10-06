@@ -91,7 +91,8 @@ void Manager::ManagerFly(bool set, int& heart, bool Autorun, float *timegame) {
 			else {
 					if (FlyLinkList->getIndex()->getData()->TimeLand(timegame)) {
 						racKet->Updateifautorun(FlyLinkList->getIndex()->getData()->GetEnd());
-						if (Collision(racKet->GetArea(), FlyLinkList->getIndex()->getData()->GetArea())) {
+						if (Collision(racKet->GetArea(), FlyLinkList->getIndex()->getData()->GetArea()) && FlyLinkList->getIndex()->getData()->status){
+							/*iftruedistance(racKet->GetArea(), FlyLinkList->getIndex()->getData()->GetArea())) {*/
 							racKet->AutoHit();
 							scored += FlyLinkList->getIndex()->getData()->Getscore();
 							FlyLinkList->deleteNode();

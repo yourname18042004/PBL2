@@ -37,11 +37,11 @@ void Tool::init() {
 	editArea = new FramesObject(new SDL_FRect{ 0, 0, 1440 * 0.8f, 720 * 0.8f }, "Data/Edit/BackGround_120_60_120_60.png", renderer, false);
 	
 	// nut 
-	toolback = new Buttons(1390, 50, 50, 50, "Data//Edit//Add_50_50_100_50.png", renderer);
+	toolback = new Buttons(1390, 50, 50, 50, "Data//Edit//Back_50_50_100_50.png", renderer);
 	add		= new Buttons(1300, 50, 50, 50, "Data//Edit//Add_50_50_100_50.png", renderer);
 	stop	= new Buttons(680, 600, 50, 50, "Data//Edit//Pause_50_50_100_50.png", renderer);
 	start   = new Buttons(680, 600, 50, 50, "Data//Edit//Start_50_50_100_50.png", renderer);
-	outFile = new Buttons(1250, 50, 50, 50, "Data//Edit//Start_50_50_100_50.png", renderer);;
+	outFile = new Buttons(1210, 50, 50, 50, "Data//Edit//Down_50_50_100_50.png", renderer);;
 
 	//thanh truot 
 	Timing				= new ScrollHorizontal(100, 600, 1060, 80, renderer);

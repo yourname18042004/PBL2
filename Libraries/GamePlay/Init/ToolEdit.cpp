@@ -64,7 +64,7 @@ void Tool::init() {
 	Text_Score.init(1150, 200, 20, 20, "Data//Galhau_Regular.ttf", 25, { 0,0,0, 255 }, "0", renderer);
 
 	// ruoi
-	flys.push_back(new FlyEdit(100, 100, 50, 50, 200, 200, 1, 5, 100, renderer, 0, &TimeEdit, &Event));
+	flys.push_back(new FlyEdit(100, 100, 70, 70, 200, 200, 0, 5, 100, renderer, 100, &TimeEdit, &Event));
 	
 	fly = flys[0]; fly->Pick();
 
@@ -77,6 +77,7 @@ void Tool::init() {
 
 	TimeEdit = 0;
 	TimeEditRun = false;
+	UpdateIfAddMap = false;
 }
 void Tool::handleEvent()
 {
@@ -154,7 +155,7 @@ void Tool::UpdateButton()
 
 	if (add->Getclick())
 	{
-		flys.push_back(new FlyEdit(300, 300, 50, 50, 500, 300, TimeEdit, 5, 100, renderer, 0, &TimeEdit, &Event));
+		flys.push_back(new FlyEdit(300, 300, 70, 70, 500, 300, TimeEdit, 5, 100, renderer, 100, &TimeEdit, &Event));
 		table->addButton(*(flys.end() - 1));
 	}
 
@@ -162,6 +163,7 @@ void Tool::UpdateButton()
 	if (outFile->Getclick())
 	{
 		FileOut(&flys, "Data//Map-dif//Level1.txt");
+		UpdateIfAddMap = true;
 	}
 }
 void Tool::UpdateScroll()
@@ -185,7 +187,7 @@ void Tool::UpdateContent()
 	Text_Timing.update(200, 600, 20, 20, "Data//Galhau_Regular.ttf", 25, { 0, 0,0, 255 }, toClock(Timing->getValue()).c_str());
 	Text_Time_Fly_Pause.update(1160, 85, 20, 20, "Data//Galhau_Regular.ttf", 25, { 0, 0,0, 255 }, toStr(Time_Fly_Pause->getValue(), "Time: ").c_str());
 	Text_Speed.update(1160, 165, 400, 20, "Data//Galhau_Regular.ttf", 25, { 0,0,0, 255 }, toStr(Speed->getValue(), "Speed: ").c_str());
-	Text_Score.update(1160, 245, 20, 20, "Data//Galhau_Regular.ttf", 25, { 0,0,0, 255 }, toStr(Score->getValue(), "Core: ").c_str());
+	Text_Score.update(1160, 245, 20, 20, "Data//Galhau_Regular.ttf", 25, { 0,0,0, 255 }, toStr(Score->getValue(), "Score: ").c_str());
 }
 
 void Tool::UpdateFly()

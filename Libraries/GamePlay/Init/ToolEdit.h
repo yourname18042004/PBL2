@@ -18,6 +18,7 @@ class Tool :public Scene {
 private:
 	float TimeEdit; // thoi gian game chay trong edit 
 	bool TimeEditRun; // thoi gian edit chay hay ko
+	bool UpdateIfAddMap;
 	FlyEdit* fly = nullptr;
 
 	void UpdateButton(); // update button
@@ -45,6 +46,8 @@ public:
 	virtual void destroy();
 	// Hàm trả về giá trị để xét xem chương trình có tiếp tục chạy nữa hay không
 	virtual bool Running() { return isRunning; }
+
+	bool* getBoolUpdate() { return &UpdateIfAddMap; }
 
 };
 

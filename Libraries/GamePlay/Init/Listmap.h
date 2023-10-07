@@ -6,6 +6,7 @@
 
 class ListMap :public Scene {
 	int choose;
+	bool* UpdateIfAddMap;
 	float pos_y_button;
 	bool Autorun;
 public:
@@ -26,7 +27,12 @@ public:
 	virtual bool Running() { return isRunning; }
 	int* getChoose() { return &choose; }
 	bool* getAutorun() { return &Autorun; }
+	void setBoolUpdate(bool* set)
+	{
+		UpdateIfAddMap = set;
+	}
+	
 
-
+	void updateMap();
 };
 #endif // !LISTMAP_H

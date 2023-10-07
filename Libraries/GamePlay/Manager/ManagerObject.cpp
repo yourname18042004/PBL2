@@ -18,9 +18,10 @@ void Manager::Add(float* timegame)
 	this->timegame = timegame;
 }
 
-void Manager::ReadMap(SDL_Renderer* renderer, const char* path)
+void Manager::ReadMap(SDL_Renderer* renderer, int level)
 {
-	ReadFile(FlyLinkList, renderer, timegame, path);
+	std::string path = "Data//Map-dif//Level" +std::to_string(level) + ".txt";
+	ReadFile(FlyLinkList, renderer, timegame, path.c_str());
 }
 
 void Manager::Update(bool set, int& heart, bool autorun, float *timegame) {

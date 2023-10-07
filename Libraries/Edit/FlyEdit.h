@@ -17,7 +17,7 @@ private:
 	float timeEnd;
 
 	// diem 
-	float core;
+	float score;
 	// toc do
 	float speed;
 
@@ -104,6 +104,7 @@ public:
 		this->renderer = renderer;
 		this->Event = Event;
 		this->pick = false;
+		this->score = score;
 	}
 
 	// Tinh toan lai tat ca cac gia tri neu co mat ki mot gia tri nao bi thay doi
@@ -251,11 +252,11 @@ public:
 	}
 
 	// cap nhat diem
-	void updateScore(float core)
+	void updateScore(float score)
 	{
 		if (pick)
 		{
-			this->core = core;
+			this->score = score;
 		}
 	}
 
@@ -280,7 +281,7 @@ public:
 	SDL_FRect getAreaFly() { return Fly; }
 	float getSpeed() { return speed; }
 	float getTimePause() { return timePause; }
-	float getScore() { return core; }
+	float getScore() { return score; }
 	float getTimeStart() { return timeStart; }
 	float getTimeEnd() { return timeEnd; }
 	float* getAddTimeStart() { return &timeStart; }

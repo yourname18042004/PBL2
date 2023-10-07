@@ -61,7 +61,7 @@ public:
 
 
 		// dat vi tri chi line va goal
-		line.w = 30;
+		line.w = 10;
 		line.h = r;
 		line.x = Start.x + width / 2.0f - line.w / 2.0f ;
 		line.y = Start.y  - line.h + area.h/2;
@@ -87,8 +87,8 @@ public:
 		SDL_FRect tmp;
 		tmp.x = area.x + area.w / 2;
 		tmp.y = area.y + area.h / 2;
-		tmp.h = area.h / 2;
-		tmp.w = area.w / 2;
+		tmp.h = area.h;
+		tmp.w = area.w;
 		return tmp;
 	}
 
@@ -157,7 +157,7 @@ public:
 	bool TimeLand(float *timegame) {
 		float r = sqrt((End.x - Start.x) * (End.x - Start.x) + (End.y - Start.y) * (End.y - Start.y));
 		float t = r / speed;
-		if (t - *timegame + t_to_a < 0.05) return true;
+		if (t - *timegame + t_to_a < 0.1) return true;
 		else return false;
 	}
 	Vector GetEnd() {

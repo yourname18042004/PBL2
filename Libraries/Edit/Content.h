@@ -8,6 +8,7 @@ class Content {
 protected:
 	SDL_Texture* texture;
 	SDL_FRect dest;
+	SDL_FRect tmp;
 	SDL_Rect src;
 	SDL_Renderer* renderer;
 
@@ -24,6 +25,7 @@ public:
 		dest.h = h;
 		dest.x = x;
 		dest.y = y;
+		tmp = dest;
 		this->content = content;
 	}
 	//cập nhật lại text
@@ -52,6 +54,32 @@ public:
 		//std::cout << content << ":" << src.w << " " << src.h << std::endl;
 		SDL_RenderCopyF(renderer, texture, &src, &dest);
 	}
+
+	void update(float x, float y)
+	{
+		dest.x = x;
+		dest.y = y;
+		tmp.x = x;
+		tmp.y = y;
+	}
+	
+	void update(bool set)
+	{
+		if (set)
+		{
+			dest.w = tmp.w * 1.2f;
+			dest.h = tmp.h * 1.2f;
+			dest.x = tmp.x - tmp.w * 0.2f / 2;
+			dest.y = tmp.y - tmp.h * 0.2f / 2;
+		}
+		else {
+			dest.w = tmp.w;
+			dest.h = tmp.h;
+			dest.x = tmp.x;
+			dest.y = tmp.y;
+			}
+		}
+	
 };
 
 

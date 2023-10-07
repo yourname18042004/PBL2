@@ -36,7 +36,7 @@ public:
 
 	void Add(float* timegame);
 
-	void ReadMap(SDL_Renderer* renderer, const char* path);
+	void ReadMap(SDL_Renderer* renderer, int level);
 
 	void Update(bool set, int &heart, bool autorun, float *timegame);
 	void render(SDL_Renderer* renderer);

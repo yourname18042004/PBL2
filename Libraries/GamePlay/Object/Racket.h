@@ -56,8 +56,8 @@ public:
 		return tmp;
 	}
 	void Updateifautorun(Vector EndFly) {
-		area.x += FindDirection(EndFly).x * 10;
-		area.y += FindDirection(EndFly).y * 10;
+		area.x += FindDirection(EndFly).x * 12;
+		area.y += FindDirection(EndFly).y * 12;
 		if (area.x > 1440 || area.x < 0) area.x = 720;
 		if (area.y > 720 || area.y < 0) area.y = 320;
 		Racket1->setPositionDest(area.x, area.y);

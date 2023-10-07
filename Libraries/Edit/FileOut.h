@@ -7,8 +7,17 @@
 static void FileOut(std::vector <FlyEdit*>* flys, const char* path)
 {
 	float k = 0.8f;
+	int count;
 	FILE* f;
-	f = fopen(path, "w");
+	
+	f = fopen("Data//Map-dif//ManagerMap.txt", "r");
+	fscanf(f, "%d", &count);
+
+	fclose(f);
+
+
+	std::string str = "Data//Map-dif//Level" + std::to_string(count + 1) + ".txt";
+	f = fopen(str.c_str(), "w");
 	fprintf(f, "%d\n", flys->size());
 	for (int i = 0; i < flys->size(); ++i)
 	{
@@ -27,6 +36,12 @@ static void FileOut(std::vector <FlyEdit*>* flys, const char* path)
 			int((*flys)[i]->getScore())
 		);
 	}
+	fclose(f);
+
+
+	f = fopen("Data//Map-dif//ManagerMap.txt", "w");
+	fprintf(f, "%d", count + 1);
+
 	fclose(f);
 }
 

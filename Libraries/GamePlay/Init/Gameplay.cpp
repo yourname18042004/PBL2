@@ -268,14 +268,7 @@ void Gameplay::update()
 
 void Gameplay::chooseMap()
 {
-	switch (*choose) {
-	case 1:
-		ManagerObject.ReadMap(renderer, "Data//Map-dif//Level1.txt");
-		break;
-	case 2:
-		ManagerObject.ReadMap(renderer, "Data//Map-dif//Level2.txt");
-		break;
-	}
+	ManagerObject.ReadMap(renderer, *choose);
 }
 
 void Gameplay::render() {

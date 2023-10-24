@@ -9,6 +9,7 @@ Text HightScore;// điểm cao nhất
 Text ifWin; // thông báo nếu thắng
 Text ifLose; // thông báo nếu thua
 Text ifResume; // thông báo nếu dừng
+Text Congrat;
 
 bool sethit = true;//Lúc Resume thì update huỷ collision 
 bool resume = false; //Có resume hay không
@@ -22,8 +23,11 @@ Buttons* box = nullptr; // hộp thoại
 
 FramesObject* background1; // viền game
 FramesObject* ScoreTab; // thanh viền ghi điểm
+FramesObject* TaskBar;
 std::vector <FramesObject> Heart;// vector chứa các mạng game
+std::vector<FramesObject> Star;
 
+Box box1;
 LoadMusic MixBackGround;
 
 int MaxScored = 0;
@@ -61,7 +65,11 @@ void Gameplay::init()
 			"Data//Picture//heart_100_100_200_100.png", renderer, true);
 		Heart.push_back(*tmp);
 	}
-
+	for (int i = 0; i < 3; i++) {
+		FramesObject* tmp = new FramesObject(new SDL_FRect{ (i + 1) * 45.0f + 600,400,50.0f,50.0f }, "Data//Picture//star_100_100_200_100.png", renderer, true);
+		Star.push_back(*tmp);
+	}
+	
 	// thêm vào biến quản lý
 	ManagerObject.Add(new Racket(100, 100,120, 120, renderer, &Event));
 	ManagerObject.Add(&timegame);
@@ -73,19 +81,21 @@ void Gameplay::init()
 	ifWin.init(630, 250, 200, 50, "Data//Galhau_Regular.ttf", 25, { 255,0,0, 255 }, "YOU WIN! ", renderer);
 	ifLose.init(620, 250, 200, 50, "Data//Galhau_Regular.ttf", 25, { 255,0,0, 255 }, "YOU LOSE!", renderer);
 	ifResume.init(620, 250, 200, 50, "Data//Galhau_Regular.ttf", 25, { 255,0,0, 255 }, "Resume", renderer);
-
+	Congrat.init(620, 250, 200, 50, "Data//Galhau_Regular.ttf", 25, { 255,0,0, 255 }, "Congratulation!", renderer);
 	//khởi tạo các nút bấm
-	buttonBack = new Buttons(630, 450, 100, 100, "Data//Picture//ButtonBack_100_100_200_100.png", renderer);
-	buttonEnd1 = new Buttons(730, 450, 100, 100, "Data//Picture//ButtonEnd_100_100_200_100.png", renderer);
+	buttonBack = new Buttons(620, 550, 100, 100, "Data//Picture//ButtonBack_100_100_200_100.png", renderer);
+	buttonEnd1 = new Buttons(720, 550, 100, 100, "Data//Picture//ButtonEnd_100_100_200_100.png", renderer);
 	buttonResume = new Buttons(1400, 690, 100, 100, "Data//Picture//ButtonResume_100_100_200_100.png", renderer);
-	buttonNext = new Buttons(830, 450, 100, 100, "Data//Picture//ButtonNext_100_100_200_100.png", renderer);
-
+	buttonNext = new Buttons(820, 550, 100, 100, "Data//Picture//ButtonNext_100_100_200_100.png", renderer);
+	  
 	// khởi tạo hộp thoại
 	box = new Buttons(720, 350, 450, 300, "Data//Picture//box_300_200_600_200.png", renderer);
 
 	// khởi tạo viền map và thanh viền điểm
 	background1 = new FramesObject(new SDL_FRect{ 0, 0, 1440.0f, 720.0f }, "Data//Picture//borders_640_320_640_320.png", renderer, false);
 	ScoreTab = new FramesObject(new SDL_FRect{ 0, 0, 300.0f, 70.0f }, "Data//Picture//ScoreTab_600_100_600_100.png", renderer, false);
+	TaskBar = new FramesObject(new SDL_FRect{ 545, 500, 350.0f, 100.0f }, "Data//Picture//ScoreTab_600_100_600_100.png", renderer, false);
+
 
 	
 	// cho chạy map
@@ -110,7 +120,7 @@ void Gameplay::Loop() {
 		render();
 		buttonResume->Setclick(Event.BUTTON_LEFT); // cài click cho resume
 		// click vào resume
-		if (buttonResume->Getclick() ) {
+		if (buttonResume->Getclick()) {
 			SDL_ShowCursor(true);
 			resume = true; // hiện resume
 			if (heart <= 0) resume = false;// nếu thua thì không hiện resume lại
@@ -120,8 +130,9 @@ void Gameplay::Loop() {
 		if (resume) {
 			sethit = false; // không đánh dc đối tượng
 			// cài click cho 2 buttons
-			buttonEnd1->Setclick(Event.BUTTON_LEFT); 
+			buttonEnd1->Setclick(Event.BUTTON_LEFT);
 			buttonBack->Setclick(Event.BUTTON_LEFT);
+
 			if (buttonEnd1->Getclick()) {
 				// reset lại thông số khi bấm nút thoát map
 				heart = 5;
@@ -144,7 +155,7 @@ void Gameplay::Loop() {
 		if (heart <= 0) {
 			sethit = false; // không cho phép đánh fly
 			SDL_ShowCursor(true);
-			
+
 			buttonEnd1->Setclick(Event.BUTTON_LEFT);
 			buttonBack->Setclick(Event.BUTTON_LEFT);
 			if (buttonBack->Getclick()) {
@@ -164,18 +175,23 @@ void Gameplay::Loop() {
 				sethit = true; // cho phép đánh
 				SDL_ShowCursor(false);
 				heart = 5;
-				ManagerObject.Reset(); 
+				ManagerObject.Reset();
 				isRunning = false; // thoát map
 			}
 		}
-			//thắng game		
+		//thắng game		
 		if (ManagerObject.IsEmty()) {
 			SDL_ShowCursor(true);
 			if (ManagerObject.scored > 0) {
-
-				buttonEnd1->Setclick(Event.BUTTON_LEFT);// quay về listmap
-				buttonBack->Setclick(Event.BUTTON_LEFT);// chơi lại màn chơi
-				buttonNext->Setclick(Event.BUTTON_LEFT);// qua màn kế tiếp
+				if (*choose == *NumberOflevel) {
+					buttonEnd1->Setclick(Event.BUTTON_LEFT);// quay về listmap
+					buttonBack->Setclick(Event.BUTTON_LEFT);// chơi lại màn chơi
+				}
+				else {
+					buttonEnd1->Setclick(Event.BUTTON_LEFT);// quay về listmap
+					buttonBack->Setclick(Event.BUTTON_LEFT);// chơi lại màn chơi
+					buttonNext->Setclick(Event.BUTTON_LEFT);
+				}
 				if (buttonBack->Getclick()) {
 					//reset thông số màn chơi
 					timegame = 0;
@@ -198,11 +214,10 @@ void Gameplay::Loop() {
 					(*choose)++;
 					chooseMap();
 				}
-				
+
 			}
 			else {
 				sethit = false; // không cho phép đánh fly
-
 				buttonEnd1->Setclick(Event.BUTTON_LEFT);
 				buttonBack->Setclick(Event.BUTTON_LEFT);
 				if (buttonBack->Getclick()) {
@@ -226,7 +241,7 @@ void Gameplay::Loop() {
 					isRunning = false;
 				}
 			}
-			
+
 		}
 	}
 }
@@ -245,8 +260,12 @@ void Gameplay::update()
 	for (int i = 0; i < heart; i++) {
 		Heart[i].UpdateFrames();
 	}
+
+	for (int i = 0; i < 3; i++) {
+		Star[i].UpdateFrames();
+	}
 	char text1[50] = "FLY KILLER SCORE:";
-	char text2[50], text3[50] = "YOUR SCORE:", win[20] = "YOU WIN!", lose[20] = "YOU LOSE!";
+	char text2[50], text3[50] = "YOUR SCORE:";
 
 	// dòng text null tạm thời được copy từ text khai báo bên trên
 	strcpy(text2, text1);
@@ -269,6 +288,7 @@ void Gameplay::update()
 void Gameplay::chooseMap()
 {
 	ManagerObject.ReadMap(renderer, *choose);
+	
 }
 
 void Gameplay::render() {
@@ -278,6 +298,7 @@ void Gameplay::render() {
 		//winloseresume(resume, ManagerObject.IsEmty(), heart, ManagerObject.scored );
 		background1->Get_Texture();//viền game
 		ScoreTab->Get_Texture();// thanh điểm
+		
 		ScoreNote.render();// điểm
 		buttonResume->Render();// nút resume
 		//// in số hình trái tim tượng trưng cho số mạng
@@ -285,23 +306,36 @@ void Gameplay::render() {
 		 for (int i = 0; i < heart; i++) {
 			Heart[i].Get_Texture();
 		 }
-
+		
 		// thắng game 
 		if (ManagerObject.IsEmty()) {
 			if (ManagerObject.scored > 0) {
-				// render hộp thoại thắng
 				box->Render();
-				buttonEnd1->Render();
-				buttonBack->Render();
-				buttonNext->Render();
-				Noti.render();
-				HightScore.render();
-				ifWin.render();
-
+				TaskBar->Get_Texture();
+				if (*choose == *NumberOflevel) {
+					buttonEnd1->Render();
+					buttonBack->Render();
+					Noti.render();
+					HightScore.render();
+					Congrat.render();
+				}
+				// render hộp thoại thắng
+				else {
+					for (int i = 0; i < int(ManagerObject.getPercent() / 33.3f); i++) {
+						Star[i].Get_Texture();
+					}
+					buttonBack->Render();
+					buttonEnd1->Render();
+					buttonNext->Render();
+					Noti.render();
+					HightScore.render();
+					ifWin.render();
+				}
 			}
 			else {
 				//nếu điểm bằng 0 thì thua 
 				box->Render();
+				TaskBar->Get_Texture();
 				buttonEnd1->Render();
 				buttonBack->Render();
 				Noti.render();
@@ -312,11 +346,12 @@ void Gameplay::render() {
 		}
 		//nếu chưa dừng
 		if (!resume) {
-			           // nếu số mạng chưa thua thì render đối tượng
+		   // nếu số mạng chưa thua thì render đối tượng
 			if (heart > 0) ManagerObject.render(renderer);
 			else {
 				// nếu thua thì không render đối tượng mà render hộp thoại thua
 				box->Render();
+				TaskBar->Get_Texture();
 				buttonEnd1->Render();
 				buttonBack->Render();
 				Noti.render();
@@ -329,12 +364,14 @@ void Gameplay::render() {
 
 			//render hộp thoại resume
 			box->Render();
+			TaskBar->Get_Texture();
 			buttonEnd1->Render();
 			buttonBack->Render();
 			Noti.render();
 			HightScore.render();
 			ifResume.render();
 		}
+
 
 		SDL_RenderPresent(renderer);
 }

@@ -3,6 +3,7 @@
 #include <Init/Window.h>
 #include "Scene.h"
 #include <vector>
+#include <Manager/Box.h>
 
 
 class Gameplay :public Scene {
@@ -10,6 +11,7 @@ private:
 	float timegame;
 	int* choose;
 	bool* Autorun;
+	int* NumberOflevel;
 public:
 	Gameplay(SDL_Renderer* renderer);
 	~Gameplay();
@@ -34,7 +36,9 @@ public:
 	void setAutorun(bool* Autorun) {
 		this->Autorun = Autorun;
 	}
+	void setNumofLevel(int* NumofLevel) {
+		this->NumberOflevel = NumofLevel;
+	}
 	void chooseMap();
-	
 };
 #endif

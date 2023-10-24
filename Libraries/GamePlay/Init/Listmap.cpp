@@ -3,7 +3,7 @@
 
 std::vector <Buttons*> level;
 std::vector <Content> content;
-int NumofLevel;
+
 Buttons* yes = nullptr;
 Buttons* no = nullptr;
 Buttons* backMenu = nullptr;
@@ -38,7 +38,7 @@ void ListMap::init() {
 	isRunning = true;
 	Autorun = false;
 	pos_y_button = 50;
-
+	RacketChoose = new FramesObject(new SDL_FRect{ Racketpos, 570, 100.0, 100.0 }, "Data//Picture//Racketchoose_100_100_100_100.png", renderer, false);
 	FILE* p;
 	p = fopen("Data//Map-dif//ManagerMap.txt", "r");
 	fscanf(p, "%d", &NumofLevel);
@@ -73,20 +73,27 @@ void ListMap::handleEvent() {
 
 void ListMap::updateMap()
 {
-	level.clear();
-	content.clear();
 	FILE* p;
+	int k;
 	p = fopen("Data//Map-dif//ManagerMap.txt", "r");
-	fscanf(p, "%d", &NumofLevel);
+	fscanf(p, "%d", &k);
 	fclose(p);
-	for (int i = 0; i < NumofLevel; i++) {
-		level.push_back(new Buttons(980, 320, 280, 85, "Data//Picture//Level_350_100_700_100.png", renderer));
-		Content tmp;
-		std::string str = "LEVEL " + std::to_string(i + 1);
-		tmp.init(980, 320, 50, 50, "Data//Galhau_Regular.ttf", 50, { 0, 0,0, 255 }, str.c_str(), renderer);
-		content.push_back(tmp);
+	if (NumofLevel != k)
+	{
+		std::cout << " update map";
+		NumofLevel = k;
+		level.clear();
+
+		content.clear();
+
+		for (int i = 0; i < NumofLevel; i++) {
+			level.push_back(new Buttons(980, 320, 280, 85, "Data//Picture//Level_350_100_700_100.png", renderer));
+			Content tmp;
+			std::string str = "LEVEL " + std::to_string(i + 1);
+			tmp.init(980, 320, 50, 50, "Data//Galhau_Regular.ttf", 50, { 0, 0, 0, 255 }, str.c_str(), renderer);
+			content.push_back(tmp);
+		}
 	}
-	
 }
 
 // Hàm khởi tạo của sổ
@@ -98,7 +105,9 @@ void ListMap::update() {
 		*UpdateIfAddMap = !(*UpdateIfAddMap);
 	}
 
-	RacketChoose = new FramesObject(new SDL_FRect{ Racketpos, 570, 100.0, 100.0 }, "Data//Picture//Racketchoose_100_100_100_100.png", renderer, false);
+	//delete RacketChoose;
+	//RacketChoose = new FramesObject(new SDL_FRect{ Racketpos, 570, 100.0, 100.0 }, "Data//Picture//Racketchoose_100_100_100_100.png", renderer, false);
+	
 	if (Event.crossUp && pos_y_button + NumofLevel * 100 > 720) pos_y_button -= 30.0f;
 	if (Event.crossDown && pos_y_button < 50) pos_y_button += 30.0f;
 	//std::cout << pos_y_button << std::endl;
@@ -128,10 +137,12 @@ void ListMap::update() {
 	if (no->Getclick()) {
 		Autorun = false;
 		Racketpos = 500; 
+		RacketChoose->setPositionDest(Racketpos, 570);
 	}
 	if (yes->Getclick()) {
 		Autorun = true;
 		Racketpos = 300;
+		RacketChoose->setPositionDest(Racketpos, 570);
 	}
 
 }

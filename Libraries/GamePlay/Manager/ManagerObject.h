@@ -23,6 +23,11 @@ private:
 	Racket* racKet;
 	//HandelEvent* Handel;
 	ObjectLinkList<Fly>* FlyLinkList = nullptr;
+
+	int sizeStart;
+	int sizeEnd;
+	float percent;
+
 public:
 	int scored = 0;
 	//Thêm vào mảng vector 1 đối tượng
@@ -50,7 +55,8 @@ public:
 	bool IsEmty();
 
 	void Reset();
-
+	
+	float getPercent();
 	
 };
 

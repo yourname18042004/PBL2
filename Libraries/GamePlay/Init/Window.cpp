@@ -51,7 +51,7 @@ void Window::init(const char* title, int xpos, int ypos, int width, int height, 
 		tool->init();
 		gameplay->setChoose(map->getChoose());
 		gameplay->setAutorun(map->getAutorun());
-
+		gameplay->setNumofLevel(map->Numoflevel());
 		map->setBoolUpdate(tool->getBoolUpdate());
 
 		scene2.Push(background);

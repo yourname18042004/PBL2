@@ -185,5 +185,8 @@
     <ClInclude Include="Libraries\Edit\FileOut.h">
       <Filter>Header Files\Edit</Filter>
     </ClInclude>
+    <ClInclude Include="Libraries\GamePlay\Manager\Box.h">
+      <Filter>Header Files\GamePlay\Manager</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

@@ -8,8 +8,10 @@ class ListMap :public Scene {
 	int choose;
 	bool* UpdateIfAddMap;
 	float pos_y_button;
+	int NumofLevel;
 	bool Autorun;
 public:
+	
 	ListMap(SDL_Renderer* renderer);
 	~ListMap();
 	virtual void init();
@@ -27,12 +29,11 @@ public:
 	virtual bool Running() { return isRunning; }
 	int* getChoose() { return &choose; }
 	bool* getAutorun() { return &Autorun; }
+	int* Numoflevel() { return &NumofLevel; }
 	void setBoolUpdate(bool* set)
 	{
 		UpdateIfAddMap = set;
 	}
-	
-
 	void updateMap();
 };
 #endif // !LISTMAP_H

@@ -46,6 +46,7 @@ private:
 	Node<T>* nodeHead;
 	Node<T>* nodeTail;
 	Node<T>* nodeIndex;
+	int size;
 
 public:
 
@@ -54,6 +55,7 @@ public:
 		nodeHead = NULL;
 		nodeTail = NULL;
 		nodeIndex = NULL;
+		size = 0;
 	}
 
 	bool isEmpty()
@@ -80,6 +82,7 @@ public:
 			nodeTail->setNext(newNode);
 			nodeTail = newNode;
 		}
+		size++;
 	}
 
 	void deleteNode() // lay va xoa
@@ -108,6 +111,7 @@ public:
 				nodeIndex->getNext()->setPrevious(nodeIndex->getPrevious());
 				nodeIndex = nodeIndex->getNext();
 			}
+			size--;
 		}
 	}
 
@@ -131,6 +135,8 @@ public:
 	void GoPrevious() {
 		nodeIndex = nodeIndex->getPrevious();
 	}
+
+	int getSize() { return size; }
 };
 
 

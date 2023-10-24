@@ -177,6 +177,7 @@
     <ClInclude Include="Libraries\GamePlay\Load\LoadDocument.h" />
     <ClInclude Include="Libraries\GamePlay\Load\LoadMusic.h" />
     <ClInclude Include="Libraries\GamePlay\Load\LoadTexture.h" />
+    <ClInclude Include="Libraries\GamePlay\Manager\Box.h" />
     <ClInclude Include="Libraries\GamePlay\Manager\Docfile.h" />
     <ClInclude Include="Libraries\GamePlay\Manager\HandelEvent.h" />
     <ClInclude Include="Libraries\GamePlay\Manager\ManagerObject.h" />

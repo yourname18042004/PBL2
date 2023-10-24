@@ -214,6 +214,8 @@ D:\PBL2\Libraries\Edit\FlyEdit.h(128,24): warning C4244: '=': conversion from 'f
 D:\PBL2\Libraries\Edit\FlyEdit.h(129,21): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
 D:\PBL2\Libraries\Edit\FileOut.h(21,13): warning C4477: 'fprintf' : format string '%d' requires an argument of type 'int', but variadic argument 1 has type 'unsigned __int64'
 D:\PBL2\Libraries\Edit\FileOut.h(21,13): message : consider using '%zd' in the format string
+D:\PBL2\Libraries\GamePlay\Init\Listmap.cpp(140,33): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+D:\PBL2\Libraries\GamePlay\Init\Listmap.cpp(145,33): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
   MenuAndBackground.cpp
 D:\PBL2\Libraries\GamePlay\Animation\FramesObject.h(39,15): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
 D:\PBL2\Libraries\GamePlay\Animation\FramesObject.h(40,15): warning C4244: '=': conversion from 'int' to 'float', possible loss of data

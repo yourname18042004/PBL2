@@ -22,6 +22,8 @@ void Manager::ReadMap(SDL_Renderer* renderer, int level)
 {
 	std::string path = "Data//Map-dif//Level" +std::to_string(level) + ".txt";
 	ReadFile(FlyLinkList, renderer, timegame, path.c_str());
+	sizeStart = FlyLinkList->getSize();
+	sizeEnd = 0;
 }
 
 void Manager::Update(bool set, int& heart, bool autorun, float *timegame) {
@@ -78,6 +80,7 @@ void Manager::ManagerFly(bool set, int& heart, bool Autorun, float *timegame) {
 						scored += FlyLinkList->getIndex()->getData()->Getscore();
 						FlyLinkList->deleteNode();
 						FlyLinkList->resetIndex();
+						sizeEnd++;
 						break;
 					}
 				}
@@ -120,3 +123,7 @@ void Manager::Reset() {
 }
 
 
+float Manager::getPercent()
+{
+	return 100 * ((float)sizeEnd) / (float)sizeStart;
+}

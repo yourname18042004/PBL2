@@ -1,10 +1,11 @@
 ﻿#include <Manager/ManagerObject.h>
 #include <Load/LoadMusic.h>
-
-LoadMusic hit;
+LoadMusic* music;
 
 Manager::Manager() {
 	FlyLinkList = new ObjectLinkList<Fly>();
+	music = new LoadMusic(2);
+	music->addSound("Data\\Sound\\hit3.wav");
 }
 void Manager::Add(Fly* a) {
 	FlyLinkList->push(a);
@@ -70,13 +71,13 @@ void Manager::ManagerFly(bool set, int& heart, bool Autorun, float *timegame) {
 		while (!FlyLinkList->setIndex() && !FlyLinkList->isEmpty()) {
 			if (!Autorun) {
 				Fly* fly = FlyLinkList->getIndex()->getData();
-				if (Collision(fly->GetArea(), racKet->GetArea()) && racKet->GetHit()) {
+				if (fly->getStatus() && Collision(fly->GetArea(), racKet->GetArea()) && racKet->GetHit()) {
+					music->playSound();
 					if (!FlyLinkList->getIndex()->getData()->status) {
 						heart--; // tru mang
 						break;
 					}
 					else {
-						//hit.addSound("Data//hit3.wav");
 						scored += FlyLinkList->getIndex()->getData()->Getscore();
 						FlyLinkList->deleteNode();
 						FlyLinkList->resetIndex();
@@ -96,7 +97,6 @@ void Manager::ManagerFly(bool set, int& heart, bool Autorun, float *timegame) {
 					if (FlyLinkList->getIndex()->getData()->TimeLand(timegame)) {
 						racKet->Updateifautorun(FlyLinkList->getIndex()->getData()->GetEnd());
 						if (Collision(racKet->GetArea(), FlyLinkList->getIndex()->getData()->GetArea()) && FlyLinkList->getIndex()->getData()->status){
-							/*iftruedistance(racKet->GetArea(), FlyLinkList->getIndex()->getData()->GetArea())) {*/
 							racKet->AutoHit();
 							scored += FlyLinkList->getIndex()->getData()->Getscore();
 							FlyLinkList->deleteNode();

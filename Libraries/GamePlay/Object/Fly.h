@@ -139,6 +139,8 @@ public:
 		}
 	}
 
+	
+
 	bool setFly()
 	{
 		Vector v1{ area.x - Start.x, area.y - Start.y };
@@ -150,6 +152,11 @@ public:
 
 	void setStatus(bool set) {
 		this->status = set;
+	}
+
+	bool getStatus()
+	{
+		return status;
 	}
 	bool Collison(SDL_FRect Racket) {
 		return Collision(area, Racket);

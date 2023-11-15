@@ -8,6 +8,7 @@ Text Noti;// thông báo win game
 Text HightScore;// điểm cao nhất
 
 
+
 bool sethit = true;//Lúc Resume thì update huỷ collision 
 bool resume = false; //Có resume hay không
 
@@ -20,12 +21,15 @@ std::vector <FramesObject> Heart;// vector chứa các mạng game
 std::vector<FramesObject> Star;
 
 Box box1;
+ScrollHorizontal* volumeBackground = nullptr;
 
 int MaxScored = 0;
 int heart = 5;
 
+
 LoadMusic* musicBackground;
 LoadMusic* soundPause;
+
 
 Gameplay::Gameplay(SDL_Renderer* renderer){
 	this->renderer = renderer;
@@ -59,7 +63,7 @@ void Gameplay::init()
 		Heart.push_back(*tmp);
 	}
 	for (int i = 0; i < 3; i++) {
-		FramesObject* tmp = new FramesObject(new SDL_FRect{ (i + 1) * 45.0f + 600,400,70.0f,70.0f }, "Data//Picture//star_100_100_200_100.png", renderer, true);
+		FramesObject* tmp = new FramesObject(new SDL_FRect{ (i + 1) * 45.0f + 600,170,70.0f,70.0f }, "Data//Picture//star_100_100_200_100.png", renderer, true);
 		Star.push_back(*tmp);
 	}
 	
@@ -70,7 +74,7 @@ void Gameplay::init()
 	// khởi tạo các văn bản
 	ScoreNote.init(52, 52, 200, 50, "Data//Galhau_Regular.ttf", 25, { 255,0,0, 255 }, "FLY KILLER SCORE:0", renderer);
 	Noti.init(250, 250, 200, 50, "Data//Galhau_Regular.ttf", 25, { 255,0,0, 255 }, "YOUR SCORE: ", renderer);
-	HightScore.init(250, 300, 200, 50, "Data//Galhau_Regular.ttf", 25, { 255,0,0, 255 }, "YOUR HIGHT SCORE IS: ", renderer);
+	HightScore.init(250, 300, 200, 50, "Data//Galhau_Regular.ttf", 25, { 255,0,0, 255 }, "YOUR HIGH SCORE IS: ", renderer);
 	
 	//khởi tạo các nút bấm
 	
@@ -79,7 +83,11 @@ void Gameplay::init()
 	ScoreTab = new FramesObject(new SDL_FRect{ 0, 0, 300.0f, 70.0f }, "Data//Picture//ScoreTab_600_100_600_100.png", renderer, false);
 
 	box1.init(renderer);
-	
+
+	volumeBackground = new ScrollHorizontal(600, 400, 250, 50, renderer);
+	volumeBackground->setValue(0, 128);
+	volumeBackground->setValue(128);
+
 	// cho chạy map
 	isRunning = true;
 	back = false;
@@ -88,11 +96,13 @@ void Gameplay::init()
 	musicBackground->addSound("Data//Sound//Ground.mp3");
 	soundPause = new LoadMusic(3);
 	soundPause->addSound("Data//Sound//Pause.mp3");
+
 }
 
 void Gameplay::Loop() {
 	Timer::sInit->reset();
-	musicBackground->playSound();
+	musicBackground->playSound(-1);
+	
 	//chọn map
 	chooseMap();
 	SDL_ShowCursor(false);//ẩn con trỏ chuột
@@ -109,7 +119,7 @@ void Gameplay::Loop() {
 		// click vào resume
 		if (buttonResume->Getclick()) {
 
-			soundPause->playSound();
+			soundPause->playSound(0);
 			SDL_ShowCursor(true);
 			resume = true; // hiện resume
 			if (heart <= 0) resume = false;// nếu thua thì không hiện resume lại
@@ -166,8 +176,10 @@ void Gameplay::Loop() {
 		}
 		//thắng game		
 		if (ManagerObject.IsEmty()) {
+			
 			SDL_ShowCursor(true);
 			if (ManagerObject.scored > 0) {
+				
 				if (*choose == *NumberOflevel) {
 					box1.SetClicklast(Event.BUTTON_LEFT);
 				}
@@ -248,7 +260,7 @@ void Gameplay::update()
 
 	// dòng text null tạm thời được copy từ text khai báo bên trên
 	strcpy(text2, text1);
-	char Maxscored[50] = "YOUR HIGHT SCORE IS:";
+	char Maxscored[50] = "YOUR HIGH SCORE IS:";
 
 	// cập nhật max điểm
 	if (ManagerObject.scored > MaxScored) MaxScored = ManagerObject.scored;
@@ -262,6 +274,10 @@ void Gameplay::update()
 	ScoreNote.update(40, 13, 200, 50, "Data//Galhau_Regular.ttf", 25, { 255 ,0 ,0 , 255 }, text2);
 	Noti.update(620, 300, 200, 50, "Data//Galhau_Regular.ttf", 25, { 255,0,0, 255 }, text3);
 	HightScore.update(565,350,300,50, "Data//Galhau_Regular.ttf", 25, { 255,0,0, 255 }, Maxscored);
+
+	volumeBackground->MoveCroll(Event.BUTTON_LEFT_PRESS);
+	musicBackground->updateVolume(volumeBackground->getValue());
+	soundPause->updateVolume(128);
 }
 
 void Gameplay::chooseMap()
@@ -287,10 +303,11 @@ void Gameplay::render() {
 		// thắng game 
 		if (ManagerObject.IsEmty()) {
 			if (ManagerObject.scored > 0) {
-
+				
 				if (*choose == *NumberOflevel) {
 
 					box1.renderLast();
+					volumeBackground->Render();
 					for (int i = 0; i < int(ManagerObject.getPercent() / 33.3f); i++) {
 						Star[i].Get_Texture();
 					}
@@ -301,6 +318,7 @@ void Gameplay::render() {
 				// render hộp thoại thắng
 				else {
 					box1.renderWin();
+					volumeBackground->Render();
 					for (int i = 0; i < int(ManagerObject.getPercent() / 33.3f); i++) {
 						Star[i].Get_Texture();
 					}
@@ -311,6 +329,7 @@ void Gameplay::render() {
 			}
 			else {
 				box1.renderLose();
+				volumeBackground->Render();
 				Noti.render();
 				HightScore.render();
 			}
@@ -322,6 +341,7 @@ void Gameplay::render() {
 			else {
 				// nếu thua thì không render đối tượng mà render hộp thoại thua
 				box1.renderLose();
+				volumeBackground->Render();
 				Noti.render();
 				HightScore.render();
 			}
@@ -329,6 +349,7 @@ void Gameplay::render() {
 		//nếu dừng
 		else {
 			box1.resume();
+			volumeBackground->Render();
 			Noti.render();
 			HightScore.render();
 		}

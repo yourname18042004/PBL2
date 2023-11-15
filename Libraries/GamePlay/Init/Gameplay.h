@@ -4,7 +4,7 @@
 #include "Scene.h"
 #include <vector>
 #include <Manager/Box.h>
-
+#include <ScrollBar.h>
 
 class Gameplay :public Scene {
 private: 

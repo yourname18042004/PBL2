@@ -1,11 +1,14 @@
 ﻿#include <Manager/ManagerObject.h>
 #include <Load/LoadMusic.h>
 LoadMusic* music;
+LoadMusic* music2;
 
 Manager::Manager() {
 	FlyLinkList = new ObjectLinkList<Fly>();
 	music = new LoadMusic(2);
+	music2 = new LoadMusic(5);
 	music->addSound("Data\\Sound\\hit3.wav");
+	music2->addSound("Data\\Sound\\miss.mp3");
 }
 void Manager::Add(Fly* a) {
 	FlyLinkList->push(a);
@@ -35,7 +38,7 @@ void Manager::Update(bool set, int& heart, bool autorun, float *timegame) {
 		racKet->UpdatePositionOfMouse();
 	}
 	else {
-
+		//Do nothing
 	}
 	racKet->UpdateRacket();
 }
@@ -72,12 +75,14 @@ void Manager::ManagerFly(bool set, int& heart, bool Autorun, float *timegame) {
 			if (!Autorun) {
 				Fly* fly = FlyLinkList->getIndex()->getData();
 				if (fly->getStatus() && Collision(fly->GetArea(), racKet->GetArea()) && racKet->GetHit()) {
-					music->playSound();
+					
 					if (!FlyLinkList->getIndex()->getData()->status) {
+						music2->playSound(0);
 						heart--; // tru mang
 						break;
 					}
 					else {
+						music->playSound(0);
 						scored += FlyLinkList->getIndex()->getData()->Getscore();
 						FlyLinkList->deleteNode();
 						FlyLinkList->resetIndex();

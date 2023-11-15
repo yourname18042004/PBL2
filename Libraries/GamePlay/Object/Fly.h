@@ -156,17 +156,20 @@ public:
 
 	bool getStatus()
 	{
-		return status;
+		return *timegame > t_to_a;
 	}
+
 	bool Collison(SDL_FRect Racket) {
 		return Collision(area, Racket);
 	}
+
 	bool TimeLand(float *timegame) {
 		float r = sqrt((End.x - Start.x) * (End.x - Start.x) + (End.y - Start.y) * (End.y - Start.y));
 		float t = r / speed;
 		if (t - *timegame + t_to_a < 0.1) return true;
 		else return false;
 	}
+
 	Vector GetEnd() {
 		return End;
 	}

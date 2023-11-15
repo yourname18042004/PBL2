@@ -4,8 +4,11 @@
 #include <SDL.h>
 #include<Init/Window.h>
 #include "Scene.h"
+#include "Load/LoadDocument.h"
+#include "Load/LoadMusic.h"
 
 class Menu:public Scene {
+	
 public:
 	Menu(SDL_Renderer* renderer);
 	~Menu();

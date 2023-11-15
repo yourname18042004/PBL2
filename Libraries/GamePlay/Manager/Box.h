@@ -1,6 +1,7 @@
 ﻿#ifndef BOX_H
 #define BOX_H
 #include<Init/Window.h>
+#include <ScrollBar.h>
 
 struct Box {
 
@@ -15,6 +16,9 @@ struct Box {
 	Text ifLose; // thông báo nếu thua
 	Text ifResume; // thông báo nếu dừng
 	Text Congrat;
+	LoadMusic* congra;
+	
+
 	void init(SDL_Renderer* renderer) {
 		box = new FramesObject(new SDL_FRect{ 495,200,450,300 }, "Data//Picture//box_300_200_600_200.png", renderer, false);
 		buttonBack = new Buttons(620, 550, 100, 100, "Data//Picture//ButtonBack_100_100_200_100.png", renderer);
@@ -26,8 +30,12 @@ struct Box {
 		ifLose.init(620, 250, 200, 50, "Data//Galhau_Regular.ttf", 25, { 255,0,0, 255 }, "YOU LOSE!", renderer);
 		ifResume.init(620, 250, 200, 50, "Data//Galhau_Regular.ttf", 25, { 255,0,0, 255 }, "Resume", renderer);
 		Congrat.init(620, 250, 200, 50, "Data//Galhau_Regular.ttf", 25, { 255,0,0, 255 }, "Congratulation!", renderer);
+
+		congra = new LoadMusic(6);
+		congra->addSound("Data//Sound//chucmung.mp3");
 	}
 	void renderWin() {
+		congra->playSound(0);
 		box->Get_Texture();
 		ifWin.render();
 		TaskBar->Get_Texture();
@@ -36,6 +44,7 @@ struct Box {
 		buttonNext->Render();
 	}
 	void renderLast() {
+		congra->playSound(0);
 		box->Get_Texture();
 		Congrat.render();
 		TaskBar->Get_Texture();
@@ -57,6 +66,7 @@ struct Box {
 		TaskBar->Get_Texture();
 		buttonBack->Render();
 		buttonEnd1->Render();
+
 	}
 	void SetClick(bool set) {
 		buttonBack->Setclick(set);

@@ -30,7 +30,7 @@ Table::Table(float pos_x, float pos_y, float width, float height, std::vector<Fl
 
 void Table::update()
 {
-	if (CollisionButton(Area)) 
+	if (CollisionButton(Area))
 	{
 		Scroll->MoveCrollWheel(Event);
 		Scroll->MoveCroll(Event->BUTTON_LEFT_PRESS);
@@ -39,27 +39,29 @@ void Table::update()
 
 	for (int i = 0; i < Count; ++i)
 	{
-		if (listButton[i]->getClickDelete() && flys->size() != 1)
-		{
-			std::cout << flys->size() << std::endl;
-			DeleteButton(i);
-			DeleteFly(i);
-			std::cout << flys->size() << std::endl;
-			
-			Count--;
-			break;
-		}
-
 		// chon ruoi de thay doi thong so
-		listButton[i]->update(Event, pos_y + height * 0.23f -pos_y_bottun);
-		if (listButton[i]->getClick() || (CollisionButton((*flys)[i]->getAreaFly()) && Event->BUTTON_LEFT) )
+		listButton[i]->update(Event, pos_y + height * 0.23f - pos_y_bottun);
+		if (listButton[i]->getClick() || (CollisionButton((*flys)[i]->getAreaFly()) && Event->BUTTON_LEFT))
 		{
 			(*flys)[Index]->unPick();
 			Index = i;
 			*fly = (*flys)[i];
 			(*fly)->Pick();
 		}
-	}	
+
+		if (listButton[i]->getClickDelete() && flys->size() != 1 && listButton.size() != 1)
+		{
+			std::cout << flys->size() << std::endl;
+			DeleteButton(i);
+			DeleteFly(i);
+			std::cout << flys->size() << std::endl;
+
+			Count--;
+			break;
+		}
+
+
+	}
 }
 
 void Table::render()
@@ -80,19 +82,36 @@ void Table::addButton(FlyEdit* fly)
 
 void Table::DeleteButton(int index)
 {
-	for (int i = index; i < listButton.size() - 1; ++i)
+	if (index == listButton.size() - 1) listButton.pop_back();
+	else
 	{
-		listButton[i] = listButton[i + 1];
-		listButton[i]->setNum(i);
+		for (int i = index; i < listButton.size() - 1; ++i)
+		{
+			listButton[i] = listButton[i + 1];
+			listButton[i]->setNum(i);
+		}
+
+		listButton.pop_back();
+		//listButton.resize(Count - 1);
 	}
-	listButton.pop_back();
 }
 void Table::DeleteFly(int index)
 {
-	for (int i = index; i < flys->size() - 1; ++i)
+	if (*fly == (*flys)[index])
 	{
-		(*flys)[i] = (*flys)[i + 1];
-
+		(*fly)->unPick();
+		*fly = (*flys)[index - 1];
+		Index--;
 	}
-	flys->pop_back();
+
+	if (index == flys->size() - 1) flys->pop_back();
+	else
+	{
+		for (int i = index; i < flys->size() - 1; ++i)
+		{
+			(*flys)[i] = (*flys)[i + 1];
+		}
+		flys->pop_back();
+		//flys->resize(Count - 1);
+	}
 }

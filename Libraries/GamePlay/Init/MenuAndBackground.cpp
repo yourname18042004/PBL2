@@ -1,49 +1,58 @@
 ﻿#include "MenuAndBackground.h"
-
+#include "ScrollBar.h"
 
 FramesObject *background;
-
+FramesObject* introduction1 = nullptr;
+FramesObject* introduction2 = nullptr;
+FramesObject* Options = nullptr;
 
 Buttons* buttonStart = nullptr;
 Buttons* buttonTool = nullptr;
 Buttons* buttonEnd = nullptr;
 Buttons* introduce = nullptr;
 Buttons* backIntro = nullptr;
-
+Buttons* MusicOptions = nullptr;
+Buttons* backOptions = nullptr;
 Buttons* next = nullptr;
 Buttons* Back = nullptr;
 
 int introduceStatus;
+bool musicOptions = false;
 
-FramesObject* introduction1 = nullptr;
-FramesObject* introduction2 = nullptr;
+ScrollHorizontal* volumeBackground_menu = nullptr; 
 
 LoadMusic* backgroundMusic = nullptr;
 
 Menu::Menu(SDL_Renderer* renderer) {
-	
 	this->renderer = renderer;
 }
 Menu::~Menu() {
 
 }
-void Menu::init() {
-
+void Menu::init(int *volume) {
+	this->volume = volume;
 	background = new FramesObject(new SDL_FRect{0, 0, 1440.0f, 720.0f}, "Data//Picture//Main_640_320_640_320.png", renderer, false);
+	introduction1 = new FramesObject(new SDL_FRect{ 10,10,1400,700 }, "Data//Picture//Introducetion_2200_1100_2200_1100.png", renderer, false);
+	introduction2 = new FramesObject(new SDL_FRect{ 10,10,1400,700 }, "Data//Picture//Introduction_2200_1100_2200_1100.png", renderer, false);
+	Options = new FramesObject(new SDL_FRect{ 450,200,600,400 }, "Data//Picture//Box_300_200_600_200.png", renderer, false);
+
 	buttonStart = new Buttons(880,520, 280, 85, "Data//Picture//Button_350_100_700_100.png", renderer);
 	buttonEnd = new Buttons(880, 620, 280, 85, "Data//Picture//ButtonEnd_350_100_700_100.png", renderer);
 	buttonTool = new Buttons(1380, 660, 100, 100, "Data//Picture//Gear_100_100_200_100.png", renderer);
 	introduce = new Buttons(1280, 660, 100, 100, "Data//Picture//huongdan_100_100_200_100.png", renderer);
 	backIntro= new Buttons(1300, 100, 100, 100, "Data//Picture//ButtonBack_100_100_200_100.png", renderer);
+	backOptions = new Buttons(980, 250, 100, 100, "Data//Picture//ButtonBack_100_100_200_100.png", renderer);
 	next = new Buttons(680, 600, 75, 75, "Data//Picture//Next_50_50_100_50.png", renderer);
 	Back = new Buttons(580, 600, 75, 75, "Data//Picture//Back_50_50_100_50.png", renderer);
-
-	introduction1 = new FramesObject(new SDL_FRect{10,10,1400,700 }, "Data//Picture//Introducetion_2200_1100_2200_1100.png", renderer, false);
-	introduction2 = new FramesObject(new SDL_FRect{ 10,10,1400,700 }, "Data//Picture//Introduction_2200_1100_2200_1100.png", renderer, false);
+	MusicOptions = new Buttons(40, 660, 100, 100, "Data//Picture//music_100_100_200_100.png", renderer);
+	
 
 	backgroundMusic = new LoadMusic(4);
 	backgroundMusic->addSound("Data//Sound//Ground.mp3");
 
+	volumeBackground_menu = new ScrollHorizontal(600, 400, 250, 50, renderer);
+	
+	// cho chạy map
 	introduceStatus = 0;
 
 	isRunning = true;
@@ -60,19 +69,32 @@ void Menu::handleEvent()
 	// Nhận sự kiện
 	Event.Handel(event);
 }
+
 void Menu::update() {
 	
-	if (introduceStatus == 0) {
+	if (introduceStatus == 0 && !musicOptions) {
 		buttonStart->Setclick(Event.BUTTON_LEFT);
 		buttonEnd->Setclick(Event.BUTTON_LEFT);
 		buttonTool->Setclick(Event.BUTTON_LEFT);
+		introduce->Setclick(Event.BUTTON_LEFT);
+		if (introduce->Getclick()) {
+			introduceStatus = 1;
+		}
+		
+		MusicOptions->Setclick(Event.BUTTON_LEFT);
 	}
-	introduce->Setclick(Event.BUTTON_LEFT);
+	std::cout << introduceStatus << std::endl;
+	if (next->Getclick()) {
+		introduceStatus = 2;
+	}
+	if (Back->Getclick()) {
+		introduceStatus = 1;
+	}
 	if (introduceStatus != 0) {
 		backIntro->Setclick(Event.BUTTON_LEFT);
 		next->Setclick(Event.BUTTON_LEFT);
 		Back->Setclick(Event.BUTTON_LEFT);
-		if (backIntro->Getclick()) introduceStatus = false;
+		if (backIntro->Getclick()) introduceStatus = 0;
 	}
 	if (buttonEnd->Getclick()) quit = true;
 	if (buttonStart->Getclick()) {
@@ -83,12 +105,18 @@ void Menu::update() {
 		isRunning = false;
 		Index = 1;
 	}
-	if (introduce->Getclick() || Back->Getclick()) {
-		introduceStatus = 1;
+	if (MusicOptions->Getclick()) {
+		musicOptions = true;
 	}
-	if (next->Getclick()) {
-		introduceStatus = 2;
+	if (musicOptions) {
+		volumeBackground_menu->MoveCroll(Event.BUTTON_LEFT_PRESS);
+		backOptions->Setclick(Event.BUTTON_LEFT);
+		if (backOptions->Getclick()) musicOptions = false;
 	}
+	
+	
+	backgroundMusic->updateVolume(volumeBackground_menu->getValue());
+	(*volume) = volumeBackground_menu->getValue();
 }
 void Menu::render() {
 	SDL_RenderClear(renderer);
@@ -98,10 +126,10 @@ void Menu::render() {
 	buttonEnd->Render();
 	buttonTool->Render();
 	introduce->Render();
+	MusicOptions->Render();
 	
 	if (introduceStatus == 1) {
 		introduction1->Get_Texture();
-		
 	}
 	if (introduceStatus == 2) {
 		introduction2->Get_Texture();
@@ -111,6 +139,13 @@ void Menu::render() {
 		Back->Render();
 		next->Render();
 	}
+
+	if (musicOptions) {
+		Options->Get_Texture();
+		volumeBackground_menu->Render();
+		backOptions->Render();
+	}
+	
 	SDL_RenderPresent(renderer);
 }
 void Menu::destroy() {
@@ -119,8 +154,12 @@ void Menu::destroy() {
 void Menu::Loop() {
 
 	isRunning = true;
+	volumeBackground_menu->setValue(0, 128);
+	volumeBackground_menu->setValue(*(this->volume));
 	backgroundMusic->playSound(-1);
+	
 	while (isRunning && !quit) {
+		
 		SDL_ShowCursor(true);
 		handleEvent();
 		update();

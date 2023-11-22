@@ -12,10 +12,12 @@ private:
 	int* choose;
 	bool* Autorun;
 	int* NumberOflevel;
+	int *volume;
 public:
 	Gameplay(SDL_Renderer* renderer);
 	~Gameplay();
-	virtual void init();
+
+	void init(int *volume);
 
 	virtual void Loop();
 	// Hàm nhận sự kiện
@@ -28,7 +30,8 @@ public:
 	virtual void destroy();
 	// Hàm trả về giá trị để xét xem chương trình có tiếp tục chạy nữa hay không
 	virtual bool Running() { return isRunning; }
-	
+
+	virtual void init() {}
 	void setChoose(int* choose)
 	{
 		this->choose = choose;
@@ -40,5 +43,6 @@ public:
 		this->NumberOflevel = NumofLevel;
 	}
 	void chooseMap();
+
 };
 #endif

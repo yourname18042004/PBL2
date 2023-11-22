@@ -1,42 +1,129 @@
-﻿  Gameplay.cpp
+﻿  MenuAndBackground.cpp
 D:\New folder\PBL2\Libraries\GamePlay\Animation\FramesObject.h(39,15): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+  (compiling source file 'Libraries/GamePlay/Init/MenuAndBackground.cpp')
+  
 D:\New folder\PBL2\Libraries\GamePlay\Animation\FramesObject.h(40,15): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-D:\New folder\PBL2\Libraries\GamePlay\Object\Fly.h(75,24): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-D:\New folder\PBL2\Libraries\GamePlay\Object\Fly.h(76,21): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+  (compiling source file 'Libraries/GamePlay/Init/MenuAndBackground.cpp')
+  
+D:\New folder\PBL2\Libraries\GamePlay\Object\Fly.h(81,24): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+  (compiling source file 'Libraries/GamePlay/Init/MenuAndBackground.cpp')
+  
+D:\New folder\PBL2\Libraries\GamePlay\Object\Fly.h(82,21): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+  (compiling source file 'Libraries/GamePlay/Init/MenuAndBackground.cpp')
+  
+D:\New folder\PBL2\Libraries\GamePlay\Object\Fly.h(115,20): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+  (compiling source file 'Libraries/GamePlay/Init/MenuAndBackground.cpp')
+  
+D:\New folder\PBL2\Libraries\GamePlay\Object\Fly.h(121,21): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+  (compiling source file 'Libraries/GamePlay/Init/MenuAndBackground.cpp')
+  
 D:\New folder\PBL2\Libraries\GamePlay\Object\Racket.h(30,40): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+  (compiling source file 'Libraries/GamePlay/Init/MenuAndBackground.cpp')
+  
 D:\New folder\PBL2\Libraries\GamePlay\Object\Racket.h(30,32): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+  (compiling source file 'Libraries/GamePlay/Init/MenuAndBackground.cpp')
+  
 D:\New folder\PBL2\Libraries\GamePlay\Object\Racket.h(63,40): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+  (compiling source file 'Libraries/GamePlay/Init/MenuAndBackground.cpp')
+  
 D:\New folder\PBL2\Libraries\GamePlay\Object\Racket.h(63,32): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+  (compiling source file 'Libraries/GamePlay/Init/MenuAndBackground.cpp')
+  
 D:\New folder\PBL2\Libraries\GamePlay\Load\LoadMusic.h(41,23): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+  (compiling source file 'Libraries/GamePlay/Init/MenuAndBackground.cpp')
+  
 D:\New folder\PBL2\Libraries\GamePlay\Object\ObjectText.h(20,12): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+  (compiling source file 'Libraries/GamePlay/Init/MenuAndBackground.cpp')
+  
 D:\New folder\PBL2\Libraries\GamePlay\Object\ObjectText.h(21,12): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+  (compiling source file 'Libraries/GamePlay/Init/MenuAndBackground.cpp')
+  
 D:\New folder\PBL2\Libraries\GamePlay\Object\ObjectText.h(22,12): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+  (compiling source file 'Libraries/GamePlay/Init/MenuAndBackground.cpp')
+  
 D:\New folder\PBL2\Libraries\GamePlay\Object\ObjectText.h(23,12): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+  (compiling source file 'Libraries/GamePlay/Init/MenuAndBackground.cpp')
+  
 D:\New folder\PBL2\Libraries\GamePlay\Object\ObjectText.h(34,12): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+  (compiling source file 'Libraries/GamePlay/Init/MenuAndBackground.cpp')
+  
 D:\New folder\PBL2\Libraries\GamePlay\Object\ObjectText.h(35,12): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+  (compiling source file 'Libraries/GamePlay/Init/MenuAndBackground.cpp')
+  
 D:\New folder\PBL2\Libraries\GamePlay\Object\ObjectText.h(36,12): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+  (compiling source file 'Libraries/GamePlay/Init/MenuAndBackground.cpp')
+  
 D:\New folder\PBL2\Libraries\GamePlay\Object\ObjectText.h(37,12): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+  (compiling source file 'Libraries/GamePlay/Init/MenuAndBackground.cpp')
+  
 D:\New folder\PBL2\Libraries\Edit\Content.h(24,12): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+  (compiling source file 'Libraries/GamePlay/Init/MenuAndBackground.cpp')
+  
 D:\New folder\PBL2\Libraries\Edit\Content.h(25,12): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+  (compiling source file 'Libraries/GamePlay/Init/MenuAndBackground.cpp')
+  
 D:\New folder\PBL2\Libraries\Edit\Content.h(26,12): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+  (compiling source file 'Libraries/GamePlay/Init/MenuAndBackground.cpp')
+  
 D:\New folder\PBL2\Libraries\Edit\Content.h(27,12): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+  (compiling source file 'Libraries/GamePlay/Init/MenuAndBackground.cpp')
+  
 D:\New folder\PBL2\Libraries\Edit\Content.h(39,12): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+  (compiling source file 'Libraries/GamePlay/Init/MenuAndBackground.cpp')
+  
 D:\New folder\PBL2\Libraries\Edit\Content.h(40,12): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+  (compiling source file 'Libraries/GamePlay/Init/MenuAndBackground.cpp')
+  
 D:\New folder\PBL2\Libraries\Edit\Content.h(41,12): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+  (compiling source file 'Libraries/GamePlay/Init/MenuAndBackground.cpp')
+  
 D:\New folder\PBL2\Libraries\Edit\Content.h(42,12): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+  (compiling source file 'Libraries/GamePlay/Init/MenuAndBackground.cpp')
+  
 D:\New folder\PBL2\Libraries\Edit\Content.h(50,35): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+  (compiling source file 'Libraries/GamePlay/Init/MenuAndBackground.cpp')
+  
 D:\New folder\PBL2\Libraries\Edit\Content.h(51,15): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+  (compiling source file 'Libraries/GamePlay/Init/MenuAndBackground.cpp')
+  
 D:\New folder\PBL2\Libraries\Edit\FlyEdit.h(74,9): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+  (compiling source file 'Libraries/GamePlay/Init/MenuAndBackground.cpp')
+  
 D:\New folder\PBL2\Libraries\Edit\FlyEdit.h(75,9): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+  (compiling source file 'Libraries/GamePlay/Init/MenuAndBackground.cpp')
+  
 D:\New folder\PBL2\Libraries\Edit\FlyEdit.h(76,11): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+  (compiling source file 'Libraries/GamePlay/Init/MenuAndBackground.cpp')
+  
 D:\New folder\PBL2\Libraries\Edit\FlyEdit.h(92,24): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+  (compiling source file 'Libraries/GamePlay/Init/MenuAndBackground.cpp')
+  
 D:\New folder\PBL2\Libraries\Edit\FlyEdit.h(93,21): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+  (compiling source file 'Libraries/GamePlay/Init/MenuAndBackground.cpp')
+  
 D:\New folder\PBL2\Libraries\Edit\FlyEdit.h(107,17): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+  (compiling source file 'Libraries/GamePlay/Init/MenuAndBackground.cpp')
+  
 D:\New folder\PBL2\Libraries\Edit\FlyEdit.h(113,9): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+  (compiling source file 'Libraries/GamePlay/Init/MenuAndBackground.cpp')
+  
 D:\New folder\PBL2\Libraries\Edit\FlyEdit.h(114,9): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+  (compiling source file 'Libraries/GamePlay/Init/MenuAndBackground.cpp')
+  
 D:\New folder\PBL2\Libraries\Edit\FlyEdit.h(115,11): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+  (compiling source file 'Libraries/GamePlay/Init/MenuAndBackground.cpp')
+  
 D:\New folder\PBL2\Libraries\Edit\FlyEdit.h(128,24): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+  (compiling source file 'Libraries/GamePlay/Init/MenuAndBackground.cpp')
+  
 D:\New folder\PBL2\Libraries\Edit\FlyEdit.h(129,21): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+  (compiling source file 'Libraries/GamePlay/Init/MenuAndBackground.cpp')
+  
 D:\New folder\PBL2\Libraries\Edit\FileOut.h(21,13): warning C4477: 'fprintf' : format string '%d' requires an argument of type 'int', but variadic argument 1 has type 'unsigned __int64'
-D:\New folder\PBL2\Libraries\Edit\FileOut.h(21,13): message : consider using '%zd' in the format string
+  (compiling source file 'Libraries/GamePlay/Init/MenuAndBackground.cpp')
+  D:\New folder\PBL2\Libraries\Edit\FileOut.h(21,13):
+  consider using '%zd' in the format string
+  
+D:\New folder\PBL2\Libraries\GamePlay\Init\MenuAndBackground.cpp(119,45): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+D:\New folder\PBL2\Libraries\GamePlay\Init\MenuAndBackground.cpp(158,34): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
   PBL2.vcxproj -> D:\New folder\PBL2\x64\Debug\PBL2.exe

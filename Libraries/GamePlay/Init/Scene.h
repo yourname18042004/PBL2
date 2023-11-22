@@ -13,7 +13,6 @@ protected:
 	// đối tượng nhận sự kiện
 	SDL_Event event;
 	HandelEvent Event;
-
 	
 public:
 	

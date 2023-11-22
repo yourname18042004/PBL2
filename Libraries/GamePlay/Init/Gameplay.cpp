@@ -21,7 +21,9 @@ std::vector <FramesObject> Heart;// vector chứa các mạng game
 std::vector<FramesObject> Star;
 
 Box box1;
+
 ScrollHorizontal* volumeBackground = nullptr;
+ScrollHorizontal* volumeSound = nullptr;
 
 int MaxScored = 0;
 int heart = 5;
@@ -50,9 +52,9 @@ void Gameplay::handleEvent()
 	// Nhận sự kiện
 	Event.Handel(event);
 }
-
-void Gameplay::init()
+void Gameplay::init(int *volume)
 {	
+	this->volume = volume;
 	// khởi tạo game 
 	timegame = 0;
 	
@@ -84,9 +86,12 @@ void Gameplay::init()
 
 	box1.init(renderer);
 
-	volumeBackground = new ScrollHorizontal(600, 400, 250, 50, renderer);
-	volumeBackground->setValue(0, 128);
-	volumeBackground->setValue(128);
+	volumeBackground = new ScrollHorizontal(590, 400, 250, 50, renderer);
+
+	
+	/*volumeSound = new ScrollHorizontal(600, 400, 250, 50, renderer);
+	volumeSound->setValue(0, 128);
+	volumeSound->setValue(128);*/
 
 	// cho chạy map
 	isRunning = true;
@@ -94,6 +99,7 @@ void Gameplay::init()
 
 	musicBackground = new LoadMusic(1);
 	musicBackground->addSound("Data//Sound//Ground.mp3");
+
 	soundPause = new LoadMusic(3);
 	soundPause->addSound("Data//Sound//Pause.mp3");
 
@@ -102,15 +108,20 @@ void Gameplay::init()
 void Gameplay::Loop() {
 	Timer::sInit->reset();
 	musicBackground->playSound(-1);
-	
+
+	volumeBackground->setValue(0, 128);
+	volumeBackground->setValue(*(this->volume));
 	//chọn map
 	chooseMap();
 	SDL_ShowCursor(false);//ẩn con trỏ chuột
 	if (*Autorun) SDL_ShowCursor(true);
+
+
 	//vòng lặp gameplay 
 	isRunning = true;
 	Index = -1;
 	while (isRunning && !quit) {
+		
 		//std::cout << timegame << std::endl;
 		handleEvent();//nhận sự kiện
 		update();
@@ -241,9 +252,9 @@ void Gameplay::Loop() {
 
 void Gameplay::update()
 {
-	//MixBackGround.addSound("Data//Sound//Ground.mp3");
-	Timer::sInit->Update();
 	
+	Timer::sInit->Update();
+
 	if(!resume){
 		timegame += Timer::sInit->DeltaTime();
 		ManagerObject.Update(sethit, heart, *Autorun, &timegame);
@@ -277,6 +288,8 @@ void Gameplay::update()
 
 	volumeBackground->MoveCroll(Event.BUTTON_LEFT_PRESS);
 	musicBackground->updateVolume(volumeBackground->getValue());
+	(*volume) = volumeBackground->getValue();
+
 	soundPause->updateVolume(128);
 }
 

@@ -44,6 +44,10 @@ public:
 	void destroy();
 	// Hàm trả về giá trị để xét xem chương trình có tiếp tục chạy nữa hay không
 	bool Running() { return isRunning; }
+
+	int* getVolume() {
+		return &volume;
+	}
 private:
 	Timer* mtimer;
 	SDL_Window* window;
@@ -52,7 +56,7 @@ private:
 	SDL_Event event;
 	// giá trị xet xem cửa sổ đã tắt hay chưa
 	bool isRunning;
-
+	int volume;
 };
 
 #endif // INIT_WINDOW_H

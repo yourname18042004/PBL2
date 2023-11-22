@@ -10,6 +10,7 @@ class ListMap :public Scene {
 	float pos_y_button;
 	int NumofLevel;
 	bool Autorun;
+	int volume;
 public:
 	
 	ListMap(SDL_Renderer* renderer);

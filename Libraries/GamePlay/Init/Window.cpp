@@ -17,7 +17,6 @@ char text[100] = "FLY KILLER SCORE:";// thanh ghi điểm số, ban đầu sẽ 
 
 Window::~Window() {}
 
-
 void Window::init(const char* title, int xpos, int ypos, int width, int height, bool fullscreen)
 {
 	// Tạo cửa sổ và render
@@ -39,28 +38,31 @@ void Window::init(const char* title, int xpos, int ypos, int width, int height, 
 		mtimer = Timer::Init();//Khởi tạo thời gian
 		//khởi tạo menu
 		
+		volume = 128;
+
 		background = new Menu(renderer);
-		background->init();
+		background->init(getVolume());
 		//khởi tạo gameplay
 		gameplay = new Gameplay(renderer);
-		gameplay->init();
+		gameplay->init(getVolume());
 
 		map = new ListMap(renderer);
 		map->init();
 		tool = new Tool(renderer);
 		tool->init();
+
 		gameplay->setChoose(map->getChoose());
 		gameplay->setAutorun(map->getAutorun());
 		gameplay->setNumofLevel(map->Numoflevel());
-		map->setBoolUpdate(tool->getBoolUpdate());
 
+		//std::cout << *getVolume();
+		map->setBoolUpdate(tool->getBoolUpdate());
 		scene2.Push(background);
 		scene2.Push(map);
 		scene2.Push(tool);
 		scene2.NextIndex(0);
 		scene2.Push(gameplay);
 		scene2.Reset();
-
 	}
 	else
 	{
@@ -73,6 +75,7 @@ void Window::update()
 	while (scene2.getNodeIndex() != NULL)
 	{
 		scene2.getNodeIndex()->getData()->Loop();
+
 		if (scene2.getNodeIndex()->getData()->quit) return;
 
 		
@@ -84,7 +87,9 @@ void Window::update()
 			scene2.PreviousIndex();
 			scene2.getNodeIndex()->getData()->Index = -1;
 		}
+		
 	}
+	
 }
 void Window::destroy()
 {

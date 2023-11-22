@@ -16,6 +16,8 @@ protected:
 	FramesObject* FlySuper = nullptr;
 	FramesObject* Goal = nullptr;
 	FramesObject* Line = nullptr;
+	FramesObject* Miss = nullptr;
+	FramesObject* Hit = nullptr;
 	SDL_FRect area;
 	SDL_FRect goal;
 	SDL_FRect line;
@@ -24,6 +26,8 @@ protected:
 	Vector Start;
 	Vector End;
 	float speed;
+	float tHit;
+	float tMiss;
 	
 	float t_to_a; //time to apear
 	float t_to_land;
@@ -56,9 +60,10 @@ public:
 		this->score = score;
 
 		FlyNormal = new FramesObject(&area, "Data//Picture//fly_100_100_200_100.png", renderer, true);
+		
+		
 
 		this->timegame = timegame;
-
 
 		// dat vi tri chi line va goal
 		line.w = 10;
@@ -70,13 +75,16 @@ public:
  		goal.y = End.y + 25;
 		goal.h = height - 50;
 		goal.w = width - 50;
-
+		
+		Miss = new FramesObject(&area, "Data//Edit//Delete_50_50_100_50.png", renderer, true);
 		// dat vi tri xoay cua hinh chu Line
 		linePoint.x = line.w / 2;
 		linePoint.y = line.h;
 
 		Line = new FramesObject(&line, "Data//Picture//Line_100_100_100_100.png", renderer, false);
 		Goal = new FramesObject(&goal, "Data//Picture//Goal_100_100_100_100.png", renderer, false);
+		tHit = -1;
+		tMiss = -1;
 	}
 
 	bool status;
@@ -102,6 +110,17 @@ public:
 
 	}
 	
+	void HIT()
+	{
+		tHit = *timegame + 0.5;
+		tMiss = -1;
+	}
+
+	void MISS()
+	{
+		tMiss = *timegame + 0.1;
+	}
+
 	void Render()
 	{
 		if (*timegame > t_to_a)
@@ -112,6 +131,8 @@ public:
 			Line->Get_Texture((angle * 180) / pi + 90, linePoint);
 			Goal->Get_Texture();
 			FlyNormal->Get_Texture((angle * 180) / pi + 90);
+			if (tHit > *timegame) Hit->Get_Texture();
+			if (tMiss > *timegame) Miss->Get_Texture();
 		}
 	}
 	
@@ -172,6 +193,10 @@ public:
 
 	Vector GetEnd() {
 		return End;
+	}
+
+	SDL_FRect *GetENd() {
+		return &goal;
 	}
 };
 

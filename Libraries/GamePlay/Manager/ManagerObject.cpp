@@ -2,6 +2,9 @@
 #include <Load/LoadMusic.h>
 LoadMusic* music;
 LoadMusic* music2;
+FramesObject* Round = nullptr;
+
+
 
 Manager::Manager() {
 	FlyLinkList = new ObjectLinkList<Fly>();
@@ -26,6 +29,7 @@ void Manager::ReadMap(SDL_Renderer* renderer, int level)
 {
 	std::string path = "Data//Map-dif//Level" +std::to_string(level) + ".txt";
 	ReadFile(FlyLinkList, renderer, timegame, path.c_str());
+	Round = new FramesObject(FlyLinkList->getIndex()->getData()->GetENd(), "Data//Edit//Goal_50_50_50_50.png", renderer, false);
 	sizeStart = FlyLinkList->getSize();
 	sizeEnd = 0;
 }
@@ -50,6 +54,7 @@ void Manager::render(SDL_Renderer* renderer) {
 		FlyLinkList->getIndex()->getData()->Render();
 		FlyLinkList->GoNext();
 	}
+
 	FlyLinkList->resetIndex();
 	racKet->Render();
 }
@@ -73,17 +78,19 @@ void Manager::ManagerFly(bool set, int& heart, bool Autorun, float *timegame) {
 	if (set) {
 		while (!FlyLinkList->setIndex() && !FlyLinkList->isEmpty()) {
 			if (!Autorun) {
-				Fly* fly = FlyLinkList->getIndex()->getData();
+				Fly* fly = FlyLinkList->getIndex()->getData(); 
 				if (fly->getStatus() && Collision(fly->GetArea(), racKet->GetArea()) && racKet->GetHit()) {
 					
 					if (!FlyLinkList->getIndex()->getData()->status) {
 						music2->playSound(0);
 						heart--; // tru mang
+						FlyLinkList->getIndex()->getData()->MISS();
 						break;
 					}
 					else {
 						music->playSound(0);
 						scored += FlyLinkList->getIndex()->getData()->Getscore();
+						FlyLinkList->getIndex()->getData()->HIT();
 						FlyLinkList->deleteNode();
 						FlyLinkList->resetIndex();
 						sizeEnd++;
@@ -126,8 +133,6 @@ void Manager::Reset() {
 			FlyLinkList->resetIndex();
 		}
 }
-
-
 float Manager::getPercent()
 {
 	return 100 * ((float)sizeEnd) / (float)sizeStart;

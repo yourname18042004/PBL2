@@ -8,11 +8,13 @@
 #include "Load/LoadMusic.h"
 
 class Menu:public Scene {
+	int *volume;
 	
 public:
 	Menu(SDL_Renderer* renderer);
 	~Menu();
-	void init();
+	void init(int *volume);
+
 	virtual void Loop();
 	// Hàm nhận sự kiện
 	virtual void handleEvent();
@@ -24,7 +26,7 @@ public:
 	virtual void destroy();
 	// Hàm trả về giá trị để xét xem chương trình có tiếp tục chạy nữa hay không
 	virtual bool Running() { return isRunning; }
-
+	virtual void init() {} 
 };
 
 #endif

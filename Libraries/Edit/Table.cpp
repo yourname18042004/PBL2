@@ -97,7 +97,7 @@ void Table::DeleteButton(int index)
 }
 void Table::DeleteFly(int index)
 {
-	if (*fly == (*flys)[index])
+	if (index != 0 && *fly == (*flys)[index])
 	{
 		(*fly)->unPick();
 		*fly = (*flys)[index - 1];

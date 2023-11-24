@@ -194,16 +194,23 @@ public:
 		{
 			int x, y;
 			SDL_GetMouseState(&x, &y);
+			
 			if (Event->BUTTON_LEFT)
 			{
 				delta_x = x - Start.x;
 				delta_y = y - Start.y;
 			}
-			
-			Start.x = x - delta_x;
-			Start.y = y - delta_y;
 
-			UpdateFly();
+			
+			int tmpx = x - delta_x;
+			int tmpy = y - delta_y;
+			if (tmpx > 0 && tmpy > 0 && tmpx < 1440 * 0.8 - 50 && tmpy < 720 * 0.8 - 50)
+			{
+				Start.x = tmpx;
+				Start.y = tmpy;
+				UpdateFly();
+			}
+			
 		}
 	}
 
@@ -224,10 +231,14 @@ public:
 				delta_y = y - End.y;
 			}
 
-			End.x = x - delta_x;
-			End.y = y - delta_y;
-
-			UpdateFly();
+			int tmpx = x - delta_x;
+			int tmpy = y - delta_y;
+			if (tmpx > 0 && tmpy > 0 && tmpx < 1440 * 0.8 - 50 && tmpy < 720 * 0.8 - 50)
+			{
+				End.x = tmpx;
+				End.y = tmpy;
+				UpdateFly();
+			}
 		}
 	}
 

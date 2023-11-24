@@ -1,15 +1,15 @@
-D:\New folder\PBL2\Libraries\Edit\ButtonTable.cpp;D:\New folder\PBL2\x64\Debug\ButtonTable.obj
-D:\New folder\PBL2\Libraries\Edit\FlyEdit.cpp;D:\New folder\PBL2\x64\Debug\FlyEdit.obj
-D:\New folder\PBL2\Libraries\Edit\ScrollBar.cpp;D:\New folder\PBL2\x64\Debug\ScrollBar.obj
-D:\New folder\PBL2\Libraries\Edit\Table.cpp;D:\New folder\PBL2\x64\Debug\Table.obj
-D:\New folder\PBL2\Libraries\GamePlay\Animation\Animation.cpp;D:\New folder\PBL2\x64\Debug\Animation.obj
-D:\New folder\PBL2\Libraries\GamePlay\Animation\FramesObject.cpp;D:\New folder\PBL2\x64\Debug\FramesObject.obj
-D:\New folder\PBL2\Libraries\GamePlay\Init\Gameplay.cpp;D:\New folder\PBL2\x64\Debug\Gameplay.obj
-D:\New folder\PBL2\Libraries\GamePlay\Init\Listmap.cpp;D:\New folder\PBL2\x64\Debug\Listmap.obj
-D:\New folder\PBL2\Libraries\GamePlay\Init\ToolEdit.cpp;D:\New folder\PBL2\x64\Debug\ToolEdit.obj
-D:\New folder\PBL2\Libraries\GamePlay\Init\Window.cpp;D:\New folder\PBL2\x64\Debug\Window.obj
-D:\New folder\PBL2\Libraries\GamePlay\Init\MenuAndBackground.cpp;D:\New folder\PBL2\x64\Debug\MenuAndBackground.obj
-D:\New folder\PBL2\Libraries\GamePlay\Manager\ManagerObject.cpp;D:\New folder\PBL2\x64\Debug\ManagerObject.obj
-D:\New folder\PBL2\Libraries\GamePlay\Object\Object.cpp;D:\New folder\PBL2\x64\Debug\Object.obj
-D:\New folder\PBL2\Libraries\GamePlay\Time_vector\Timer.cpp;D:\New folder\PBL2\x64\Debug\Timer.obj
-D:\New folder\PBL2\Main.cpp;D:\New folder\PBL2\x64\Debug\Main.obj
+D:\C++\PBL2\Libraries\Edit\ButtonTable.cpp;D:\C++\PBL2\x64\Debug\ButtonTable.obj
+D:\C++\PBL2\Libraries\Edit\FlyEdit.cpp;D:\C++\PBL2\x64\Debug\FlyEdit.obj
+D:\C++\PBL2\Libraries\Edit\ScrollBar.cpp;D:\C++\PBL2\x64\Debug\ScrollBar.obj
+D:\C++\PBL2\Libraries\Edit\Table.cpp;D:\C++\PBL2\x64\Debug\Table.obj
+D:\C++\PBL2\Libraries\GamePlay\Animation\Animation.cpp;D:\C++\PBL2\x64\Debug\Animation.obj
+D:\C++\PBL2\Libraries\GamePlay\Animation\FramesObject.cpp;D:\C++\PBL2\x64\Debug\FramesObject.obj
+D:\C++\PBL2\Libraries\GamePlay\Init\Gameplay.cpp;D:\C++\PBL2\x64\Debug\Gameplay.obj
+D:\C++\PBL2\Libraries\GamePlay\Init\Listmap.cpp;D:\C++\PBL2\x64\Debug\Listmap.obj
+D:\C++\PBL2\Libraries\GamePlay\Init\ToolEdit.cpp;D:\C++\PBL2\x64\Debug\ToolEdit.obj
+D:\C++\PBL2\Libraries\GamePlay\Init\Window.cpp;D:\C++\PBL2\x64\Debug\Window.obj
+D:\C++\PBL2\Libraries\GamePlay\Init\MenuAndBackground.cpp;D:\C++\PBL2\x64\Debug\MenuAndBackground.obj
+D:\C++\PBL2\Libraries\GamePlay\Manager\ManagerObject.cpp;D:\C++\PBL2\x64\Debug\ManagerObject.obj
+D:\C++\PBL2\Libraries\GamePlay\Object\Object.cpp;D:\C++\PBL2\x64\Debug\Object.obj
+D:\C++\PBL2\Libraries\GamePlay\Time_vector\Timer.cpp;D:\C++\PBL2\x64\Debug\Timer.obj
+D:\C++\PBL2\Main.cpp;D:\C++\PBL2\x64\Debug\Main.obj

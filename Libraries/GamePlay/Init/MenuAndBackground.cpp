@@ -5,6 +5,7 @@ FramesObject *background;
 FramesObject* introduction1 = nullptr;
 FramesObject* introduction2 = nullptr;
 FramesObject* Options = nullptr;
+FramesObject* quitNote = nullptr;
 
 Buttons* buttonStart = nullptr;
 Buttons* buttonTool = nullptr;
@@ -15,9 +16,14 @@ Buttons* MusicOptions = nullptr;
 Buttons* backOptions = nullptr;
 Buttons* next = nullptr;
 Buttons* Back = nullptr;
+Buttons* quitNo = nullptr;
+Buttons* quitYes = nullptr;
+
+Text Question;
 
 int introduceStatus;
 bool musicOptions = false;
+bool questionQuit = false;
 
 ScrollHorizontal* volumeBackground_menu = nullptr; 
 
@@ -35,6 +41,8 @@ void Menu::init(int *volume) {
 	introduction1 = new FramesObject(new SDL_FRect{ 10,10,1400,700 }, "Data//Picture//Introducetion_2200_1100_2200_1100.png", renderer, false);
 	introduction2 = new FramesObject(new SDL_FRect{ 10,10,1400,700 }, "Data//Picture//Introduction_2200_1100_2200_1100.png", renderer, false);
 	Options = new FramesObject(new SDL_FRect{ 450,200,600,400 }, "Data//Picture//Box_300_200_600_200.png", renderer, false);
+	quitNote = new FramesObject(new SDL_FRect{ 450,200,700,200 }, "Data//Picture//ScoreTab_600_100_600_100.png", renderer, false);
+
 
 	buttonStart = new Buttons(880,520, 280, 85, "Data//Picture//Button_350_100_700_100.png", renderer);
 	buttonEnd = new Buttons(880, 620, 280, 85, "Data//Picture//ButtonEnd_350_100_700_100.png", renderer);
@@ -44,8 +52,11 @@ void Menu::init(int *volume) {
 	backOptions = new Buttons(980, 250, 100, 100, "Data//Picture//ButtonBack_100_100_200_100.png", renderer);
 	next = new Buttons(680, 600, 75, 75, "Data//Picture//Next_50_50_100_50.png", renderer);
 	Back = new Buttons(580, 600, 75, 75, "Data//Picture//Back_50_50_100_50.png", renderer);
-	MusicOptions = new Buttons(40, 660, 100, 100, "Data//Picture//music_100_100_200_100.png", renderer);
-	
+	MusicOptions = new Buttons(80, 660, 100, 100, "Data//Picture//music_100_100_200_100.png", renderer);
+	quitNo = new Buttons(730, 380, 100, 100, "Data//Picture//ButtonBack_100_100_200_100.png", renderer);
+	quitYes = new Buttons(830, 380, 100, 100, "Data//Picture//ButtonEnd_100_100_200_100.png", renderer);
+
+	Question.init(600, 250, 400, 60, "Data//Galhau_Regular.ttf", 50, { 255,0,0, 255 }, "Are you sure you want to quit?", renderer);
 
 	backgroundMusic = new LoadMusic(4);
 	backgroundMusic->addSound("Data//Sound//Ground.mp3");
@@ -72,7 +83,7 @@ void Menu::handleEvent()
 
 void Menu::update() {
 	
-	if (introduceStatus == 0 && !musicOptions) {
+	if (introduceStatus == 0 && !musicOptions && !questionQuit) {
 		buttonStart->Setclick(Event.BUTTON_LEFT);
 		buttonEnd->Setclick(Event.BUTTON_LEFT);
 		buttonTool->Setclick(Event.BUTTON_LEFT);
@@ -83,7 +94,7 @@ void Menu::update() {
 		
 		MusicOptions->Setclick(Event.BUTTON_LEFT);
 	}
-	std::cout << introduceStatus << std::endl;
+
 	if (next->Getclick()) {
 		introduceStatus = 2;
 	}
@@ -96,7 +107,9 @@ void Menu::update() {
 		Back->Setclick(Event.BUTTON_LEFT);
 		if (backIntro->Getclick()) introduceStatus = 0;
 	}
-	if (buttonEnd->Getclick()) quit = true;
+	if (buttonEnd->Getclick()) {
+		questionQuit = true;
+	}
 	if (buttonStart->Getclick()) {
 		isRunning = false;
 		Index = 0;
@@ -113,8 +126,12 @@ void Menu::update() {
 		backOptions->Setclick(Event.BUTTON_LEFT);
 		if (backOptions->Getclick()) musicOptions = false;
 	}
-	
-	
+	if (questionQuit) {
+		quitNo->Setclick(Event.BUTTON_LEFT);
+		quitYes->Setclick(Event.BUTTON_LEFT);
+	}
+	if (quitYes->Getclick()) quit = true;
+	if (quitNo->Getclick()) questionQuit = false;
 	backgroundMusic->updateVolume(volumeBackground_menu->getValue());
 	(*volume) = volumeBackground_menu->getValue();
 }
@@ -145,7 +162,12 @@ void Menu::render() {
 		volumeBackground_menu->Render();
 		backOptions->Render();
 	}
-	
+	if (questionQuit) {
+		quitNote->Get_Texture();
+		quitNo->Render();
+		quitYes->Render();
+		Question.render();
+	}
 	SDL_RenderPresent(renderer);
 }
 void Menu::destroy() {

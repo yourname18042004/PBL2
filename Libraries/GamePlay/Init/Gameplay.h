@@ -13,6 +13,7 @@ private:
 	bool* Autorun;
 	int* NumberOflevel;
 	int *volume;
+
 public:
 	Gameplay(SDL_Renderer* renderer);
 	~Gameplay();
@@ -42,6 +43,7 @@ public:
 	void setNumofLevel(int* NumofLevel) {
 		this->NumberOflevel = NumofLevel;
 	}
+	
 	void chooseMap();
 
 };

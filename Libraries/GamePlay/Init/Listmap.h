@@ -5,12 +5,15 @@
 
 
 class ListMap :public Scene {
+	
 	int choose;
 	bool* UpdateIfAddMap;
 	float pos_y_button;
 	int NumofLevel;
 	bool Autorun;
 	int volume;
+
+	bool setDelete;
 public:
 	
 	ListMap(SDL_Renderer* renderer);
@@ -32,6 +35,7 @@ public:
 	int* getChoose() { return &choose; }
 	bool* getAutorun() { return &Autorun; }
 	int* Numoflevel() { return &NumofLevel; }
+	void DeleteMap(int i);
 	void setBoolUpdate(bool* set)
 	{
 		UpdateIfAddMap = set;

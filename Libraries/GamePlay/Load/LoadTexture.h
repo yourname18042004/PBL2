@@ -21,7 +21,7 @@ public:
 			SDL_FreeSurface(image);
 			return texture;
 		}
-		else std::cout << "Dell tim thay duong dan " << file << std::endl;
+		else std::cout << "Khong tim thay duong dan " << file << std::endl;
 		return nullptr;
 	}
 };

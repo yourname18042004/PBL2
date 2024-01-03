@@ -11,6 +11,8 @@
 #include <string>
 #include <FlyEdit.h>
 #include <FileOut.h>
+#include <TexBox.h>
+#include <Frame.h>
 
 
 class Tool :public Scene {
@@ -25,12 +27,13 @@ private:
 	void UpdateScroll(); // update thanh cuon
 	void UpdateContent(); // update hien thi chu
 	void UpdateFly(); // update fly
+	void UpdateFrame();
 
 	void RenderButton(); // render button
 	void RenderScroll(); // render thanh cuon
 	void RenderContent(); // render hien thi chu
 	void RenderFly(); // render fly
-	
+	void RenderFrame();
 public:
 	Tool(SDL_Renderer* renderer);
 	~Tool();

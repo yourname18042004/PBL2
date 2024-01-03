@@ -54,7 +54,7 @@ void Window::init(const char* title, int xpos, int ypos, int width, int height, 
 		gameplay->setChoose(map->getChoose());
 		gameplay->setAutorun(map->getAutorun());
 		gameplay->setNumofLevel(map->Numoflevel());
-
+		//gameplay->SetMap(map->getMap());
 		//std::cout << *getVolume();
 		map->setBoolUpdate(tool->getBoolUpdate());
 		scene2.Push(background);

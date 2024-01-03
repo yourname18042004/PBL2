@@ -20,7 +20,10 @@ Content Text_Time_Fly_Pause;
 Content Text_Speed;
 Content Text_Score;
 
+
 Table* table = nullptr;
+
+Frame* box;
 
 FramesObject* editArea = nullptr;
 
@@ -63,6 +66,8 @@ void Tool::init() {
 	Text_Speed.init(1150, 150, 400, 20, "Data//Galhau_Regular.ttf", 25, { 0,0,0, 255 }, "0", renderer);
 	Text_Score.init(1150, 200, 20, 20, "Data//Galhau_Regular.ttf", 25, { 0,0,0, 255 }, "0", renderer);
 
+	box = new Frame(200, 100, 1000, 400, renderer);
+
 	// ruoi
 	flys.push_back(new FlyEdit(100, 100, 70, 70, 200, 200, 0, 5, 100, renderer, 100, &TimeEdit, &Event));
 	
@@ -99,6 +104,7 @@ void Tool::update()
 	UpdateScroll();
 	UpdateContent();
 	UpdateFly();
+	UpdateFrame();
 
 	if (toolback->Getclick()) 
 	{
@@ -117,9 +123,11 @@ void Tool::render()
 	RenderScroll();
 	RenderContent();
 	RenderFly();
-
+	
 	table->render();
 	
+	RenderFrame();
+
 	SDL_RenderPresent(renderer);
 }
 void Tool::destroy() 
@@ -181,7 +189,6 @@ void Tool::UpdateScroll()
 	else if (!TimeEditRun) TimeEdit = Timing->getValue();
 
 }
-
 void Tool::UpdateContent()
 {
 	Text_Timing.update(200, 600, 20, 20, "Data//Galhau_Regular.ttf", 25, { 0, 0,0, 255 }, toClock(Timing->getValue()).c_str());
@@ -189,7 +196,6 @@ void Tool::UpdateContent()
 	Text_Speed.update(1160, 165, 400, 20, "Data//Galhau_Regular.ttf", 25, { 0,0,0, 255 }, toStr(Speed->getValue(), "Speed: ").c_str());
 	Text_Score.update(1160, 245, 20, 20, "Data//Galhau_Regular.ttf", 25, { 0,0,0, 255 }, toStr(Score->getValue(), "Score: ").c_str());
 }
-
 void Tool::UpdateFly()
 {
 	// neu mot con ruoi dc chon thi cac gia tri cua thanh cuon pause, speed, score, thoi gian bat dau chay
@@ -224,6 +230,11 @@ void Tool::UpdateFly()
 	for(int i = 0; i < flys.size(); ++i)
 		flys[i]->move();
 }
+void Tool::UpdateFrame()
+{
+	box->Update(Event);
+}
+
 
 void Tool::RenderButton()
 {
@@ -253,4 +264,8 @@ void Tool::RenderFly()
 {
 	for (int i = 0; i < flys.size(); ++i)
 		flys[i]->Render();
+}
+void Tool::RenderFrame()
+{
+	box->Render();
 }

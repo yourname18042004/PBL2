@@ -93,6 +93,12 @@
     <ClCompile Include="Libraries\Edit\ButtonTable.cpp">
       <Filter>Header Files\Edit</Filter>
     </ClCompile>
+    <ClCompile Include="Libraries\Edit\TexBox.cpp">
+      <Filter>Header Files\Edit</Filter>
+    </ClCompile>
+    <ClCompile Include="Libraries\Edit\Frame.cpp">
+      <Filter>Header Files\Edit</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Libraries\GamePlay\Object\Fly.h">
@@ -187,6 +193,12 @@
     </ClInclude>
     <ClInclude Include="Libraries\GamePlay\Manager\Box.h">
       <Filter>Header Files\GamePlay\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="Libraries\Edit\TexBox.h">
+      <Filter>Header Files\Edit</Filter>
+    </ClInclude>
+    <ClInclude Include="Libraries\Edit\Frame.h">
+      <Filter>Header Files\Edit</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

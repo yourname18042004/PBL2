@@ -9,6 +9,7 @@
 #include <Data Structure/Linklist.h>
 #include "HandelEvent.h"
 #include <cstdlib>
+#include <string.h>
 #include <Time_vector/Timer.h>
 #include <Manager/Docfile.h>
 

@@ -141,10 +141,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Libraries\Edit\Frame.cpp" />
     <ClCompile Include="Libraries\Edit\ButtonTable.cpp" />
     <ClCompile Include="Libraries\Edit\FlyEdit.cpp" />
     <ClCompile Include="Libraries\Edit\ScrollBar.cpp" />
     <ClCompile Include="Libraries\Edit\Table.cpp" />
+    <ClCompile Include="Libraries\Edit\TexBox.cpp" />
     <ClCompile Include="Libraries\GamePlay\Animation\Animation.cpp" />
     <ClCompile Include="Libraries\GamePlay\Animation\FramesObject.cpp" />
     <ClCompile Include="Libraries\GamePlay\Init\Gameplay.cpp" />
@@ -158,12 +160,14 @@
     <ClCompile Include="Main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Libraries\Edit\Frame.h" />
     <ClInclude Include="Libraries\Edit\ButtonTable.h" />
     <ClInclude Include="Libraries\Edit\Content.h" />
     <ClInclude Include="Libraries\Edit\FileOut.h" />
     <ClInclude Include="Libraries\Edit\FlyEdit.h" />
     <ClInclude Include="Libraries\Edit\ScrollBar.h" />
     <ClInclude Include="Libraries\Edit\Table.h" />
+    <ClInclude Include="Libraries\Edit\TexBox.h" />
     <ClInclude Include="Libraries\GamePlay\Animation\Animation.h" />
     <ClInclude Include="Libraries\GamePlay\Animation\FramesObject.h" />
     <ClInclude Include="Libraries\GamePlay\Data Structure\Linklist.h" />

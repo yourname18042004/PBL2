@@ -15,9 +15,13 @@ public:
 	int MOUSE_X = 0;
 	int MOUSE_Y = 0;
 
-	void Handel(SDL_Event event)
-	{
+	const Uint8 *Key = SDL_GetKeyboardState(NULL);;
 
+	SDL_Event event;
+
+	void Handel(SDL_Event& event)
+	{
+		this->event = event;
 		if (BUTTON_LEFT) BUTTON_LEFT = false;
 		if (event.type == SDL_MOUSEBUTTONUP)
 		{
@@ -49,6 +53,11 @@ public:
 			crossUp = false;
 			crossDown = false;
 		}
+	}
+
+	bool getBachSpace()
+	{
+		return Key[SDL_SCANCODE_BACKSPACE];
 	}
 };
 

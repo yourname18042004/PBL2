@@ -1,12 +1,13 @@
 ﻿#include "Listmap.h"
 
-
-std::vector <Buttons*> level;
+std::vector <Buttons*> MapLevel;
+std::vector <std::pair<Buttons*, Buttons*>> CustomMap;
 std::vector <Content> content;
 
 Buttons* yes = nullptr;
 Buttons* no = nullptr;
 Buttons* backMenu = nullptr;
+Buttons* setDeleteMap = nullptr;
 FramesObject* background2 = nullptr;
 FramesObject* Box = nullptr;
 
@@ -29,6 +30,9 @@ void ListMap::init() {
 	no = new Buttons(540, 550, 150, 70, "Data//Picture//No_350_100_700_100.png", renderer);
 	Box = new FramesObject(new SDL_FRect{ 230, 400, 450.0f, 300.0f }, "Data//Picture//Box_300_200_600_200.png", renderer, false);
 	
+	setDeleteMap = new Buttons(1290, 670, 150, 150, "Data//Picture//ButtonBack_100_100_200_100.png", renderer);
+	setDelete = false;
+
 	backMenu = new Buttons(1390, 670, 150, 150, "Data//Picture//ButtonBack_100_100_200_100.png", renderer);
 
 	textAutorun.init(330,450,250,50, "Data//Galhau_Regular.ttf", 25, { 255,0,0, 255 }, "AUTORUN?", renderer);
@@ -39,18 +43,8 @@ void ListMap::init() {
 	Autorun = false;
 	pos_y_button = 50;
 	RacketChoose = new FramesObject(new SDL_FRect{ Racketpos, 570, 100.0, 100.0 }, "Data//Picture//Racketchoose_100_100_100_100.png", renderer, false);
-	FILE* p;
-	p = fopen("Data//Map-dif//ManagerMap.txt", "r");
-	fscanf(p, "%d", &NumofLevel);
-	fclose(p);
-	for (int i = 0; i < NumofLevel; i++) {
-		level.push_back(new Buttons(980, 320, 280, 85, "Data//Picture//Level_350_100_700_100.png", renderer));
-		Content tmp;
-		std::string str = "LEVEL " + std::to_string(i + 1);
-		tmp.init(980, 320, 50, 50, "Data//Galhau_Regular.ttf", 50, { 0, 0,0, 255 }, str.c_str(), renderer);
-		content.push_back(tmp);
-	}
 	
+	updateMap();
 }
 void ListMap::Loop() {
 	isRunning = true;
@@ -77,23 +71,40 @@ void ListMap::updateMap()
 	int k;
 	p = fopen("Data//Map-dif//ManagerMap.txt", "r");
 	fscanf(p, "%d", &k);
-	fclose(p);
 	if (NumofLevel != k)
 	{
 		std::cout << " update map";
 		NumofLevel = k;
-		level.clear();
+		CustomMap.clear();
+		MapLevel.clear();
 
 		content.clear();
 
-		for (int i = 0; i < NumofLevel; i++) {
-			level.push_back(new Buttons(980, 320, 280, 85, "Data//Picture//Level_350_100_700_100.png", renderer));
+		for (int i = 0; i < 5; i++)
+		{
+			MapLevel.push_back(new Buttons(980, 320, 280, 85, "Data//Picture//Level_350_100_700_100.png", renderer));
+
+			Content tmp;
+			std::string str = "LEVEL " + std::to_string(i + 1);
+			tmp.init(980, 320, 50, 50, "Data//Galhau_Regular.ttf", 50, { 0, 0, 0, 255 }, str.c_str(), renderer);
+			content.push_back(tmp);
+		}
+
+		for (int i = 5; i < NumofLevel; i++) {
+			char path[100];
+			CustomMap.push_back
+			({ 
+				new Buttons(980, 320, 280, 85, "Data//Picture//Level_350_100_700_100.png", renderer), 
+				new Buttons(1150, 320, 50, 50, "Data//Edit//Delete_50_50_100_50.png", renderer)
+			});
 			Content tmp;
 			std::string str = "LEVEL " + std::to_string(i + 1);
 			tmp.init(980, 320, 50, 50, "Data//Galhau_Regular.ttf", 50, { 0, 0, 0, 255 }, str.c_str(), renderer);
 			content.push_back(tmp);
 		}
 	}
+	fclose(p);
+
 }
 
 // Hàm khởi tạo của sổ
@@ -105,34 +116,68 @@ void ListMap::update() {
 		*UpdateIfAddMap = !(*UpdateIfAddMap);
 	}
 
-	//delete RacketChoose;
-	//RacketChoose = new FramesObject(new SDL_FRect{ Racketpos, 570, 100.0, 100.0 }, "Data//Picture//Racketchoose_100_100_100_100.png", renderer, false);
-	
 	if (Event.crossUp && pos_y_button + NumofLevel * 100 > 720) pos_y_button -= 30.0f;
 	if (Event.crossDown && pos_y_button < 50) pos_y_button += 30.0f;
-	//std::cout << pos_y_button << std::endl;
-	for (int i = 0; i < NumofLevel; i++)
+	
+	int index = 0;
+
+	for (int i = 0; i < 5; ++i)
 	{
-		level[i]->setDest(level[i]->getDest().x, pos_y_button + i * 100);
-		level[i]->Setclick(Event.BUTTON_LEFT);
-		if (level[i]->Getclick()) {
-			Index = 0;
-			choose = i + 1;
-			isRunning = false;
+		MapLevel[i]->setDest(MapLevel[i]->getDest().x, pos_y_button + index * 100);
+		if (setDelete == false)
+		{
+			MapLevel[i]->Setclick(Event.BUTTON_LEFT);
+			if (MapLevel[i]->Getclick()) {
+				Index = 0;
+				choose = i + 1;
+				isRunning = false;
+			}
 		}
 
-		content[i].update(900, pos_y_button + i * 100 + 20);
-		content[i].update(CollisionButton(level[i]->getDest()));
+		content[i].update(900, pos_y_button + index * 100 + 20);
+		content[i].update(CollisionButton(MapLevel[i]->getDest()));
+		++index;
+	}
+	
+	for (int i = 0; i < NumofLevel - 5; i++)
+	{
+		CustomMap[i].first->setDest(CustomMap[i].first->getDest().x, pos_y_button + index * 100);
+		if (setDelete == false)
+		{
+			CustomMap[i].first->Setclick(Event.BUTTON_LEFT);
+			if (CustomMap[i].first->Getclick()) {
+				Index = 0;
+				choose = 5 + i + 1;
+				isRunning = false;
+			}
+		}
+		if(setDelete == true)
+		{
+			CustomMap[i].second->setDest(CustomMap[i].second->getDest().x, pos_y_button + index * 100);
+			CustomMap[i].second->Setclick(Event.BUTTON_LEFT);
+			if (CustomMap[i].second->Getclick())
+			{
+				DeleteMap(i);
+			}
+		}
+
+		content[i + 5].update(900, pos_y_button + index * 100 + 20);
+		content[i + 5].update(CollisionButton(CustomMap[i].first->getDest()));
+		index++;
 	}
 	
 	yes->Setclick(Event.BUTTON_LEFT);
 	no->Setclick(Event.BUTTON_LEFT);
 	backMenu->Setclick(Event.BUTTON_LEFT);
-	
+	setDeleteMap->Setclick(Event.BUTTON_LEFT);
+
 	if (backMenu->Getclick()) {
 		back = true;
 		isRunning = false;
-
+	}
+	if (setDeleteMap->Getclick())
+	{
+		setDelete = !setDelete;
 	}
 	if (no->Getclick()) {
 		Autorun = false;
@@ -146,19 +191,70 @@ void ListMap::update() {
 	}
 
 }
+void ListMap::DeleteMap(int index)
+{
+	FILE* f;
+	f = fopen("Data//Map-dif//ManagerMap.txt", "r+");
+	
+	int size;
+	fscanf(f, "%d", &size);
+	std::vector <std::string> map;
+
+	for (int i = 0; i < size; ++i)
+	{
+		char p[50];
+		fscanf(f, "%s", p);
+
+		if (i == index) {
+			std::string tmp = p;
+			tmp = "Data//Map-dif//" + tmp;
+			remove(tmp.c_str());
+			continue;
+		}
+		map.push_back(p);
+		
+		
+	}
+
+	fclose(f);
+
+	NumofLevel = --size;
+
+	f = fopen("Data//Map-dif//ManagerMap.txt", "w");
+
+	fprintf(f, "%d\n", size);
+	
+	for (int i = 0; i < size; ++i)
+	{
+		std::cout << map[i] << "\n";
+		fprintf(f, "%s\n", map[i].c_str());
+	}
+
+	fclose(f);
+
+	updateMap();
+}
+
 // Hàm hiện thị đối tượng
 void ListMap::render() {
 	SDL_RenderClear(renderer);
 
 	background2->Get_Texture();
 
-	for (int i = 0; i < NumofLevel; ++i)
+	for (int i = 0; i < 5; ++i)
 	{
-		level[i]->Render();
+		MapLevel[i]->Render();
 		content[i].render();
+	}
+	for (int i = 0; i < NumofLevel - 5; ++i)
+	{
+		CustomMap[i].first->Render();
+		if(setDelete == true) CustomMap[i].second->Render();
+		content[i + 5].render();
 	}
 
 	backMenu->Render();
+	setDeleteMap->Render();
 	Box->Get_Texture();
 	yes->Render();
 	no->Render();

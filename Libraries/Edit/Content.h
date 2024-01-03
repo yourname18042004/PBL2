@@ -19,7 +19,7 @@ public:
 		const char* font, int size, SDL_Color Color,
 		const char* content, SDL_Renderer* renderer)
 	{
-		texture = Font::LoadCharac(font, size, Color, content, renderer);
+		texture = Font::LoadChar(font, &dest.w, &dest.h, size, Color, content, renderer);
 		this->renderer = renderer;
 		dest.w = w;
 		dest.h = h;
@@ -35,7 +35,7 @@ public:
 	{
 		SDL_Texture* tmp = texture;
 		texture = nullptr;
-		texture = Font::LoadCharac(font, size, Color, content, renderer);
+		texture = Font::LoadChar(font, &dest.w, &dest.h, size, Color, content, renderer);
 		dest.w = w;
 		dest.h = h;
 		dest.x = x;
@@ -43,6 +43,8 @@ public:
 		this->content = content;
 		SDL_DestroyTexture(tmp);
 	}
+
+
 	void render() {
 		SDL_Rect src; 
 		src.x = 0;

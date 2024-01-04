@@ -16,6 +16,14 @@ float Racketpos = 500;
 
 Text textAutorun;
 
+std::string getName(std::string s) {
+	std::string tmp;
+	for (int i = 15; i < s.size(); ++i) {
+		if (s[i] == '.') break;
+		tmp.push_back(s[i]);
+	}
+	return tmp;
+}
 
 ListMap::ListMap(SDL_Renderer* renderer) {
 	this->renderer = renderer;
@@ -30,7 +38,7 @@ void ListMap::init() {
 	no = new Buttons(540, 550, 150, 70, "Data//Picture//No_350_100_700_100.png", renderer);
 	Box = new FramesObject(new SDL_FRect{ 230, 400, 450.0f, 300.0f }, "Data//Picture//Box_300_200_600_200.png", renderer, false);
 	
-	setDeleteMap = new Buttons(1290, 670, 150, 150, "Data//Picture//ButtonBack_100_100_200_100.png", renderer);
+	setDeleteMap = new Buttons(1250, 670, 100, 100, "Data//Picture//bin_100_100_200_100.png", renderer);
 	setDelete = false;
 
 	backMenu = new Buttons(1390, 670, 150, 150, "Data//Picture//ButtonBack_100_100_200_100.png", renderer);
@@ -44,6 +52,8 @@ void ListMap::init() {
 	pos_y_button = 50;
 	RacketChoose = new FramesObject(new SDL_FRect{ Racketpos, 570, 100.0, 100.0 }, "Data//Picture//Racketchoose_100_100_100_100.png", renderer, false);
 	
+	level_default = 7;
+
 	updateMap();
 }
 void ListMap::Loop() {
@@ -80,7 +90,7 @@ void ListMap::updateMap()
 
 		content.clear();
 
-		for (int i = 0; i < 5; i++)
+		for (int i = 0; i < level_default; i++)
 		{
 			MapLevel.push_back(new Buttons(980, 320, 280, 85, "Data//Picture//Level_350_100_700_100.png", renderer));
 
@@ -90,7 +100,7 @@ void ListMap::updateMap()
 			content.push_back(tmp);
 		}
 
-		for (int i = 5; i < NumofLevel; i++) {
+		for (int i = level_default; i < NumofLevel; i++) {
 			char path[100];
 			CustomMap.push_back
 			({ 
@@ -98,7 +108,7 @@ void ListMap::updateMap()
 				new Buttons(1150, 320, 50, 50, "Data//Edit//Delete_50_50_100_50.png", renderer)
 			});
 			Content tmp;
-			std::string str = "LEVEL " + std::to_string(i + 1);
+			std::string str = getName(Map::sInit->m[i]);
 			tmp.init(980, 320, 50, 50, "Data//Galhau_Regular.ttf", 50, { 0, 0, 0, 255 }, str.c_str(), renderer);
 			content.push_back(tmp);
 		}
@@ -121,7 +131,7 @@ void ListMap::update() {
 	
 	int index = 0;
 
-	for (int i = 0; i < 5; ++i)
+	for (int i = 0; i < level_default; ++i)
 	{
 		MapLevel[i]->setDest(MapLevel[i]->getDest().x, pos_y_button + index * 100);
 		if (setDelete == false)
@@ -139,7 +149,7 @@ void ListMap::update() {
 		++index;
 	}
 	
-	for (int i = 0; i < NumofLevel - 5; i++)
+	for (int i = 0; i < NumofLevel - level_default; i++)
 	{
 		CustomMap[i].first->setDest(CustomMap[i].first->getDest().x, pos_y_button + index * 100);
 		if (setDelete == false)
@@ -147,7 +157,7 @@ void ListMap::update() {
 			CustomMap[i].first->Setclick(Event.BUTTON_LEFT);
 			if (CustomMap[i].first->Getclick()) {
 				Index = 0;
-				choose = 5 + i + 1;
+				choose = level_default + i + 1;
 				isRunning = false;
 			}
 		}
@@ -157,12 +167,12 @@ void ListMap::update() {
 			CustomMap[i].second->Setclick(Event.BUTTON_LEFT);
 			if (CustomMap[i].second->Getclick())
 			{
-				DeleteMap(i);
+				DeleteMap(i + level_default);
 			}
 		}
 
-		content[i + 5].update(900, pos_y_button + index * 100 + 20);
-		content[i + 5].update(CollisionButton(CustomMap[i].first->getDest()));
+		content[i + level_default].update(900, pos_y_button + index * 100 + 20);
+		content[i + level_default].update(CollisionButton(CustomMap[i].first->getDest()));
 		index++;
 	}
 	
@@ -193,45 +203,10 @@ void ListMap::update() {
 }
 void ListMap::DeleteMap(int index)
 {
-	FILE* f;
-	f = fopen("Data//Map-dif//ManagerMap.txt", "r+");
+	remove(Map::sInit->m[index].c_str());
+	Map::sInit->deleteMap(index);
+	NumofLevel = Map::sInit->m.size();
 	
-	int size;
-	fscanf(f, "%d", &size);
-	std::vector <std::string> map;
-
-	for (int i = 0; i < size; ++i)
-	{
-		char p[50];
-		fscanf(f, "%s", p);
-
-		if (i == index) {
-			std::string tmp = p;
-			tmp = "Data//Map-dif//" + tmp;
-			remove(tmp.c_str());
-			continue;
-		}
-		map.push_back(p);
-		
-		
-	}
-
-	fclose(f);
-
-	NumofLevel = --size;
-
-	f = fopen("Data//Map-dif//ManagerMap.txt", "w");
-
-	fprintf(f, "%d\n", size);
-	
-	for (int i = 0; i < size; ++i)
-	{
-		std::cout << map[i] << "\n";
-		fprintf(f, "%s\n", map[i].c_str());
-	}
-
-	fclose(f);
-
 	updateMap();
 }
 
@@ -241,16 +216,16 @@ void ListMap::render() {
 
 	background2->Get_Texture();
 
-	for (int i = 0; i < 5; ++i)
+	for (int i = 0; i < level_default; ++i)
 	{
 		MapLevel[i]->Render();
 		content[i].render();
 	}
-	for (int i = 0; i < NumofLevel - 5; ++i)
+	for (int i = 0; i < NumofLevel - level_default; ++i)
 	{
 		CustomMap[i].first->Render();
 		if(setDelete == true) CustomMap[i].second->Render();
-		content[i + 5].render();
+		content[i + level_default].render();
 	}
 
 	backMenu->Render();

@@ -1,8 +1,8 @@
 ﻿#ifndef LISTMAP_H
 #define LISTMAP_H
 #include<Init/Gameplay.h>
-
-
+#include <Time_vector/Map.h>
+#include <cstdio>
 
 class ListMap :public Scene {
 	
@@ -12,6 +12,8 @@ class ListMap :public Scene {
 	int NumofLevel;
 	bool Autorun;
 	int volume;
+
+	int level_default;
 
 	bool setDelete;
 public:

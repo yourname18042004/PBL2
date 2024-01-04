@@ -9,11 +9,12 @@
 
 class Menu:public Scene {
 	int *volume;
+	bool* check;
 	
 public:
 	Menu(SDL_Renderer* renderer);
 	~Menu();
-	void init(int *volume);
+	void init(int *volume, bool *check);
 
 	virtual void Loop();
 	// Hàm nhận sự kiện

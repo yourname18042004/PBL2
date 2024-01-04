@@ -13,9 +13,12 @@ bool sethit = true;//Lúc Resume thì update huỷ collision
 bool resume = false; //Có resume hay không
 
 
+
 Buttons* buttonResume = nullptr; // nút tạm dừng
 FramesObject* background1; // viền game
 FramesObject* ScoreTab; // thanh viền ghi điểm
+
+
 
 std::vector <FramesObject> Heart;// vector chứa các mạng game
 std::vector<FramesObject> Star;
@@ -52,12 +55,20 @@ void Gameplay::handleEvent()
 	// Nhận sự kiện
 	Event.Handel(event);
 }
-void Gameplay::init(int *volume)
+void Gameplay::init(int *volume, bool *check)
 {	
 	this->volume = volume;
+	this->check = check;
+	
 	// khởi tạo game 
 	timegame = 0;
+
+	std::ifstream myfile("Data//Map-dif//highscore.txt");
+
+	myfile.is_open();
+	myfile >> MaxScored;
 	
+	myfile.close();
 	// khởi tạo mạng chơi
 	for (int i = 0; i < heart; i++) {
 		FramesObject* tmp = new FramesObject(new SDL_FRect{ (i + 1) * 30.0f + 900, 0, 50.0f, 50.0f }, 
@@ -79,14 +90,13 @@ void Gameplay::init(int *volume)
 	HightScore.init(250, 300, 200, 50, "Data//Galhau_Regular.ttf", 25, { 255,0,0, 255 }, "YOUR HIGH SCORE IS: ", renderer);
 	
 	//khởi tạo các nút bấm
-	
 	buttonResume = new Buttons(1400, 690, 100, 100, "Data//Picture//ButtonResume_100_100_200_100.png", renderer);
 	background1 = new FramesObject(new SDL_FRect{ 0, 0, 1440.0f, 720.0f }, "Data//Picture//borders_640_320_640_320.png", renderer, false);
 	ScoreTab = new FramesObject(new SDL_FRect{ 0, 0, 300.0f, 70.0f }, "Data//Picture//ScoreTab_600_100_600_100.png", renderer, false);
 
 	box1.init(renderer);
 
-	volumeBackground = new ScrollHorizontal(590, 400, 250, 50, renderer);
+	volumeBackground = new ScrollHorizontal(560, 550, 250, 50, renderer);
 
 	
 	/*volumeSound = new ScrollHorizontal(600, 400, 250, 50, renderer);
@@ -108,7 +118,7 @@ void Gameplay::init(int *volume)
 void Gameplay::Loop() {
 	Timer::sInit->reset();
 	musicBackground->playSound(-1);
-
+	musicBackground->updateVolume(*(this->volume));
 	volumeBackground->setValue(0, 128);
 	volumeBackground->setValue(*(this->volume));
 	//chọn map
@@ -247,6 +257,10 @@ void Gameplay::Loop() {
 			}
 		}
 	}
+	std::ofstream myfile("Data//Map-dif//highscore.txt");
+	myfile.is_open();
+	myfile << MaxScored;
+	myfile.close();
 	musicBackground->stopMusic();
 }
 
@@ -285,11 +299,21 @@ void Gameplay::update()
 	ScoreNote.update(40, 13, 200, 50, "Data//Galhau_Regular.ttf", 25, { 255 ,0 ,0 , 255 }, text2);
 	Noti.update(620, 300, 200, 50, "Data//Galhau_Regular.ttf", 25, { 255,0,0, 255 }, text3);
 	HightScore.update(565,350,300,50, "Data//Galhau_Regular.ttf", 25, { 255,0,0, 255 }, Maxscored);
-
+	if (box1.getclickSoundCheck()) {
+		if (*check) *check = false;
+		else *check = true;
+	}
 	volumeBackground->MoveCroll(Event.BUTTON_LEFT_PRESS);
-	musicBackground->updateVolume(volumeBackground->getValue());
-	(*volume) = volumeBackground->getValue();
-
+	if (!*check) {
+		*volume = 0;
+		volumeBackground->setValue(*volume);
+		musicBackground->updateVolume(*volume);
+	}
+	else {
+		*volume = volumeBackground->getValue();
+		musicBackground->updateVolume(*volume);
+	}
+	
 	soundPause->updateVolume(128);
 }
 
@@ -319,7 +343,7 @@ void Gameplay::render() {
 				
 				if (*choose == *NumberOflevel) {
 
-					box1.renderLast();
+					box1.renderLast(*check);
 					volumeBackground->Render();
 					for (int i = 0; i < int(ManagerObject.getPercent() / 33.3f); i++) {
 						Star[i].Get_Texture();
@@ -330,8 +354,8 @@ void Gameplay::render() {
 				}
 				// render hộp thoại thắng
 				else {
-					box1.renderWin();
-					volumeBackground->Render();
+					box1.renderWin(*check);
+					//volumeBackground->Render();
 					for (int i = 0; i < int(ManagerObject.getPercent() / 33.3f); i++) {
 						Star[i].Get_Texture();
 					}
@@ -341,7 +365,7 @@ void Gameplay::render() {
 				}
 			}
 			else {
-				box1.renderLose();
+				box1.renderLose(*check);
 				volumeBackground->Render();
 				Noti.render();
 				HightScore.render();
@@ -353,15 +377,15 @@ void Gameplay::render() {
 			if (heart > 0) ManagerObject.render(renderer);
 			else {
 				// nếu thua thì không render đối tượng mà render hộp thoại thua
-				box1.renderLose();
-				volumeBackground->Render();
+				box1.renderLose(*check);
+				//volumeBackground->Render();
 				Noti.render();
 				HightScore.render();
 			}
 		}
 		//nếu dừng
 		else {
-			box1.resume();
+			box1.resume(*check);
 			volumeBackground->Render();
 			Noti.render();
 			HightScore.render();
@@ -370,6 +394,7 @@ void Gameplay::render() {
 }
 void Gameplay::destroy()
 {
+	
 	Timer::sInit->release();// xoá thời gian
 	SDL_DestroyRenderer(renderer);
 }

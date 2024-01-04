@@ -99,6 +99,9 @@
     <ClCompile Include="Libraries\Edit\Frame.cpp">
       <Filter>Header Files\Edit</Filter>
     </ClCompile>
+    <ClCompile Include="Libraries\GamePlay\Time_vector\Map.cpp">
+      <Filter>Header Files\GamePlay\Object</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Libraries\GamePlay\Object\Fly.h">
@@ -199,6 +202,9 @@
     </ClInclude>
     <ClInclude Include="Libraries\Edit\Frame.h">
       <Filter>Header Files\Edit</Filter>
+    </ClInclude>
+    <ClInclude Include="Libraries\GamePlay\Time_vector\Map.h">
+      <Filter>Header Files\GamePlay\Object</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -46,6 +46,26 @@ public:
 	SDL_FRect getDest() { return Dest; }
 };
 
+class TrueFalse : public Buttons {
+private:
+	FramesObject* frame2 = nullptr;
+public:
+	TrueFalse(float x, float y, float width, float height, const char* filepath, SDL_Renderer* renderer, const char* filepath2) :
+		Buttons(x,  y,  width, height, filepath, renderer) {
+		SDL_FRect a;
+		a.x = x - width / 2;
+		a.y = y - height / 2;
+		a.h = height;
+		a.w = width;
+		frame2 = new FramesObject(&a, filepath2, renderer, false);
+		
+	}
+	void RenderTrueFalse(bool set) {
+			
+			frame2->Get_Texture();
+		
+	}
 
+};
 
 #endif

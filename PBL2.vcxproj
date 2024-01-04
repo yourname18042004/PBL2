@@ -156,6 +156,7 @@
     <ClCompile Include="Libraries\GamePlay\Init\MenuAndBackground.cpp" />
     <ClCompile Include="Libraries\GamePlay\Manager\ManagerObject.cpp" />
     <ClCompile Include="Libraries\GamePlay\Object\Object.cpp" />
+    <ClCompile Include="Libraries\GamePlay\Time_vector\Map.cpp" />
     <ClCompile Include="Libraries\GamePlay\Time_vector\Timer.cpp" />
     <ClCompile Include="Main.cpp" />
   </ItemGroup>
@@ -190,6 +191,7 @@
     <ClInclude Include="Libraries\GamePlay\Object\Object.h" />
     <ClInclude Include="Libraries\GamePlay\Object\ObjectText.h" />
     <ClInclude Include="Libraries\GamePlay\Object\Racket.h" />
+    <ClInclude Include="Libraries\GamePlay\Time_vector\Map.h" />
     <ClInclude Include="Libraries\GamePlay\Time_vector\Timer.h" />
     <ClInclude Include="Libraries\GamePlay\Time_vector\Vector.h" />
     <ClInclude Include="Libraries\GamePlay\Vacham\CollisionHandling.h" />

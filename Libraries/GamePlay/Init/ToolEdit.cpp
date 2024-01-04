@@ -20,6 +20,7 @@ Content Text_Time_Fly_Pause;
 Content Text_Speed;
 Content Text_Score;
 
+bool set = 0;
 
 Table* table = nullptr;
 
@@ -97,19 +98,28 @@ void Tool::handleEvent()
 
 void Tool::update() 
 {
-	UpdateButton();
+	if (!set) {
+		UpdateButton();
+
+		table->update();
+
+		UpdateScroll();
+		UpdateContent();
+		UpdateFly();
+		
+	}
+	else
+	{
+		UpdateFrame();
+	}
 	
-	table->update();
-
-	UpdateScroll();
-	UpdateContent();
-	UpdateFly();
-	UpdateFrame();
-
 	if (toolback->Getclick()) 
 	{
 		isRunning = false;
 		back = true;
+	}
+	if (set) {
+		box->SetClick(Event.BUTTON_LEFT);
 	}
 }
 
@@ -170,8 +180,8 @@ void Tool::UpdateButton()
 	// xuat file
 	if (outFile->Getclick())
 	{
-		FileOut(&flys, "Data//Map-dif//Level1.txt");
-		UpdateIfAddMap = true;
+		set = 1;
+		
 	}
 }
 void Tool::UpdateScroll()
@@ -233,6 +243,13 @@ void Tool::UpdateFly()
 void Tool::UpdateFrame()
 {
 	box->Update(Event);
+	if (box->getclickOK() && box->getContent().size() != 0) {
+		FileOut(&flys, box->getContent());
+		UpdateIfAddMap = true;
+	}
+	if (box->getclickCancel()) {
+		set = 0;
+	}
 }
 
 
@@ -267,5 +284,6 @@ void Tool::RenderFly()
 }
 void Tool::RenderFrame()
 {
+	if(set)
 	box->Render();
 }

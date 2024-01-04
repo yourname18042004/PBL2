@@ -28,6 +28,7 @@
 #include "Gameplay.h"
 #include "ToolEdit.h"
 #include <Init/Listmap.h>
+#include <Time_vector/Map.h>
 
 // đối tượng nhận và xử lý tất cả các đối tượng sự kiện khác
 
@@ -48,8 +49,12 @@ public:
 	int* getVolume() {
 		return &volume;
 	}
+	bool* getCheck() {
+		return &checkSound;
+	}
 private:
 	Timer* mtimer;
+	Map* vector_map;
 	SDL_Window* window;
 	SDL_Renderer* renderer;
 	// đối tượng nhận sự kiện
@@ -57,6 +62,7 @@ private:
 	// giá trị xet xem cửa sổ đã tắt hay chưa
 	bool isRunning;
 	int volume;
+	bool checkSound;
 };
 
 #endif // INIT_WINDOW_H

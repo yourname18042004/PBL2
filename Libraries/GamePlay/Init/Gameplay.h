@@ -13,12 +13,13 @@ private:
 	bool* Autorun;
 	int* NumberOflevel;
 	int *volume;
+	bool* check;
 
 public:
 	Gameplay(SDL_Renderer* renderer);
 	~Gameplay();
 
-	void init(int *volume);
+	void init(int *volume, bool *check);
 
 	virtual void Loop();
 	// Hàm nhận sự kiện

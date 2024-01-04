@@ -1,5 +1,6 @@
 ﻿#include <Manager/ManagerObject.h>
 #include <Load/LoadMusic.h>
+#include <Time_vector/Map.h>
 LoadMusic* music;
 LoadMusic* music2;
 FramesObject* Round = nullptr;
@@ -27,23 +28,7 @@ void Manager::Add(float* timegame)
 
 void Manager::ReadMap(SDL_Renderer* renderer, int level)
 {
-	std::string path;// = "Data//Map-dif//Level" + std::to_string(level) + ".txt";
-
-	FILE* p;
-	char pat[100];
-	char q[100];
-	p = fopen("Data//Map-dif//ManagerMap.txt", "r");
-	fscanf(p, "%s", q);
-	
-	for (int i = 0; i < level - 1; i++) {
-		fscanf(p, "%s", q);
-	}
-	fscanf(p, "%s", pat);
-	std::string tmp = pat;
-	path = "Data//Map-dif//" + tmp;
-	std::cout << "\n" << path << "\n";
-	fclose(p);
-	ReadFile(FlyLinkList, renderer, timegame, path.c_str());
+	ReadFile(FlyLinkList, renderer, timegame, Map::sInit->m[level - 1].c_str());
 	Round = new FramesObject(FlyLinkList->getIndex()->getData()->GetENd(), "Data//Edit//Goal_50_50_50_50.png", renderer, false);
 	sizeStart = FlyLinkList->getSize();
 	sizeEnd = 0;

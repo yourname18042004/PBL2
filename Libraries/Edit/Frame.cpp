@@ -4,7 +4,7 @@ TextBox* tex;
 
 Frame::Frame(int pos_x, int pos_y, int width, int height, SDL_Renderer* renderer) :
 pos_x(pos_x), pos_y(pos_y), width(width), height(height), renderer(renderer),
-Area(new FramesObject(new SDL_FRect{ float(pos_x), float(pos_y), float(width), float(height) }, "Data/Edit/BackGround_120_60_120_60.png", renderer, false))
+Area(new FramesObject(new SDL_FRect{ float(pos_x), float(pos_y), float(width), float(height) }, "Data/Edit/OutBox_120_60_120_60.png", renderer, false))
 
 {
 	tex = new TextBox(pos_x + width * 0.1f, pos_y + height * 0.3f, width * 0.8f, width * 0.1f, renderer);
@@ -28,6 +28,10 @@ void Frame::Render()
 
 	OK->Render();
 	Cancel->Render();
+}
+std::string Frame::getContent()
+{
+	return tex->getContent();
 }
 
 Frame::~Frame()

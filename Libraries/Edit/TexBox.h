@@ -28,6 +28,11 @@ public:
 	void Update(HandelEvent& event);
 
 	void Render();
+
+	std::string getContent()
+	{
+		return content;
+	}
 };
 
 #endif // !TEXBOX_H

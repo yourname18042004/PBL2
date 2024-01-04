@@ -34,17 +34,25 @@ void Window::init(const char* title, int xpos, int ypos, int width, int height, 
 
 		TTF_Init();
 		isRunning = true;
+
+		std::ifstream myfile("Data//Map-dif//Setting.txt");
+		myfile.is_open();
+		myfile >> checkSound;
+		myfile >> volume;
+		
+		std::cout << volume;
+		myfile.close();
 		
 		mtimer = Timer::Init();//Khởi tạo thời gian
 		//khởi tạo menu
-		
-		volume = 128;
+		vector_map = Map::Init();
+
 
 		background = new Menu(renderer);
-		background->init(getVolume());
+		background->init(getVolume(), getCheck());
 		//khởi tạo gameplay
 		gameplay = new Gameplay(renderer);
-		gameplay->init(getVolume());
+		gameplay->init(getVolume(), getCheck());
 
 		map = new ListMap(renderer);
 		map->init();
@@ -95,6 +103,13 @@ void Window::destroy()
 {
 	mtimer->release();
 	mtimer = NULL;
+	vector_map->release();
+	vector_map = NULL;
+	std::ofstream myfile("Data//Map-dif//Setting.txt");
+	myfile.is_open();
+	myfile << checkSound << std::endl;
+	myfile << volume;
+	myfile.close();
 	SDL_DestroyWindow(window);
 	SDL_DestroyRenderer(renderer);
 }

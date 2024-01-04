@@ -5,8 +5,9 @@
 #include <vector>
 #include <random>
 #include <ctime>
+#include <Time_vector/Map.h>
 
-static void FileOut(std::vector <FlyEdit*>* flys, const char* path)
+static void FileOut(std::vector <FlyEdit*>* flys, std::string path)
 {
 	float k = 0.8f;
 	int count;
@@ -20,7 +21,7 @@ static void FileOut(std::vector <FlyEdit*>* flys, const char* path)
 	std::srand(std::time(0));
 	int ran = std::rand() % 100000000;
 
-	std::string str = "Data//Map-dif//" + std::to_string(ran) + ".txt";
+	std::string str = "Data//Map-dif//" + path + ".txt";
 	f = fopen(str.c_str(), "w");
 	fprintf(f, "%d\n", flys->size());
 	for (int i = 0; i < flys->size(); ++i)
@@ -42,7 +43,8 @@ static void FileOut(std::vector <FlyEdit*>* flys, const char* path)
 	}
 	fclose(f);
 
-
+	Map::sInit->addMap(str);
+/*
 	f = fopen("Data//Map-dif//ManagerMap.txt", "r+");
 
 	int size;
@@ -58,6 +60,7 @@ static void FileOut(std::vector <FlyEdit*>* flys, const char* path)
 
 	fclose(f);
 
+	
 	++size;
 
 	f = fopen("Data//Map-dif//ManagerMap.txt", "w");
@@ -69,10 +72,10 @@ static void FileOut(std::vector <FlyEdit*>* flys, const char* path)
 		std::cout << map[i] << "\n";
 		fprintf(f, "%s\n", map[i].c_str());
 	}
-	std::string tmp = std::to_string(ran) + ".txt";
+	std::string tmp = path + ".txt";
 	fprintf(f, "%s\n", tmp.c_str());
 
-	fclose(f);
+	fclose(f);*/
 }
 
 

@@ -8,7 +8,7 @@ Area(new FramesObject(new SDL_FRect{ float(pos_x), float(pos_y), float(width), f
 
 {
 	tex = new TextBox(pos_x + width * 0.1f, pos_y + height * 0.3f, width * 0.8f, width * 0.1f, renderer);
-	OK = new Buttons(pos_x + width * 0.4f, pos_y + height * 0.7f, width * 0.1f, width * 0.1f, "Data//Edit//Back_50_50_100_50.png", renderer);
+	OK = new Buttons(pos_x + width * 0.4f, pos_y + height * 0.7f, width * 0.1f, width * 0.1f, "Data//Edit//Down_50_50_100_50.png", renderer);
 	Cancel = new Buttons(pos_x + width * 0.6f, pos_y + height * 0.7f, width * 0.1f, width * 0.1f, "Data//Edit//Back_50_50_100_50.png", renderer);
 
 }

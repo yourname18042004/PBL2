@@ -41,6 +41,7 @@ void TextBox::Update(HandelEvent& event)
 	}
 	if(event.event.type == SDL_TEXTINPUT && setPick)
 	{
+		if(content.length() <= 12)
 		content = content + event.event.text.text;
 		frame_content.update(pos_x + 10, pos_y, width, height, "Data//Galhau_Regular.ttf", height, { 0, 0, 0, 255 }, content.c_str());
 	}

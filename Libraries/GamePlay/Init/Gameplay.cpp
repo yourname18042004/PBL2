@@ -7,11 +7,8 @@ Text ScoreNote;// ghi điểm
 Text Noti;// thông báo win game
 Text HightScore;// điểm cao nhất
 
-
-
 bool sethit = true;//Lúc Resume thì update huỷ collision 
 bool resume = false; //Có resume hay không
-
 
 
 Buttons* buttonResume = nullptr; // nút tạm dừng
@@ -108,7 +105,7 @@ void Gameplay::init(int *volume, bool *check)
 	back = false;
 
 	musicBackground = new LoadMusic(1);
-	musicBackground->addSound("Data//Sound//Ground.mp3");
+	musicBackground->addSound("Data//Sound//Nhacgame.mp3");
 
 	soundPause = new LoadMusic(3);
 	soundPause->addSound("Data//Sound//Pause.mp3");
@@ -123,15 +120,14 @@ void Gameplay::Loop() {
 	volumeBackground->setValue(*(this->volume));
 	//chọn map
 	chooseMap();
-	SDL_ShowCursor(false);//ẩn con trỏ chuột
 	if (*Autorun) SDL_ShowCursor(true);
-
+	else SDL_ShowCursor(false);//ẩn con trỏ chuột
 
 	//vòng lặp gameplay 
 	isRunning = true;
 	Index = -1;
 	while (isRunning && !quit) {
-		
+		//std::cout << *choose << " " << *NumberOflevel << std::endl;
 		//std::cout << timegame << std::endl;
 		handleEvent();//nhận sự kiện
 		update();
@@ -197,8 +193,7 @@ void Gameplay::Loop() {
 		}
 		//thắng game		
 		if (ManagerObject.IsEmty()) {
-			
-			SDL_ShowCursor(true);
+			//SDL_ShowCursor(true);
 			if (ManagerObject.scored > 0) {
 				
 				if (*choose == *NumberOflevel) {
@@ -222,14 +217,13 @@ void Gameplay::Loop() {
 					ManagerObject.Reset();
 					isRunning = false;
 				}
-				if (box1.getclickNext()) {
+				if (box1.getclickNext() && *choose < *NumberOflevel) {
 					//qua màn tiếp theo
 					timegame = 0;
 					heart = 5;
 					(*choose)++;
 					chooseMap();
 				}
-
 			}
 			else {
 				sethit = false; // không cho phép đánh fly
@@ -340,11 +334,11 @@ void Gameplay::render() {
 		// thắng game 
 		if (ManagerObject.IsEmty()) {
 			if (ManagerObject.scored > 0) {
-				
-				if (*choose == *NumberOflevel) {
 
+				if (*choose == *NumberOflevel) {
+					
 					box1.renderLast(*check);
-					volumeBackground->Render();
+					//volumeBackground->Render();
 					for (int i = 0; i < int(ManagerObject.getPercent() / 33.3f); i++) {
 						Star[i].Get_Texture();
 					}

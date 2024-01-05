@@ -19,9 +19,15 @@ public:
 
 	SDL_Event event;
 
+	void setClick()
+	{
+		BUTTON_LEFT = false;
+	}
+	
 	void Handel(SDL_Event& event)
 	{
 		this->event = event;
+		BUTTON_LEFT = false;
 		if (BUTTON_LEFT) BUTTON_LEFT = false;
 		if (event.type == SDL_MOUSEBUTTONUP)
 		{

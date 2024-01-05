@@ -28,15 +28,20 @@ void Manager::Add(float* timegame)
 
 void Manager::ReadMap(SDL_Renderer* renderer, int level)
 {
-	ReadFile(FlyLinkList, renderer, timegame, Map::sInit->m[level - 1].c_str());
-	Round = new FramesObject(FlyLinkList->getIndex()->getData()->GetENd(), "Data//Edit//Goal_50_50_50_50.png", renderer, false);
-	sizeStart = FlyLinkList->getSize();
-	sizeEnd = 0;
+	if (level - 1 < Map::sInit->m.size())
+	{
+		ReadFile(FlyLinkList, renderer, timegame, Map::sInit->m[level - 1].c_str());
+		Round = new FramesObject(FlyLinkList->getIndex()->getData()->GetENd(), "Data//Edit//Goal_50_50_50_50.png", renderer, false);
+		sizeStart = FlyLinkList->getSize();
+		sizeEnd = 0;
+	}
+	
 }
 
 void Manager::Update(bool set, int& heart, bool autorun, float *timegame) {
 	UpdatePositionAndVector();
 	FlyLinkList->resetIndex();
+	racKet->set();
 	ManagerFly(set, heart, autorun, timegame);
 	if (!autorun) {
 		racKet->UpdatePositionOfMouse();
@@ -80,7 +85,7 @@ void Manager::ManagerFly(bool set, int& heart, bool Autorun, float *timegame) {
 			if (!Autorun) {
 				Fly* fly = FlyLinkList->getIndex()->getData(); 
 				if (fly->getStatus() && Collision(fly->GetArea(), racKet->GetArea()) && racKet->GetHit()) {
-					
+					racKet->resetRacket();
 					if (!FlyLinkList->getIndex()->getData()->status) {
 						music2->playSound(0);
 						heart--; // tru mang

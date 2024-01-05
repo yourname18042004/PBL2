@@ -10,6 +10,7 @@ private:
 	SDL_FRect area;
 	FramesObject* Racket1 = nullptr;
 	HandelEvent* handleEvent;
+	bool buttonleft = false;
 public:
 	Racket(float pos_x, float pos_y, float width, float height, SDL_Renderer* Render, HandelEvent *handleEvent) : Object(pos_x, pos_y, width, height, Render) 
 	{
@@ -31,9 +32,11 @@ public:
 	}
 	void UpdateRacket()
 	{
-		if (GetHit()) {
+		if (GetHit()) buttonleft = true;
+		if (buttonleft) {
 		
 			Racket1->setRunanimation();
+			buttonleft = false;
 		}
 		Racket1->UpdateFrames();
 
@@ -42,10 +45,19 @@ public:
 	bool GetHit() {
 		return handleEvent->BUTTON_LEFT;
 	}
+	void set()
+	{
+		buttonleft = handleEvent->BUTTON_LEFT;
+	}
+	void resetRacket()
+	{
+		handleEvent->setClick();
+	}
 
 	void Render()
 	{
 		Racket1->Get_Texture();
+		buttonleft = false;
 	}
 	SDL_FRect GetArea() {
 		SDL_FRect tmp;

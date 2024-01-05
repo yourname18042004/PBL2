@@ -1,8 +1,6 @@
-7
-Data//Map-dif//Level1.txt
-Data//Map-dif//Level2.txt
-Data//Map-dif//Level3.txt
-Data//Map-dif//Level4.txt
-Data//Map-dif//Level5.txt
-Data//Map-dif//Level6.txt
-Data//Map-dif//Level8.txt
+5
+Data//Map-dif//LeveL1.txt
+Data//Map-dif//LeveL2.txt
+Data//Map-dif//LeveL3.txt
+Data//Map-dif//LeveL4.txt
+Data//Map-dif//LeveL5.txt

@@ -38,7 +38,7 @@ void ListMap::init() {
 	no = new Buttons(540, 550, 150, 70, "Data//Picture//No_350_100_700_100.png", renderer);
 	Box = new FramesObject(new SDL_FRect{ 230, 400, 450.0f, 300.0f }, "Data//Picture//Box_300_200_600_200.png", renderer, false);
 	
-	setDeleteMap = new Buttons(1250, 670, 100, 100, "Data//Picture//bin_100_100_200_100.png", renderer);
+	setDeleteMap = new Buttons(1390, 550, 100, 100, "Data//Picture//bin_100_100_200_100.png", renderer);
 	setDelete = false;
 
 	backMenu = new Buttons(1390, 670, 150, 150, "Data//Picture//ButtonBack_100_100_200_100.png", renderer);
@@ -52,7 +52,7 @@ void ListMap::init() {
 	pos_y_button = 50;
 	RacketChoose = new FramesObject(new SDL_FRect{ Racketpos, 570, 100.0, 100.0 }, "Data//Picture//Racketchoose_100_100_100_100.png", renderer, false);
 	
-	level_default = 7;
+	level_default = 5;
 
 	updateMap();
 }
@@ -92,7 +92,7 @@ void ListMap::updateMap()
 
 		for (int i = 0; i < level_default; i++)
 		{
-			MapLevel.push_back(new Buttons(980, 320, 280, 85, "Data//Picture//Level_350_100_700_100.png", renderer));
+			MapLevel.push_back(new Buttons(1100, 320, 280, 85, "Data//Picture//Level_350_100_700_100.png", renderer));
 
 			Content tmp;
 			std::string str = "LEVEL " + std::to_string(i + 1);
@@ -104,12 +104,14 @@ void ListMap::updateMap()
 			char path[100];
 			CustomMap.push_back
 			({ 
-				new Buttons(980, 320, 280, 85, "Data//Picture//Level_350_100_700_100.png", renderer), 
-				new Buttons(1150, 320, 50, 50, "Data//Edit//Delete_50_50_100_50.png", renderer)
+				new Buttons(1100, 320, 280, 85, "Data//Picture//Level_350_100_700_100.png", renderer), 
+				new Buttons(930, 320, 50, 50, "Data//Edit//Delete_50_50_100_50.png", renderer)
 			});
 			Content tmp;
 			std::string str = getName(Map::sInit->m[i]);
-			tmp.init(980, 320, 50, 50, "Data//Galhau_Regular.ttf", 50, { 0, 0, 0, 255 }, str.c_str(), renderer);
+			int sizetext = 7 * 50 / (str.size());
+			if (sizetext > 50) sizetext = 50;
+			tmp.init(980, 320, sizetext, sizetext, "Data//Galhau_Regular.ttf", sizetext , { 0, 0, 0, 255 }, str.c_str(), renderer);
 			content.push_back(tmp);
 		}
 	}
@@ -144,7 +146,7 @@ void ListMap::update() {
 			}
 		}
 
-		content[i].update(900, pos_y_button + index * 100 + 20);
+		content[i].update(1020, pos_y_button + index * 100 + 20);
 		content[i].update(CollisionButton(MapLevel[i]->getDest()));
 		++index;
 	}
@@ -171,7 +173,7 @@ void ListMap::update() {
 			}
 		}
 
-		content[i + level_default].update(900, pos_y_button + index * 100 + 20);
+		content[i + level_default].update(1020, pos_y_button + index * 100 + 20);
 		content[i + level_default].update(CollisionButton(CustomMap[i].first->getDest()));
 		index++;
 	}

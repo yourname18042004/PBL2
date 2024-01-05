@@ -1,11 +1,12 @@
 ﻿#include "ToolEdit.h"
 
 Buttons* toolback = nullptr;
-
 Buttons* add = nullptr; // button them doi tuong ruoi
 Buttons* stop = nullptr; // button dung thoi gian chay
 Buttons* start = nullptr; // button bat dau chay thoi gian 
 Buttons* outFile = nullptr; // button xuat file
+
+LoadMusic* background = nullptr;
 
 // thanh cuon
 ScrollHorizontal* Timing = nullptr; // thoi gian chay 
@@ -21,11 +22,15 @@ Content Text_Speed;
 Content Text_Score;
 
 bool set = 0;
+float timelimit = -1;
+float timelimit1 = -1;
 
 Table* table = nullptr;
 
 Frame* box;
 
+FramesObject* Thatbai = nullptr;
+FramesObject* Thanhcong = nullptr;
 FramesObject* editArea = nullptr;
 
 std::vector <FlyEdit*> flys;
@@ -36,10 +41,13 @@ Tool::Tool(SDL_Renderer* renderer) {
 Tool::~Tool() {
 
 }
-void Tool::init() {
+void Tool::init(int *volume) {
+	this->volume = volume;
 	// back ground
 	editArea = new FramesObject(new SDL_FRect{ 0, 0, 1440 * 0.8f, 720 * 0.8f }, "Data/Edit/BackGround_120_60_120_60.png", renderer, false);
-	
+	Thatbai = new FramesObject(new SDL_FRect{ 400, 200, 640, 320 }, "Data/Edit/Trongten_640_320_640_320.png", renderer, false);
+	Thanhcong = new FramesObject(new SDL_FRect{ 400, 200, 640, 320 }, "Data/Edit/Thanhcong_640_320_640_320.png", renderer, false);
+
 	// nut 
 	toolback = new Buttons(1390, 50, 50, 50, "Data//Edit//Back_50_50_100_50.png", renderer);
 	add		= new Buttons(1300, 50, 50, 50, "Data//Edit//Add_50_50_100_50.png", renderer);
@@ -75,6 +83,10 @@ void Tool::init() {
 	fly = flys[0]; fly->Pick();
 
 	table = new Table(1185, 305, 208, 416, &flys, &fly, renderer, &Event);
+
+	background = new LoadMusic(7);
+	background->addSound("Data//Sound//tooledit.mp3");
+	
 
 	// điều kiện thoát và nhảy
 	isRunning = true;
@@ -121,6 +133,7 @@ void Tool::update()
 	if (set) {
 		box->SetClick(Event.BUTTON_LEFT);
 	}
+	background->updateVolume(*(this->volume));
 }
 
 
@@ -142,12 +155,13 @@ void Tool::render()
 }
 void Tool::destroy() 
 {
-
+	
 }
 void Tool::Loop() 
 {
 	Timer::sInit->reset();
 	isRunning = true;
+	background->playSound(-1);
 	while (isRunning && !quit) 
 	{
 		Timer::sInit->Update();
@@ -156,6 +170,7 @@ void Tool::Loop()
 		update();
 		render();
 	}
+	background->stopMusic();
 }
 
 void Tool::UpdateButton() 
@@ -244,12 +259,19 @@ void Tool::UpdateFrame()
 {
 	box->Update(Event);
 	if (box->getclickOK() && box->getContent().size() != 0) {
+
 		FileOut(&flys, box->getContent());
 		UpdateIfAddMap = true;
+		timelimit1 = 10;
+		set = 0;
+	}
+	else if (box->getclickOK() && box->getContent().size() == 0) {
+		timelimit = 10;
 	}
 	if (box->getclickCancel()) {
 		set = 0;
 	}
+
 }
 
 
@@ -260,6 +282,8 @@ void Tool::RenderButton()
 	outFile->Render();
 	if (!TimeEditRun) stop->Render();
 	else start->Render();
+
+	
 
 }
 void Tool::RenderScroll()
@@ -286,4 +310,13 @@ void Tool::RenderFrame()
 {
 	if(set)
 	box->Render();
+
+	if (timelimit >=0 ) {
+		Thatbai->Get_Texture();
+		timelimit -= 0.01;
+	}
+	if (timelimit1 >= 0) {
+		Thanhcong->Get_Texture();
+		timelimit1 -= 0.01;
+	}
 }

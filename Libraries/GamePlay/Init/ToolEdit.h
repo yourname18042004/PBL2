@@ -21,6 +21,7 @@ private:
 	float TimeEdit; // thoi gian game chay trong edit 
 	bool TimeEditRun; // thoi gian edit chay hay ko
 	bool UpdateIfAddMap;
+	int* volume;
 	FlyEdit* fly = nullptr;
 
 	void UpdateButton(); // update button
@@ -37,7 +38,8 @@ private:
 public:
 	Tool(SDL_Renderer* renderer);
 	~Tool();
-	void init();
+	void init(int *volume);
+	virtual void init(){}
 	virtual void Loop();
 	// Hàm nhận sự kiện
 	virtual void handleEvent();

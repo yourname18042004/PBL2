@@ -57,7 +57,7 @@ void Window::init(const char* title, int xpos, int ypos, int width, int height, 
 		map = new ListMap(renderer);
 		map->init();
 		tool = new Tool(renderer);
-		tool->init();
+		tool->init(getVolume());
 
 		gameplay->setChoose(map->getChoose());
 		gameplay->setAutorun(map->getAutorun());

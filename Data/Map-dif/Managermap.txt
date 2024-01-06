@@ -1,6 +1,13 @@
-5
+12
 Data//Map-dif//LeveL1.txt
 Data//Map-dif//LeveL2.txt
 Data//Map-dif//LeveL3.txt
 Data//Map-dif//LeveL4.txt
 Data//Map-dif//LeveL5.txt
+Data//Map-dif//custome.txt
+Data//Map-dif//custome1.txt
+Data//Map-dif//giap.txt
+Data//Map-dif//hard.txt
+Data//Map-dif//thanh.txt
+Data//Map-dif//xoan_oc.txt
+Data//Map-dif//he.txt

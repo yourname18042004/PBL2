@@ -79,15 +79,15 @@ void ListMap::updateMap()
 {
 	FILE* p;
 	int k;
-	p = fopen("Data//Map-dif//ManagerMap.txt", "r");
-	fscanf(p, "%d", &k);
-	if (NumofLevel != k)
+	//NumofLevel = 0;
+	//p = fopen("Data//Map-dif//ManagerMap.txt", "r");
+	//fscanf(p, "%d", &k);
+	if (NumofLevel != Map::sInit->m.size())
 	{
-		std::cout << " update map";
-		NumofLevel = k;
+		
+		NumofLevel = Map::sInit->m.size();
 		CustomMap.clear();
 		MapLevel.clear();
-
 		content.clear();
 
 		for (int i = 0; i < level_default; i++)
@@ -99,7 +99,14 @@ void ListMap::updateMap()
 			tmp.init(980, 320, 50, 50, "Data//Galhau_Regular.ttf", 50, { 0, 0, 0, 255 }, str.c_str(), renderer);
 			content.push_back(tmp);
 		}
-
+		
+		for (int i = level_default; i < NumofLevel-1; ++i) {
+			for (int j = i + 1; j < NumofLevel; ++j) {
+				if (Map::sInit->m[i].compare(Map::sInit->m[j]) > 0) {
+					std::swap(Map::sInit->m[i], Map::sInit->m[j]);
+				}
+			}
+		}
 		for (int i = level_default; i < NumofLevel; i++) {
 			char path[100];
 			CustomMap.push_back
@@ -114,14 +121,20 @@ void ListMap::updateMap()
 			tmp.init(980, 320, sizetext, sizetext, "Data//Galhau_Regular.ttf", sizetext , { 0, 0, 0, 255 }, str.c_str(), renderer);
 			content.push_back(tmp);
 		}
+		CustomMap.push_back
+		({
+			new Buttons(1100, 320, 280, 85, "Data//Picture//Level_350_100_700_100.png", renderer),
+			new Buttons(930, 320, 50, 50, "Data//Edit//Delete_50_50_100_50.png", renderer)
+		});
+		Content tmp; 
+		tmp.init(980, 320, 50, 50, "Data//Galhau_Regular.ttf", 50, { 0, 0, 0, 255 }, "NULL", renderer);
+		content.push_back(tmp);
 	}
-	fclose(p);
-
+	//fclose(p);
 }
 
 // Hàm khởi tạo của sổ
 void ListMap::update() {
-
 	if (*UpdateIfAddMap)
 	{
 		updateMap();
@@ -207,8 +220,9 @@ void ListMap::DeleteMap(int index)
 {
 	remove(Map::sInit->m[index].c_str());
 	Map::sInit->deleteMap(index);
-	NumofLevel = Map::sInit->m.size();
-	
+
+	//NumofLevel = Map::sInit->m.size();
+
 	updateMap();
 }
 

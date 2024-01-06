@@ -63,8 +63,8 @@ public:
 		SDL_FRect tmp;
 		tmp.x = area.x + area.w / 2;
 		tmp.y = area.y + area.h / 2;
-		tmp.h = area.h / 10;
-		tmp.w = area.w / 10;
+		tmp.h = area.h / 7;
+		tmp.w = area.w / 7;
 		return tmp;
 	}
 	void Updateifautorun(Vector EndFly) {

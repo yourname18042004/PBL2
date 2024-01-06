@@ -360,7 +360,7 @@ void Gameplay::render() {
 			}
 			else {
 				box1.renderLose(*check);
-				volumeBackground->Render();
+				//volumeBackground->Render();
 				Noti.render();
 				HightScore.render();
 			}

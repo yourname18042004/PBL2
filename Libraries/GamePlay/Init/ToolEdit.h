@@ -23,6 +23,7 @@ private:
 	bool UpdateIfAddMap;
 	int* volume;
 	FlyEdit* fly = nullptr;
+	std::vector<std::string> sname;
 
 	void UpdateButton(); // update button
 	void UpdateScroll(); // update thanh cuon
@@ -51,7 +52,7 @@ public:
 	virtual void destroy();
 	// Hàm trả về giá trị để xét xem chương trình có tiếp tục chạy nữa hay không
 	virtual bool Running() { return isRunning; }
-
+	void docTen();
 	bool* getBoolUpdate() { return &UpdateIfAddMap; }
 
 };

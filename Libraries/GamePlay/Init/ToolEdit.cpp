@@ -24,6 +24,7 @@ Content Text_Score;
 bool set = 0;
 float timelimit = -1;
 float timelimit1 = -1;
+float timelimit2 = -1;
 
 Table* table = nullptr;
 
@@ -31,9 +32,19 @@ Frame* box;
 
 FramesObject* Thatbai = nullptr;
 FramesObject* Thanhcong = nullptr;
+FramesObject* Trungten = nullptr;
 FramesObject* editArea = nullptr;
 
 std::vector <FlyEdit*> flys;
+
+std::string getName1(std::string s) {
+	std::string tmp;
+	for (int i = 15; i < s.size(); ++i) {
+		if (s[i] == '.') break;
+		tmp.push_back(s[i]);
+	}
+	return tmp;
+}
 
 Tool::Tool(SDL_Renderer* renderer) {
 	this->renderer = renderer;
@@ -47,6 +58,7 @@ void Tool::init(int *volume) {
 	editArea = new FramesObject(new SDL_FRect{ 0, 0, 1440 * 0.8f, 720 * 0.8f }, "Data/Edit/BackGround_120_60_120_60.png", renderer, false);
 	Thatbai = new FramesObject(new SDL_FRect{ 400, 200, 640, 320 }, "Data/Edit/Trongten_640_320_640_320.png", renderer, false);
 	Thanhcong = new FramesObject(new SDL_FRect{ 400, 200, 640, 320 }, "Data/Edit/Thanhcong_640_320_640_320.png", renderer, false);
+	Trungten = new FramesObject(new SDL_FRect{ 400, 200, 640, 320 }, "Data/Edit/Trungten_640_320_640_320.png", renderer, false);
 
 	// nut 
 	toolback = new Buttons(1390, 50, 50, 50, "Data//Edit//Back_50_50_100_50.png", renderer);
@@ -97,6 +109,31 @@ void Tool::init(int *volume) {
 	TimeEditRun = false;
 	UpdateIfAddMap = false;
 }
+void Tool::docTen() {
+	std::string path;
+
+	char pat[100];
+
+	int count;
+
+	std::ifstream myfile("Data//Map-dif//ManagerMap.txt");
+	myfile.is_open();
+	myfile >> count;
+	std::string tmp;
+	getline(myfile, tmp);
+	for (int i = 0; i < count; i++) {
+		std::string tmp;
+		getline(myfile, tmp);
+		path = tmp;
+		sname.push_back(path);
+	}
+
+	myfile.close();
+
+	for (int i = 0; i < sname.size(); ++i) {
+		sname[i] = getName1(sname[i]);
+	}
+}
 void Tool::handleEvent()
 {
 	// Nhận sự kiện từ của sổ
@@ -134,6 +171,8 @@ void Tool::update()
 		box->SetClick(Event.BUTTON_LEFT);
 	}
 	background->updateVolume(*(this->volume));
+
+	
 }
 
 
@@ -162,6 +201,7 @@ void Tool::Loop()
 	Timer::sInit->reset();
 	isRunning = true;
 	background->playSound(-1);
+	docTen();
 	while (isRunning && !quit) 
 	{
 		Timer::sInit->Update();
@@ -258,12 +298,22 @@ void Tool::UpdateFly()
 void Tool::UpdateFrame()
 {
 	box->Update(Event);
+	bool checkTrung = false;
+	for (int i = 0; i < sname.size(); ++i) {
+		if (sname[i] == box->getContent()) {
+			checkTrung = true;
+			break;
+		}
+	}
 	if (box->getclickOK() && box->getContent().size() != 0) {
-
-		FileOut(&flys, box->getContent());
-		UpdateIfAddMap = true;
-		timelimit1 = 10;
-		set = 0;
+		if (checkTrung) timelimit2 = 10;
+		else {
+			FileOut(&flys, box->getContent());
+			UpdateIfAddMap = true;
+			timelimit1 = 10;
+			set = 0;
+			//docTen();
+		}
 	}
 	else if (box->getclickOK() && box->getContent().size() == 0) {
 		timelimit = 10;
@@ -271,7 +321,6 @@ void Tool::UpdateFrame()
 	if (box->getclickCancel()) {
 		set = 0;
 	}
-
 }
 
 
@@ -282,8 +331,6 @@ void Tool::RenderButton()
 	outFile->Render();
 	if (!TimeEditRun) stop->Render();
 	else start->Render();
-
-	
 
 }
 void Tool::RenderScroll()
@@ -318,5 +365,9 @@ void Tool::RenderFrame()
 	if (timelimit1 >= 0) {
 		Thanhcong->Get_Texture();
 		timelimit1 -= 0.01;
+	}
+	if (timelimit2 >= 0) {
+		Trungten->Get_Texture();
+		timelimit2 -= 0.01;
 	}
 }

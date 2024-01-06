@@ -36,7 +36,7 @@ static void FileOut(std::vector <FlyEdit*>* flys, std::string path)
 			(*flys)[i]->GetEnd().x / k,
 			(*flys)[i]->GetEnd().y / k,
 			(*flys)[i]->getTimeStart(),
-			(*flys)[i]->getTimeEnd(),
+			(*flys)[i]->getTimePause(),
 			(*flys)[i]->getSpeed() / k,
 			int((*flys)[i]->getScore())
 		);

@@ -1,5 +1,6 @@
 #include "Map.h"
 
+
 Map* Map::sInit = NULL;
 
 
@@ -44,11 +45,9 @@ void Map::writeFile()
 {
 	std::ofstream myfile("Data//Map-dif//ManagerMap.txt");
 	myfile.is_open();
-	//std::cout << "asuhdiuahsdiuhawduih " << m.size() << "\n";
 	myfile << m.size() << "\n";
 	for (int i = 0; i < m.size(); i++) {
 		std::string str = m[i];
-		
 		myfile << str << "\n";
 	}
 
